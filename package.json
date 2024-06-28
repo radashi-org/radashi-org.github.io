@@ -9,11 +9,16 @@
     "preview": "astro preview",
     "astro": "astro"
   },
+  "prettier": "@alloc/prettier-config",
   "dependencies": {
+    "@astrojs/check": "^0.7.0",
     "@astrojs/starlight": "^0.24.5",
     "astro": "^4.10.2",
     "sharp": "^0.32.5",
-    "@astrojs/check": "^0.7.0",
     "typescript": "^5.5.2"
+  },
+  "devDependencies": {
+    "@alloc/prettier-config": "^1.0.0",
+    "prettier": "^3.3.2"
   }
 }
