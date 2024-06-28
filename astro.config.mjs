@@ -22,6 +22,7 @@ export default defineConfig({
           autogenerate: { directory: 'reference' },
         },
       ],
+      customCss: ['./src/styles/custom.css'],
     }),
     unocss({
       presets: [unocssMini()],

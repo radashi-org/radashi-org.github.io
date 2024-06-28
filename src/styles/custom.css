@@ -1,0 +1,11 @@
+.sl-markdown-content {
+  header {
+    padding-top: 3rem !important;
+    border-top: 1px solid var(--sl-color-neutral-200);
+
+    p {
+      margin-top: 0.5rem;
+      font-size: 110%;
+    }
+  }
+}
