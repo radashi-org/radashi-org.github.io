@@ -1,9 +1,21 @@
 .sl-markdown-content {
-  header {
-    padding-top: 3rem !important;
-    border-top: 1px solid var(--sl-color-neutral-200);
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  .big-page-link {
+    display: block;
+    text-decoration: none;
+    padding: 1.2rem 2rem;
+    border-radius: 1rem;
+    transition: background-color 0.1s ease-in-out;
+
+    &:hover {
+      background-color: rgba(240, 240, 240, 0.05);
+    }
 
     p {
+      color: rgb(185, 185, 185);
       margin-top: 0.5rem;
       font-size: 110%;
     }

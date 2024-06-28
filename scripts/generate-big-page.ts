@@ -9,17 +9,26 @@ async function main() {
   const sections: Record<string, Section> = {}
 
   for (const file of await glob('radashi/docs/**/*.mdx')) {
+    const slug = file
+      .replace(/\.mdx$/, '')
+      .split('/')
+      .slice(2) // Remove "radashi/docs/"
+      .join('/')
+
     const { data, content } = matter(
       await readFile(file)
     ) as GrayMatterFile<any> & {
       data: FunctionInfo
       content: string
     }
-    const section = (sections[data.group] ||= {
-      name: data.group,
+
+    const sectionId = slug.split('/')[0]
+    const section = (sections[sectionId] ||= {
+      name: sectionId[0].toUpperCase() + sectionId.slice(1),
       functions: [],
     })
-    section.functions.push(renderFunction(content, data))
+
+    section.functions.push(renderFunction(slug, data))
   }
 
   await writeFile('src/content/docs/reference/index.mdx', renderIndex(sections))
@@ -33,33 +42,30 @@ type Section = {
 type FunctionInfo = {
   title: string
   description: string
-  group: string
 }
 
-function renderFunction(content: string, data: FunctionInfo) {
-  const header = dedent`
-    <header>
-      ## ${data.title}
+function renderFunction(slug: string, data: FunctionInfo) {
+  return dedent`
+    <a href="/reference/${slug}" class="big-page-link">
+      <h2>${data.title}</h2>
       <p>${data.description}</p>
-    </header>
+    </a>
   `
-
-  return (
-    header + '\n\n' + content.replace(/#{2,}/g, prefix => '#' + prefix).trim()
-  )
 }
 
 function renderIndex(sections: Record<string, Section>) {
   const metadata = dedent`
     ---
-    title: API Reference
-    tableOfContents:
-      maxHeadingLevel: 2
+    title: Functions overview
+    tableOfContents: false
+    next: false
     ---
+
+    Welcome to the Radashi API Reference.
   `
 
-  const content = Object.entries(sections)
-    .map(([name, section]) => `# ${name}\n\n${section.functions.join('\n\n')}`)
+  const content = Object.values(sections)
+    .map(section => `# ${section.name}\n\n${section.functions.join('\n\n')}`)
     .join('\n\n')
 
   return metadata + '\n\n' + content
