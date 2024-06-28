@@ -2,7 +2,7 @@ diff --git a/components/EditLink.astro b/components/EditLink.astro
 index 74be4c8f79d4c48b46bf92b7a2750f412a98abac..fbc2fe2b6ffc7aa51e1f398cf0e6eaf64db58f69 100644
 --- a/components/EditLink.astro
 +++ b/components/EditLink.astro
-@@ -1,27 +1,38 @@
+@@ -1,27 +1,37 @@
  ---
 -import Icon from '../user-components/Icon.astro';
 -import type { Props } from '../props';
@@ -11,7 +11,6 @@ index 74be4c8f79d4c48b46bf92b7a2750f412a98abac..fbc2fe2b6ffc7aa51e1f398cf0e6eaf6
  
 -const { editUrl, labels } = Astro.props;
 +let { editUrl, labels } = Astro.props
-+console.log({ editUrl })
 +if (editUrl?.pathname.includes('/reference/')) {
 +  if (editUrl.pathname.includes('/reference/index')) {
 +    editUrl = undefined
