@@ -11,14 +11,16 @@
   },
   "prettier": "@alloc/prettier-config",
   "dependencies": {
-    "@astrojs/check": "^0.7.0",
-    "@astrojs/starlight": "^0.24.5",
-    "astro": "^4.10.2",
-    "sharp": "^0.32.5",
-    "typescript": "^5.5.2"
+    "@astrojs/starlight": "^0.24.5"
   },
   "devDependencies": {
     "@alloc/prettier-config": "^1.0.0",
-    "prettier": "^3.3.2"
+    "@astrojs/check": "^0.7.0",
+    "@unocss/astro": "^0.61.0",
+    "@unocss/preset-mini": "^0.61.0",
+    "astro": "^4.10.2",
+    "prettier": "^3.3.2",
+    "sharp": "^0.32.5",
+    "typescript": "^5.5.2"
   }
 }

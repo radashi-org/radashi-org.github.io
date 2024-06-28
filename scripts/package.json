@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@types/node": "^20.14.9",
+    "dedent": "^1.5.3",
+    "fast-glob": "^3.3.2",
+    "gray-matter": "^4.0.3",
+    "sucrase": "^3.35.0"
+  }
+}
