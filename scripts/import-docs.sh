@@ -8,7 +8,7 @@ fi
 git clone https://github.com/radashi-org/radashi --depth 1
 mkdir -p src/content/docs/reference/
 
-sucrase-node scripts/generate-big-page.ts
+sucrase-node scripts/generate-reference-index.ts
 
 cd radashi/docs
 cp -r * ../../src/content/docs/reference
