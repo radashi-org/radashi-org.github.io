@@ -47,7 +47,7 @@ type FunctionInfo = {
 function renderFunction(slug: string, data: FunctionInfo) {
   return dedent`
     <a href="/reference/${slug}" class="big-page-link">
-      <h2>${data.title}</h2>
+      <h3>${data.title}</h3>
       <p>${data.description}</p>
     </a>
   `
