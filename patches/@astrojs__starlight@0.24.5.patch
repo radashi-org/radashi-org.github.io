@@ -1,5 +1,5 @@
 diff --git a/components/EditLink.astro b/components/EditLink.astro
-index 74be4c8f79d4c48b46bf92b7a2750f412a98abac..fbc2fe2b6ffc7aa51e1f398cf0e6eaf64db58f69 100644
+index 74be4c8f79d4c48b46bf92b7a2750f412a98abac..a849e3caa8f5e0fed5eecf7b994dc478bf6edfad 100644
 --- a/components/EditLink.astro
 +++ b/components/EditLink.astro
 @@ -1,27 +1,37 @@
@@ -58,3 +58,13 @@ index 74be4c8f79d4c48b46bf92b7a2750f412a98abac..fbc2fe2b6ffc7aa51e1f398cf0e6eaf6
 +    color: var(--sl-color-white);
 +  }
  </style>
+diff --git a/components/Icons.ts b/components/Icons.ts
+index 0cab2756d9c80c3ab54d6ed9fd851d191c34460d..8e5251478521fd91288514f8bb034e4bc46bf485 100644
+--- a/components/Icons.ts
++++ b/components/Icons.ts
+@@ -155,4 +155,5 @@ export const BuiltInIcons = {
+ export const Icons = {
+ 	...BuiltInIcons,
+ 	...FileIcons,
++	pencil: '',
+ };
