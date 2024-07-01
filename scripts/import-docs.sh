@@ -1,5 +1,5 @@
 set -e
-export PATH="$PWD/node_modules/sucrase/bin:$PATH"
+export PATH="$PWD/scripts/node_modules/sucrase/bin:$PATH"
 
 if [ -d radashi ]; then
   rm -rf radashi

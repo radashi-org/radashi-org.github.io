@@ -9,6 +9,36 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'My Docs',
+      tableOfContents: false,
+      head: [
+        {
+          tag: 'link',
+          attrs: {
+            rel: 'preconnect',
+            href: 'https://fonts.googleapis.com',
+          },
+        },
+        {
+          tag: 'link',
+          attrs: {
+            rel: 'preconnect',
+            href: 'https://fonts.gstatic.com',
+            crossorigin: '',
+          },
+        },
+        {
+          tag: 'link',
+          attrs: {
+            rel: 'stylesheet',
+            href: 'https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap',
+          },
+        },
+      ],
+      logo: {
+        light: './src/assets/radashi-logo@3x.webp',
+        dark: './src/assets/radashi-logo-dark@3x.webp',
+        replacesTitle: true,
+      },
       social: {
         github: 'https://github.com/withastro/starlight',
       },
@@ -25,7 +55,11 @@ export default defineConfig({
           autogenerate: { directory: 'reference' },
         },
       ],
-      customCss: ['./src/styles/custom.css'],
+      customCss: [
+        './src/styles/custom.css',
+        './src/styles/light-theme.css',
+        './src/styles/dark-theme.css',
+      ],
     }),
     unocss({
       presets: [unocssMini()],

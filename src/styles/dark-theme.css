@@ -1,0 +1,84 @@
+:root,
+::backdrop {
+  --sl-hue-red: 360;
+  --sl-font-system: 'Figtree', ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  --sl-color-text: #dfd1d7;
+  --sl-color-bg: #1e1b1a;
+  --sl-color-bg-nav: #1e1b1a;
+  --sl-color-bg-sidebar: #1e1b1a;
+  --sl-color-hairline: #221e1d;
+  --sl-color-black: #1e1b1a;
+  --sl-content-width: 45rem;
+  --sl-color-text-accent: #ff7b7b;
+  --sl-sidebar-item-padding-inline: 0rem;
+  --ec-frm-inlBtnBg: #ff7b7b;
+  /* --code-background: #221f1f; */
+  /* --ec-brdRad: 12px; */
+  /* --ec-brdWd: 0.5px; */
+  ul ul li {
+    /* margin-inline-start: var(--sl-sidebar-item-padding-inline); */
+    border-inline-start: none;
+    font-weight: 300;
+    /* padding-inline-start: var(--sl-sidebar-item-padding-inline); */
+  }
+  ul {
+    --sl-sidebar-item-padding-inline: 0rem;
+    list-style: none;
+    padding: 0;
+  }
+  .content-panel {
+    padding-right: 14vw;
+    padding-left: 4vw;
+  }
+  .header {
+    border: none;
+  }
+  #starlight__sidebar ul li a {
+    line-height: 2.25;
+  }
+  .expressive-code {
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+  }
+  .expressive-code .frame pre {
+    border-radius: 8px;
+    padding: 18px;
+    background: #221f1f;
+    border: 0.6px solid #342f2f;
+  }
+  .expressive-code .frame {
+    --code-background: #00000000;
+  }
+  .expressive-code pre {
+    border-radius: 8px;
+  }
+  .content-panel + .content-panel {
+    border-top: none;
+  }
+  .sidebar-pane {
+    padding-left: 0.8rem;
+  }
+  [aria-current='page'],
+  [aria-current='page']:hover,
+  [aria-current='page']:focus {
+    font-weight: 300;
+    color: var(--sl-color-text-accent);
+    background-color: #0000;
+  }
+  --ec-codePadBlk: 2rem;
+  /* a {
+    display: block;
+    border-radius: 0;
+    text-decoration: none;
+    color: var(--sl-color-gray-2);
+    padding: 0.4rem 0;
+    line-height: 1.4;
+  } */
+  .expressive-code .copy button::before {
+    border: 1px none #00000000;
+  }
+}

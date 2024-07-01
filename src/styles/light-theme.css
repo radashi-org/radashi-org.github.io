@@ -1,0 +1,20 @@
+:root[data-theme='light'],
+[data-theme='light'] ::backdrop {
+  --sl-color-bg-nav: #f9f9f9;
+  --sl-color-bg: #f9f9f9;
+  --sl-color-hairline-shade: #f9f9f9;
+  --sl-font-system: 'Figtree', ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  .right-sidebar {
+    border-inline-start: none;
+    display: none;
+  }
+  --sl-color-text: #4e3340;
+  --sl-color-text-accent: #000;
+  --sl-content-pad-x: 1rem;
+  a:where {
+    line-height: 2.5;
+  }
+}

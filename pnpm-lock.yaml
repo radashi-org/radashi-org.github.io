@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   '@astrojs/starlight@0.24.5':
-    hash: fsoqti3euezuns4ocb3kj5nq2a
+    hash: i6zoj7o3nuzvduxjovr6sxzjnm
     path: patches/@astrojs__starlight@0.24.5.patch
 
 importers:
@@ -15,7 +15,7 @@ importers:
     dependencies:
       '@astrojs/starlight':
         specifier: ^0.24.5
-        version: 0.24.5(patch_hash=fsoqti3euezuns4ocb3kj5nq2a)(astro@4.11.3(@types/node@20.14.9)(typescript@5.5.2))
+        version: 0.24.5(patch_hash=i6zoj7o3nuzvduxjovr6sxzjnm)(astro@4.11.3(@types/node@20.14.9)(typescript@5.5.2))
     devDependencies:
       '@alloc/prettier-config':
         specifier: ^1.0.0
@@ -2647,7 +2647,7 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.23.8
 
-  '@astrojs/starlight@0.24.5(patch_hash=fsoqti3euezuns4ocb3kj5nq2a)(astro@4.11.3(@types/node@20.14.9)(typescript@5.5.2))':
+  '@astrojs/starlight@0.24.5(patch_hash=i6zoj7o3nuzvduxjovr6sxzjnm)(astro@4.11.3(@types/node@20.14.9)(typescript@5.5.2))':
     dependencies:
       '@astrojs/mdx': 3.1.2(astro@4.11.3(@types/node@20.14.9)(typescript@5.5.2))
       '@astrojs/sitemap': 3.1.6
