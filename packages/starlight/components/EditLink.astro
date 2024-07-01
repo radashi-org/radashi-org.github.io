@@ -2,7 +2,17 @@
 import Icon from '../user-components/Icon.astro';
 import type { Props } from '../props';
 
-const { editUrl, labels } = Astro.props;
+let { editUrl, labels } = Astro.props;
+if (editUrl?.pathname.includes('/reference/')) {
+	if (editUrl.pathname.includes('/reference/index')) {
+		editUrl = undefined;
+	} else {
+		editUrl = new URL(
+			editUrl.pathname.replace('/src/content/docs/reference/', '/'),
+			editUrl.origin
+		);
+	}
+}
 ---
 
 {
