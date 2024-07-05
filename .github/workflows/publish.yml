@@ -1,0 +1,12 @@
+name: Publish docs
+
+on:
+  repository_dispatch:
+    types: [publish]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Hello, world!"
