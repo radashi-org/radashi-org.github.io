@@ -1,11 +1,13 @@
 import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
 import unocss from '@unocss/astro'
+import mdAstro from '@astropub/md'
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://radashi-org.github.io',
   integrations: [
+    mdAstro(),
     starlight({
       title: 'My Docs',
       tableOfContents: false,
