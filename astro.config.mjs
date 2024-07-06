@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
 import unocss from '@unocss/astro'
-import unocssMini from '@unocss/preset-mini'
 
 // https://astro.build/config
 export default defineConfig({
@@ -84,8 +83,6 @@ export default defineConfig({
         './src/styles/dark-theme.css',
       ],
     }),
-    unocss({
-      presets: [unocssMini()],
-    }),
+    unocss(),
   ],
 })
