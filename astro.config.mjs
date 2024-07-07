@@ -51,6 +51,29 @@ export default defineConfig({
         //   items: [],
         // },
         {
+          label: 'Getting Started',
+          link: 'getting-started',
+          attrs: { class: 'h3' },
+        },
+        {
+          label: 'Core Concepts',
+          link: 'core-concepts',
+          attrs: { class: 'h3' },
+        },
+        {
+          label: 'Installation',
+          link: 'installation',
+          attrs: { class: 'h3 hr-after' },
+          icon: {
+            src: '/Install-dark.svg',
+            attrs: {
+              // width: '24rem',
+              // height: '24rem',
+              fill: 'currentColor',
+            },
+          },
+        },
+        {
           label: 'Reference',
           autogenerate: { directory: 'reference' },
         },
