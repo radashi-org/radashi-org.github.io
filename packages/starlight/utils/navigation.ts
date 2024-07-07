@@ -30,12 +30,17 @@ export interface Link {
 interface Group {
 	type: 'group';
 	label: string;
-	entries: (Link | Group)[];
+	entries: (Link | Group | Separator)[];
 	collapsed: boolean;
 	badge: Badge | undefined;
 }
 
-export type SidebarEntry = Link | Group;
+interface Separator {
+	type: 'separator';
+	separator: string;
+}
+
+export type SidebarEntry = Link | Group | Separator;
 
 /**
  * A representation of the route structure. For each object entry:
@@ -74,6 +79,11 @@ function configItemToEntry(
 		return linkFromConfig(item, locale, currentPathname);
 	} else if ('autogenerate' in item) {
 		return groupFromAutogenerateConfig(item, locale, routes, currentPathname);
+	} else if ('separator' in item) {
+		return {
+			type: 'separator',
+			separator: item.separator,
+		};
 	} else {
 		return {
 			type: 'group',

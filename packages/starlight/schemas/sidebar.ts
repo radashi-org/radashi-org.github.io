@@ -65,6 +65,7 @@ type ManualSidebarGroupInput = z.input<typeof SidebarGroupSchema> & {
 	items: Array<
 		| z.input<typeof SidebarLinkItemSchema>
 		| z.input<typeof AutoSidebarGroupSchema>
+		| z.input<typeof SeparatorSchema>
 		| ManualSidebarGroupInput
 	>;
 };
@@ -74,6 +75,7 @@ type ManualSidebarGroupOutput = z.output<typeof SidebarGroupSchema> & {
 	items: Array<
 		| z.output<typeof SidebarLinkItemSchema>
 		| z.output<typeof AutoSidebarGroupSchema>
+		| z.output<typeof SeparatorSchema>
 		| ManualSidebarGroupOutput
 	>;
 };
@@ -85,13 +87,29 @@ const ManualSidebarGroupSchema: z.ZodType<
 > = SidebarGroupSchema.extend({
 	/** Array of links and subcategories to display in this category. */
 	items: z.lazy(() =>
-		z.union([SidebarLinkItemSchema, ManualSidebarGroupSchema, AutoSidebarGroupSchema]).array()
+		z
+			.union([
+				SidebarLinkItemSchema,
+				ManualSidebarGroupSchema,
+				AutoSidebarGroupSchema,
+				SeparatorSchema,
+			])
+			.array()
 	),
+});
+
+const SeparatorSchema = z.object({
+	separator: z
+		.string()
+		.regex(
+			/^(\d+(\.\d+)?(px|em|rem|%))?\s*(none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset)\s*(#[0-9A-Fa-f]{3,8}|rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*(,\s*[\d.]+)?\s*\)|[a-zA-Z]+)?$/
+		),
 });
 
 export const SidebarItemSchema = z.union([
 	SidebarLinkItemSchema,
 	ManualSidebarGroupSchema,
 	AutoSidebarGroupSchema,
+	SeparatorSchema,
 ]);
 export type SidebarItem = z.infer<typeof SidebarItemSchema>;

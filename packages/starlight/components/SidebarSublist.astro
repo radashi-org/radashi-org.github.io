@@ -13,59 +13,74 @@ const { sublist, nested } = Astro.props;
 
 <ul class:list={{ 'top-level': !nested }}>
 	{
-		sublist.map((entry) => (
-			<li>
-				{entry.type === 'link' ? (
-					<a
-						href={entry.href}
-						aria-current={entry.isCurrent && 'page'}
-						class:list={[{ large: !nested }, entry.attrs.class]}
-						{...entry.attrs}
-					>
-						{entry.icon && (
-							<img
-								{...entry.icon.attrs}
-								src={entry.icon.src}
-								class:list={['sidebar-icon', entry.icon.attrs?.class]}
-							/>
-						)}
-						<span>{entry.label}</span>
-						{entry.badge && (
-							<Badge
-								variant={entry.badge.variant}
-								class={entry.badge.class}
-								text={entry.badge.text}
-							/>
-						)}
-					</a>
-				) : (
-					<details
-						open={flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed}
-					>
-						<summary>
-							<div class="group-label">
-								<span class="large">{entry.label}</span>
-								{entry.badge && (
-									<Badge
-										variant={entry.badge.variant}
-										class={entry.badge.class}
-										text={entry.badge.text}
-									/>
-								)}
-							</div>
-							<Icon name="right-caret" class="caret" size="1.25rem" />
-						</summary>
-						<Astro.self sublist={entry.entries} nested />
-					</details>
-				)}
-			</li>
-		))
+		sublist.map((entry) =>
+			entry.type === 'separator' ? (
+				<hr style={{ border: entry.separator }} />
+			) : (
+				<li>
+					{entry.type === 'link' ? (
+						<a
+							href={entry.href}
+							aria-current={entry.isCurrent && 'page'}
+							class:list={[{ large: !nested }, entry.attrs.class]}
+							{...entry.attrs}
+						>
+							{entry.icon && (
+								<img
+									{...entry.icon.attrs}
+									src={entry.icon.src}
+									class:list={['sidebar-icon', entry.icon.attrs?.class]}
+								/>
+							)}
+							<span>{entry.label}</span>
+							{entry.badge && (
+								<Badge
+									variant={entry.badge.variant}
+									class={entry.badge.class}
+									text={entry.badge.text}
+								/>
+							)}
+						</a>
+					) : (
+						<details
+							open={flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed}
+						>
+							<summary>
+								<div class="group-label">
+									<span class="large">{entry.label}</span>
+									{entry.badge && (
+										<Badge
+											variant={entry.badge.variant}
+											class={entry.badge.class}
+											text={entry.badge.text}
+										/>
+									)}
+								</div>
+								<Icon name="right-caret" class="caret" size="1.25rem" />
+							</summary>
+							<Astro.self sublist={entry.entries} nested />
+						</details>
+					)}
+				</li>
+			)
+		)
 	}
 </ul>
 
 <style>
+	hr {
+		display: block;
+		width: calc(100% + 2rem);
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		margin-left: -1rem;
+	}
+
+	.sidebar-icon {
+		display: inline-block;
+	}
+
 	ul {
-		/* --sl-sidebar-item-padding-inline: 0.2rem; */
 		list-style: none;
 		padding: 0;
 	}
@@ -82,7 +97,6 @@ const { sublist, nested } = Astro.props;
 
 	.large {
 		font-size: var(--sl-text-lg);
-		/* font-weight: 600; */
 	}
 
 	.top-level > li + li {
@@ -96,12 +110,8 @@ const { sublist, nested } = Astro.props;
 		align-items: center;
 		justify-content: space-between;
 		padding: 0.2em var(--sl-sidebar-item-padding-inline);
-		/* line-height: 2.4; */
 		cursor: pointer;
 		user-select: none;
-		margin-top: 2.6rem;
-		/* font-weight: 300; */
-		/* font-size: 5rem; */
 	}
 	summary::marker,
 	summary::-webkit-details-marker {
@@ -122,12 +132,18 @@ const { sublist, nested } = Astro.props;
 	}
 
 	a {
-		display: block;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
 		border-radius: 0.25rem;
 		text-decoration: none;
 		color: var(--sl-color-gray-2);
 		padding: 0.3em var(--sl-sidebar-item-padding-inline);
 		line-height: 1.4;
+
+		span {
+			flex-shrink: 0;
+		}
 	}
 
 	a:hover,
