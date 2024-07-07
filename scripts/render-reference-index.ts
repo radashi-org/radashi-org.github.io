@@ -1,14 +1,12 @@
+import dedent from 'dedent'
 import glob from 'fast-glob'
 import matter, { GrayMatterFile } from 'gray-matter'
-import { readFile, writeFile } from 'node:fs/promises'
-import dedent from 'dedent'
+import { readFile } from 'node:fs/promises'
 
-main()
-
-async function main() {
+export async function renderReferenceIndex() {
   const sections: Record<string, Section> = {}
 
-  for (const file of await glob('radashi/docs/**/*.mdx')) {
+  for (const file of glob.sync('radashi/docs/**/*.mdx').sort()) {
     const slug = file
       .replace(/\.mdx$/, '')
       .split('/')
@@ -31,7 +29,7 @@ async function main() {
     section.functions.push(renderFunction(slug, data))
   }
 
-  await writeFile('src/content/docs/reference/index.mdx', renderIndex(sections))
+  return renderIndex(sections)
 }
 
 type Section = {

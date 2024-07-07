@@ -27,17 +27,6 @@
   font-size: var(--sl-text-sm);
   font-weight: 300;
   color: var(--sl-color-text);
-
-  &.hr-after::after {
-    content: '';
-    display: block;
-    width: calc(100% + 2rem);
-    height: 0.6px;
-    background-color: rgba(240, 240, 240, 0.1);
-    margin-top: 1.5rem;
-    margin-bottom: -0.5rem;
-    margin-left: -1rem;
-  }
 }
 /* 
 .sl-markdown-content h2:not(:where(.not-content *))h2 {

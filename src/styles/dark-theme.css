@@ -18,7 +18,7 @@
   /* --code-background: #221f1f; */
   /* --ec-brdRad: 12px; */
   /* --ec-brdWd: 0.5px; */
-  ul ul li {
+  #starlight__sidebar ul ul li {
     /* margin-inline-start: var(--sl-sidebar-item-padding-inline); */
     border-inline-start: none;
     font-weight: 300;

@@ -1,38 +1,64 @@
 ---
+import { objectify } from 'radashi'
+import { Icon } from '@astrojs/starlight/components'
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
 import { Markdown } from '@astropub/md'
 import { createClient } from '@supabase/supabase-js'
+import path from 'node:path'
+import fs from 'node:fs'
 
-// Initialize Supabase client
-const supabase = createClient(
-  import.meta.env.SUPABASE_URL,
-  import.meta.env.SUPABASE_ANON_KEY
-)
-
-// Fetch all rows from the lodash_parity table
-const {
-  data,
-  error,
-}: {
-  data:
-    | {
-        name: string
-        status: 'yes' | 'no' | '100' | 'soon' | null
-        weekly_downloads_num: number
-        notes: string | null
-      }[]
-    | null
-  error: any
-} = await supabase.from('lodash_parity').select('*')
-
-if (!data) {
-  throw Error('Error fetching parity data: ' + error.stack)
+export type LodashFeature = {
+  name: string
+  status: 'yes' | 'no' | '100' | 'soon' | null
+  weekly_downloads_num: number
+  notes: string | null
 }
 
-// Sort by most popular
-data.sort((a, b) => b.weekly_downloads_num - a.weekly_downloads_num)
+async function loadDatabaseItems() {
+  const cachePath = './.cache/lodash-parity.json'
+  try {
+    const cache = fs.readFileSync(cachePath, 'utf-8')
+    const cacheMtime = fs.statSync(cachePath).mtime
+    const expiryTime = 1000 * 60 * 60 * 24 // 24 hours
+    if (Date.now() - cacheMtime.getTime() < expiryTime) {
+      return JSON.parse(cache) as LodashFeature[]
+    }
+  } catch {}
+
+  // Initialize Supabase client
+  const supabase = createClient(
+    import.meta.env.SUPABASE_URL,
+    import.meta.env.SUPABASE_ANON_KEY
+  )
+
+  // Fetch all rows from the lodash_parity table
+  const {
+    data: items,
+    error,
+  }: {
+    data: LodashFeature[] | null
+    error: any
+  } = await supabase.from('lodash_parity').select('*')
+
+  if (!items) {
+    throw Error('Error fetching parity data: ' + error.stack)
+  }
+
+  // Sort by most popular
+  items.sort((a, b) => b.weekly_downloads_num - a.weekly_downloads_num)
+
+  fs.mkdirSync(path.dirname(cachePath), { recursive: true })
+  fs.writeFileSync(cachePath, JSON.stringify(items))
+  return items
+}
+
+const items = await loadDatabaseItems()
+const itemsByName = objectify(items, item => item.name)
 
 function getColorofRelvance(relevance: number) {
+  // green => #00C4A4
+  // yellow => #E8A734
+  // orange => #E37E5F
   // Color range: orange (30°) -> yellow (60°) -> green (120°) as relevance goes from 0 to 1
   const hue = 50 + Math.min(70, relevance * 70) // 30-120 degrees
   const saturation = 100 // Always fully saturated
@@ -55,80 +81,89 @@ function getColorofRelvance(relevance: number) {
     > function has the most weekly downloads of any Lodash function, hence its rating
     of 100 out of 100.
   </p>
-  {
-    data ? (
-      <ul class="!px-12">
-        {data.map(item => {
-          const relevance = Math.round(
-            Math.pow(
-              item.weekly_downloads_num / data[0].weekly_downloads_num,
-              0.14
-            ) * 100
-          )
+  <div class="sort-buttons flex flex-row justify-end">
+    <div role="button" data-sort-by="weekly_downloads_num" data-descending>
+      <Icon name="download" class="w-6 h-6" />
+    </div>
+    <div role="button" data-sort-by="name">
+      <Icon name="alphabetical" class="w-6 h-6" />
+    </div>
+  </div>
+  <article>
+    {
+      items ? (
+        <ul class="!px-12">
+          {items.map(item => {
+            const relevance = Math.round(
+              Math.pow(
+                item.weekly_downloads_num / items[0].weekly_downloads_num,
+                0.14
+              ) * 100
+            )
 
-          const relevanceColor = getColorofRelvance(
-            item.weekly_downloads_num / data[0].weekly_downloads_num
-          )
+            const relevanceColor = getColorofRelvance(
+              item.weekly_downloads_num / items[0].weekly_downloads_num
+            )
 
-          return (
-            <li class="py-6">
-              <h2 class="relative flex flex-row">
-                <img
-                  src={`/parity/${item.status}.svg`}
-                  class="w-14 h-14 !absolute top-0 left--8 translate-x--100% translate-y--0.3rem"
-                />
-                {item.name}
-                <div class="flex-1" />
-                <circle-progress
-                  class="inline-block !mt-0 ml-1rem translate--y-0.1rem"
-                  animation="none"
-                  style={`--ring-color: ${relevanceColor};`}
-                  value={relevance}
-                  max="100"
-                  text-format="value"
-                />
-              </h2>
-              <div class="notes">
-                {item.notes ? (
-                  <Markdown of={item.notes} />
-                ) : (
-                  <p>
-                    {
+            const descriptionHeader = (
+              <p>
+                <em>
+                  <Markdown.Inline
+                    of={
                       {
-                        no: (
-                          <em>
-                            This function was rejected due to its
-                            incompatibility with the ethos of Radashi.
-                          </em>
-                        ),
-                        yes: <em>No differences have been noted.</em>,
-                        soon: <em>This function is being worked on.</em>,
-                        '100': (
-                          <em>
-                            This function is identical to the original Lodash
-                            function.
-                          </em>
-                        ),
-                        null: (
-                          <em>
-                            This function may or may not be implemented in the
-                            future.
-                          </em>
-                        ),
-                      }['' + item.status]
+                        no: 'This function was rejected due to its incompatibility with the ethos of Radashi.',
+                        yes: item.notes
+                          ? 'Here‘s what makes Radashi‘s implementation different:'
+                          : 'No differences have been noted.',
+                        soon: 'This function is being worked on.',
+                        '100':
+                          'This function is identical to the original Lodash function.',
+                        null: `If you‘d like to see this function added to Radashi, [visit the discussions](https://github.com/orgs/radashi-org/discussions?discussions_q=is%3Aopen+${item.name}) and voice your opinion there. You may need to create a new discussion first.`,
+                      }['' + item.status]!
                     }
-                  </p>
-                )}
-              </div>
-              <hr />
-            </li>
-          )
-        })}
-      </ul>
-    ) : (
-      <p>Error loading data</p>
-    )
-  }
+                  />
+                </em>
+              </p>
+            )
+
+            return (
+              <li data-name={item.name} class="py-6">
+                <h2 class="relative flex flex-row !color-$sl-color-white !text-size-$sl-text-h3">
+                  <img
+                    src={`/parity/${item.status}.svg`}
+                    class="w-14 h-14 !absolute top-0 left--8 translate-x--100% translate-y--0.3rem"
+                  />
+                  {item.name}
+                  <div class="flex-1" />
+                  <circle-progress
+                    class="inline-block !mt-0 ml-1rem translate--y-0.1rem"
+                    animation="none"
+                    style={`--ring-color: ${relevanceColor};`}
+                    value={relevance}
+                    max="100"
+                    text-format="value"
+                  />
+                </h2>
+                <div class="notes">
+                  {item.notes ? (
+                    <>
+                      {descriptionHeader}
+                      <Markdown of={item.notes} />
+                    </>
+                  ) : (
+                    descriptionHeader
+                  )}
+                </div>
+                <hr />
+              </li>
+            )
+          })}
+        </ul>
+      ) : (
+        <p>Error loading data</p>
+      )
+    }
+  </article>
   <p>
     <em
       >If a Lodash function is missing, it's because it has {'<'} 10,000 weekly downloads.</em
@@ -136,8 +171,47 @@ function getColorofRelvance(relevance: number) {
   </p>
 </StarlightPage>
 
+<script define:vars={{ itemsByName }}>
+  globalThis.itemsByName = itemsByName
+</script>
+
 <script>
+  import type { LodashFeature } from './lodash-parity.astro'
+  import { alphabetical, sort } from 'radashi'
   import 'js-circle-progress'
+
+  const itemElements = document.querySelectorAll('li[data-name]')
+
+  declare const itemsByName: Record<string, LodashFeature>
+
+  document.querySelector('.sort-buttons')?.addEventListener('click', event => {
+    const button = (event.target as HTMLElement).closest('[role="button"]')
+    if (button) {
+      const sortBy = button.getAttribute('data-sort-by')
+      const descending =
+        button.hasAttribute('data-descending') &&
+        button.getAttribute('data-descending') !== 'false'
+
+      let items = Array.from(itemElements, itemElement => {
+        itemElement.remove()
+        const name = itemElement.getAttribute('data-name')!
+        return { ...itemsByName[name], element: itemElement }
+      })
+      if (sortBy === 'name') {
+        items = alphabetical(
+          items,
+          item => item.name,
+          descending ? 'desc' : 'asc'
+        )
+      } else {
+        items = sort(items, item => item.weekly_downloads_num, descending)
+      }
+      const article = document.querySelector('article')!
+      items.forEach(item => {
+        article.appendChild(item.element)
+      })
+    }
+  })
 </script>
 
 <style is:global>
@@ -152,10 +226,6 @@ function getColorofRelvance(relevance: number) {
     border: 1px solid rgba(128, 128, 128, 0.3) !important;
     margin-top: 8rem !important;
     margin-bottom: 4rem !important;
-  }
-
-  h2 {
-    margin-top: 0;
   }
 
   circle-progress.small::part(base) {
@@ -183,5 +253,11 @@ function getColorofRelvance(relevance: number) {
       sans-serif;
     font-weight: 600;
     fill: white;
+  }
+
+  .sort-buttons
+    :not(a, strong, em, del, span, input, code)
+    + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+    margin-top: 0;
   }
 </style>

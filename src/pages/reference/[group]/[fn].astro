@@ -1,0 +1,52 @@
+---
+/// <reference path="../../../env.d.ts" />
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+import type { MDXInstance } from 'astro'
+import heft from 'virtual:radashi/heft'
+import path from 'path'
+
+interface StaticParams {
+  group: string
+  fn: string
+}
+
+interface Frontmatter {
+  title: string
+  description: string
+}
+
+interface Props {
+  page: MDXInstance<Frontmatter>
+}
+
+interface StaticPage {
+  params: StaticParams
+  props: Props
+}
+
+export async function getStaticPaths(): Promise<StaticPage[]> {
+  const pages: MDXInstance<Frontmatter>[] = await Astro.glob(
+    '../../../../radashi/docs/**/*.mdx'
+  )
+
+  return pages.map(page => {
+    return {
+      params: {
+        group: path.basename(path.dirname(page.file)),
+        fn: page.frontmatter.title,
+      },
+      props: {
+        page,
+      },
+    }
+  })
+}
+
+const {
+  page: { frontmatter, Content },
+} = Astro.props
+---
+
+<StarlightPage frontmatter={frontmatter}>
+  <Content />
+</StarlightPage>
