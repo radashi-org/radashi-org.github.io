@@ -1,10 +1,10 @@
 ---
-import { PAGE_TITLE_ID, PAGE_DESCRIPTION_ID } from '../constants';
+import { PAGE_TITLE_ID } from '../constants';
 import type { Props } from '../props';
 ---
 
 <h1 id={PAGE_TITLE_ID}>{Astro.props.entry.data.title}</h1>
-<p id={PAGE_DESCRIPTION_ID}>{Astro.props.entry.data.description}</p>
+<p>{Astro.props.entry.data.description}</p>
 
 <style>
 	h1 {

@@ -74,7 +74,7 @@
 	font-size: var(--sl-text-h1);
 }
 .sl-markdown-content h2:not(:where(.not-content *)) {
-	font-size: 1rem;
+	font-size: var(--sl-text-base);
 	color: var(--sl-color-accent);
 }
 .sl-markdown-content h3:not(:where(.not-content *)) {
