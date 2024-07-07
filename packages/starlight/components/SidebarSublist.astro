@@ -22,6 +22,13 @@ const { sublist, nested } = Astro.props;
 						class:list={[{ large: !nested }, entry.attrs.class]}
 						{...entry.attrs}
 					>
+						{entry.icon && (
+							<img
+								{...entry.icon.attrs}
+								src={entry.icon.src}
+								class:list={['sidebar-icon', entry.icon.attrs?.class]}
+							/>
+						)}
 						<span>{entry.label}</span>
 						{entry.badge && (
 							<Badge
@@ -58,7 +65,7 @@ const { sublist, nested } = Astro.props;
 
 <style>
 	ul {
-		--sl-sidebar-item-padding-inline: 0.5rem;
+		/* --sl-sidebar-item-padding-inline: 0.2rem; */
 		list-style: none;
 		padding: 0;
 	}
@@ -75,12 +82,13 @@ const { sublist, nested } = Astro.props;
 
 	.large {
 		font-size: var(--sl-text-lg);
-		font-weight: 600;
-		color: var(--sl-color-white);
+		/* font-weight: 600; */
 	}
 
 	.top-level > li + li {
 		margin-top: 0.75rem;
+		font-weight: 600;
+		color: --sl-color-gray-2;
 	}
 
 	summary {
@@ -88,9 +96,12 @@ const { sublist, nested } = Astro.props;
 		align-items: center;
 		justify-content: space-between;
 		padding: 0.2em var(--sl-sidebar-item-padding-inline);
-		line-height: 1.4;
+		/* line-height: 2.4; */
 		cursor: pointer;
 		user-select: none;
+		margin-top: 2.6rem;
+		/* font-weight: 300; */
+		/* font-size: 5rem; */
 	}
 	summary::marker,
 	summary::-webkit-details-marker {
@@ -100,9 +111,11 @@ const { sublist, nested } = Astro.props;
 	.caret {
 		transition: transform 0.2s ease-in-out;
 		flex-shrink: 0;
+		display: none;
 	}
 	:global([dir='rtl']) .caret {
 		transform: rotateZ(180deg);
+		display: none;
 	}
 	[open] > summary .caret {
 		transform: rotateZ(90deg);
@@ -140,7 +153,7 @@ const { sublist, nested } = Astro.props;
 			margin-top: 0.5rem;
 		}
 		.large {
-			font-size: var(--sl-text-base);
+			font-size: 1.2rem;
 		}
 		a {
 			font-size: var(--sl-text-sm);

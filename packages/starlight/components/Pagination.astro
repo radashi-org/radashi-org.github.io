@@ -11,9 +11,9 @@ const isRtl = dir === 'rtl';
 	{
 		prev && (
 			<a href={prev.href} rel="prev">
-				<Icon name={isRtl ? 'right-arrow' : 'left-arrow'} size="1.5rem" />
+				<Icon name={isRtl ? 'right-arrow' : 'left-arrow'} size="1.8rem" />
 				<span>
-					{labels['page.previousLink']}
+					<span class="next-link-tag">{labels['page.previousLink']}</span>
 					<br />
 					<span class="link-title">{prev.label}</span>
 				</span>
@@ -23,9 +23,9 @@ const isRtl = dir === 'rtl';
 	{
 		next && (
 			<a href={next.href} rel="next">
-				<Icon name={isRtl ? 'left-arrow' : 'right-arrow'} size="1.5rem" />
+				<Icon name={isRtl ? 'left-arrow' : 'right-arrow'} size="1.8rem" />
 				<span>
-					{labels['page.nextLink']}
+					<span class="next-link-tag">{labels['page.nextLink']}</span>
 					<br />
 					<span class="link-title">{next.label}</span>
 				</span>
@@ -49,9 +49,11 @@ const isRtl = dir === 'rtl';
 		width: 100%;
 		flex-basis: calc(50% - 0.5rem);
 		flex-grow: 1;
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: 0.5rem;
+		border: 0.6px solid var(--sl-color-gray-5);
+		border-radius: 1000rem;
 		padding: 1rem;
+		padding-right: 1.6rem;
+		padding-left: 1.6rem;
 		text-decoration: none;
 		color: var(--sl-color-gray-2);
 		box-shadow: var(--sl-shadow-md);
@@ -61,18 +63,26 @@ const isRtl = dir === 'rtl';
 		justify-content: end;
 		text-align: end;
 		flex-direction: row-reverse;
+		padding-right: 1.6rem;
+		padding-left: 1.6rem;
 	}
 	a:hover {
-		border-color: var(--sl-color-gray-2);
+		border-color: var(--sl-color-gray-4);
 	}
 
 	.link-title {
 		color: var(--sl-color-white);
-		font-size: var(--sl-text-2xl);
+		font-size: 1.3rem;
 		line-height: var(--sl-line-height-headings);
 	}
 
 	svg {
 		flex-shrink: 0;
+	}
+
+	.next-link-tag {
+		color: var(--sl-color-text-accent);
+		font-size: 0.95rem;
+		font-weight: var(--sl-font-weight-semibold);
 	}
 </style>

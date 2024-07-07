@@ -8,7 +8,7 @@ const { labels, toc } = Astro.props;
 {
 	toc && (
 		<starlight-toc data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
-			<nav aria-labelledby="starlight__on-this-page">
+			<nav aria-labelledby="starlight__on-this-page" style="color: red;">
 				<h2 id="starlight__on-this-page">{labels['tableOfContents.onThisPage']}</h2>
 				<TableOfContentsList toc={toc.items} />
 			</nav>

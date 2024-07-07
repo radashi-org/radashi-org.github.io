@@ -19,14 +19,14 @@ const shouldRenderSearch =
 	<div class="title-wrapper sl-flex">
 		<SiteTitle {...Astro.props} />
 	</div>
-	<div class="sl-flex">
+	<div class="search-root sl-flex">
 		{shouldRenderSearch && <Search {...Astro.props} />}
 	</div>
 	<div class="sl-hidden md:sl-flex right-group">
-		<div class="sl-flex social-icons">
+		<!-- <div class="sl-flex social-icons">
 			<SocialIcons {...Astro.props} />
-		</div>
-		<ThemeSelect {...Astro.props} />
+		</div> -->
+		<!-- <ThemeSelect {...Astro.props} /> -->
 		<LanguageSelect {...Astro.props} />
 	</div>
 </div>
@@ -37,6 +37,11 @@ const shouldRenderSearch =
 		justify-content: space-between;
 		align-items: center;
 		height: 100%;
+		background-color: rgba(0, 0, 0, 0) !important;
+	}
+
+	.search-root {
+		justify-content: flex-end;
 	}
 
 	.title-wrapper {

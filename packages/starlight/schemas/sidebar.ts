@@ -11,6 +11,13 @@ const SidebarBaseSchema = z.object({
 	translations: z.record(z.string()).default({}),
 	/** Adds a badge to the link item */
 	badge: BadgeConfigSchema(),
+	/** Adds an icon to the link item */
+	icon: z.optional(
+		z.object({
+			src: z.string(),
+			attrs: z.record(z.string()).default({}),
+		})
+	),
 });
 
 const SidebarGroupSchema = SidebarBaseSchema.extend({

@@ -24,13 +24,14 @@ const pagefindTranslations = {
 		{
 			/* The span is `aria-hidden` because it is not shown on small screens. Instead, the icon label is used for accessibility purposes. */
 		}
-		<Icon name="magnifier" label={labels['search.label']} />
-		<span class="sl-hidden md:sl-block" aria-hidden="true">{labels['search.label']}</span>
-		<Icon
+		<!-- <Icon name="magnifier" label={labels['search.label']} /> -->
+		<!-- <span class="sl-hidden md:sl-block" aria-hidden="true" style="">{labels['search.label']}</span> -->
+		<!-- <Icon
 			name="forward-slash"
 			class="sl-hidden md:sl-block"
 			label={labels['search.shortcutLabel']}
-		/>
+		/> -->
+		<img src="/src/assets/search-dark.svg" alt="Search" />
 	</button>
 
 	<dialog style="padding:0" aria-label={labels['search.label']}>
@@ -154,26 +155,27 @@ const pagefindTranslations = {
 	}
 	button[data-open-modal] {
 		display: flex;
-		align-items: center;
-		gap: 0.5rem;
+		color: red;
+		/* align-items: center; */
+		/* gap: 0.5rem; */
 		border: 0;
 		background-color: transparent;
-		color: var(--sl-color-gray-1);
+		/* color: var(--sl-color-gray-1); */
 		cursor: pointer;
-		height: 2.5rem;
+		height: 3rem;
 		font-size: var(--sl-text-xl);
 	}
 
 	@media (min-width: 50rem) {
 		button[data-open-modal] {
-			border: 1px solid var(--sl-color-gray-5);
-			border-radius: 0.5rem;
-			padding-inline-start: 0.75rem;
-			padding-inline-end: 1rem;
-			background-color: var(--sl-color-black);
-			color: var(--sl-color-gray-2);
-			font-size: var(--sl-text-sm);
-			width: 100%;
+			/* border: 1px solid var(--sl-color-gray-5); */
+			/* border-radius: 0.5rem; */
+			/* padding-inline-start: 0.75rem; */
+			/* padding-inline-end: 1rem; */
+			/* background-color: var(--sl-color-black); */
+			/* color: var(--sl-color-gray-2); */
+			/* font-size: var(--sl-text-sm); */
+			width: auto;
 			max-width: 22rem;
 		}
 		button[data-open-modal]:hover {
@@ -203,7 +205,7 @@ const pagefindTranslations = {
 	dialog::backdrop {
 		background-color: var(--sl-color-backdrop-overlay);
 		-webkit-backdrop-filter: blur(0.25rem);
-		backdrop-filter: blur(0.25rem);
+		backdrop-filter: blur(1.25rem);
 	}
 
 	.dialog-frame {
