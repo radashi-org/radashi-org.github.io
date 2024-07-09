@@ -72,6 +72,56 @@ const pagefindEnabled =
 					scroll-padding-top: calc(1.5rem + var(--sl-nav-height));
 				}
 			}
+
+			/* html {
+				--origin-x: calc(var(--click-x, 0.5) * 100%);
+				--origin-y: calc(var(--click-y, 0.5) * 100%);
+			}
+
+			main {
+				position: relative;
+			}
+
+			html .transition-reveal:not(.is-previous-container) {
+				background: var(--sl-color-bg);
+				clip-path: circle(75% at 50% 50%);
+				background: blue !important;
+				min-height: 100vh;
+			}
+
+			html.is-animating .transition-reveal:not(.is-previous-container) {
+				clip-path: circle(0% at var(--origin-x) var(--origin-y));
+			}
+
+			html.is-changing .transition-reveal:not(.is-previous-container) {
+				position: absolute;
+				background: red !important;
+				width: 100%;
+				top: 0;
+				z-index: 2;
+
+				transition:
+					clip-path 0.4s cubic-bezier(0.5, 0, 0.15, 1),
+					mask-position 0.4s cubic-bezier(0.5, 0, 0.15, 1),
+					-webkit-mask-position 0.4s cubic-bezier(0.5, 0, 0.15, 1);
+			}
+
+			html.is-changing .transition-reveal.is-previous-container {
+				position: absolute;
+				top: 0;
+				z-index: 1;
+				left: 0;
+			} */
+
+			/* Define a transition duration during page visits */
+			html.is-changing .transition-fade {
+				transition: opacity 0.125s;
+				opacity: 1;
+			}
+			/* Define the styles for the unloaded pages */
+			html.is-animating .transition-fade {
+				opacity: 0;
+			}
 		</style>
 		<ThemeProvider {...Astro.props} />
 	</head>
@@ -87,35 +137,62 @@ const pagefindEnabled =
 					lang={Astro.props.entryMeta.lang}
 					dir={Astro.props.entryMeta.dir}
 				>
-					{/* TODO: Revisit how this logic flows. */}
-					<Banner {...Astro.props} />
-					{
-						Astro.props.entry.data.hero ? (
-							<ContentPanel {...Astro.props}>
-								<Hero {...Astro.props} />
-								<MarkdownContent {...Astro.props}>
-									<slot />
-								</MarkdownContent>
-								<Footer {...Astro.props} />
-							</ContentPanel>
-						) : (
-							<>
+					<div id="swup" class="page transition-fade">
+						{/* TODO: Revisit how this logic flows. */}
+						<Banner {...Astro.props} />
+						{
+							Astro.props.entry.data.hero ? (
 								<ContentPanel {...Astro.props}>
-									<PageTitle {...Astro.props} />
-									{Astro.props.entry.data.draft && <DraftContentNotice {...Astro.props} />}
-									{Astro.props.isFallback && <FallbackContentNotice {...Astro.props} />}
-								</ContentPanel>
-								<ContentPanel {...Astro.props}>
+									<Hero {...Astro.props} />
 									<MarkdownContent {...Astro.props}>
 										<slot />
 									</MarkdownContent>
 									<Footer {...Astro.props} />
 								</ContentPanel>
-							</>
-						)
-					}
+							) : (
+								<>
+									<ContentPanel {...Astro.props}>
+										<PageTitle {...Astro.props} />
+										{Astro.props.entry.data.draft && <DraftContentNotice {...Astro.props} />}
+										{Astro.props.isFallback && <FallbackContentNotice {...Astro.props} />}
+									</ContentPanel>
+									<ContentPanel {...Astro.props}>
+										<MarkdownContent {...Astro.props}>
+											<slot />
+										</MarkdownContent>
+										<Footer {...Astro.props} />
+									</ContentPanel>
+								</>
+							)
+						}
+					</div>
 				</main>
 			</TwoColumnContent>
 		</PageFrame>
+		<script>
+			import Swup from 'swup';
+			// import SwupParallelPlugin from '@swup/parallel-plugin';
+
+			declare global {
+				var swup: Swup;
+			}
+
+			globalThis.swup = new Swup();
+			// globalThis.swup = new Swup({
+			// 	plugins: [new SwupParallelPlugin()],
+			// });
+
+			// swup.hooks.on('visit:start', (context) => {
+			// 	let x = 0.5;
+			// 	let y = 0.5;
+			// 	const event = context.trigger.event as MouseEvent;
+			// 	if (event && typeof event.clientX === 'number') {
+			// 		x = event.clientX / window.innerWidth;
+			// 		y = event.clientY / window.innerHeight;
+			// 	}
+			// 	document.documentElement.style.setProperty('--click-x', x.toString());
+			// 	document.documentElement.style.setProperty('--click-y', y.toString());
+			// });
+		</script>
 	</body>
 </html>

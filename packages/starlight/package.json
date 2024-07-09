@@ -190,6 +190,7 @@
     "@astrojs/mdx": "^3.1.0",
     "@astrojs/sitemap": "^3.1.5",
     "@pagefind/default-ui": "^1.0.3",
+    "@swup/parallel-plugin": "^0.4.0",
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
     "astro-expressive-code": "^0.35.3",
@@ -204,6 +205,7 @@
     "rehype": "^13.0.1",
     "rehype-format": "^5.0.0",
     "remark-directive": "^3.0.0",
+    "swup": "^4.6.1",
     "unified": "^11.0.4",
     "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.1"
