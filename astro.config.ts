@@ -49,7 +49,7 @@ export default defineConfig({
         },
       ],
       logo: {
-        light: './src/assets/radashi-logo@3x.webp',
+        light: './src/assets/radashi-logo-dark@3x.webp',
         dark: './src/assets/radashi-logo-dark@3x.webp',
         replacesTitle: true,
       },
@@ -59,12 +59,11 @@ export default defineConfig({
       editLink: {
         baseUrl: 'https://github.com/radashi-org/radashi/edit/main/docs/',
       },
+      expressiveCode: {
+        themes: ['starlight-dark'],
+      },
       sidebar: generateSidebar(),
-      customCss: [
-        './src/styles/custom.css',
-        './src/styles/light-theme.css',
-        './src/styles/dark-theme.css',
-      ],
+      customCss: ['./src/styles/custom.css', './src/styles/dark-theme.css'],
     }),
     unocss(),
   ],
