@@ -89,21 +89,6 @@ const StarlightTailwindPlugin = () =>
 					'--sl-color-accent-low': themeAccent(950, '#1e1b4b'),
 					'--sl-color-accent': themeAccent(600, '#4f46e5'),
 					'--sl-color-accent-high': themeAccent(200, '#c7d2fe'),
-					// Light mode Starlight theme variables
-					'&[data-theme="light"]': {
-						'--sl-color-white': theme('colors.gray.900'),
-						'--sl-color-gray-1': theme('colors.gray.800'),
-						'--sl-color-gray-2': theme('colors.gray.700'),
-						'--sl-color-gray-3': theme('colors.gray.500'),
-						'--sl-color-gray-4': theme('colors.gray.400'),
-						'--sl-color-gray-5': theme('colors.gray.300'),
-						'--sl-color-gray-6': theme('colors.gray.200'),
-						'--sl-color-gray-7': theme('colors.gray.100'),
-						'--sl-color-black': white,
-						'--sl-color-accent-low': themeAccent(200, '#c7d2fe'),
-						'--sl-color-accent': themeAccent(600, '#4f46e5'),
-						'--sl-color-accent-high': themeAccent(900, '#312e81'),
-					},
 				},
 			});
 		},
