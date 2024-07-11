@@ -33,7 +33,7 @@ export async function getStaticPaths(): Promise<StaticPage[]> {
     return {
       params: {
         group: path.basename(path.dirname(page.file)),
-        fn: page.frontmatter.title,
+        fn: path.basename(page.file, '.mdx'),
       },
       props: {
         page,
@@ -48,5 +48,38 @@ const {
 ---
 
 <StarlightPage frontmatter={frontmatter}>
+  <div
+    id="heft"
+    class="inline-block px-0.8rem py-0.4rem bg-#bddef2 color-[hsl(224,_10%,_10%)] rounded-full text-0.8rem font-500 translate-y--20% translate-x-1rem"
+  >
+    <strong class="font-700">{heft[frontmatter.title]}</strong> bytes
+  </div>
   <Content />
+  <script>
+    function update() {
+      const h1 = document.querySelector(':not(.is-previous-container) h1')!
+      console.log({ h1 })
+      h1.append(document.getElementById('heft')!)
+    }
+    setTimeout(() => {
+      const swup = globalThis.__swup
+      swup.hooks.on('content:replace', () => {
+        const url = swup.getCurrentUrl()
+        console.log({ url })
+
+        const prevPageLink = document.querySelector(
+          '.sidebar-content [aria-current="page"]'
+        )!
+        prevPageLink.removeAttribute('aria-current')
+
+        const currPageLink = document.querySelector(
+          `.sidebar-content a[href="${url}"]`
+        )!
+        currPageLink.setAttribute('aria-current', 'page')
+
+        update()
+      })
+    }, 10)
+    update()
+  </script>
 </StarlightPage>

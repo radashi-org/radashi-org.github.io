@@ -10,11 +10,14 @@ export async function renderHeftJson() {
     const result = await build({
       entryPoints: [file],
       platform: 'node',
+      target: 'node18',
       bundle: true,
-      minify: true,
       write: false,
+      minify: true,
+      format: 'esm',
     })
-    const sizeInBytes = result.outputFiles[0].contents.length
+    const content = Buffer.from(result.outputFiles[0].contents).toString('utf8')
+    const sizeInBytes = Buffer.byteLength(content)
     heft[name] = sizeInBytes
   }
 

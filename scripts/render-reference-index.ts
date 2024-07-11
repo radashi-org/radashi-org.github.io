@@ -55,7 +55,8 @@ function renderIndex(sections: Record<string, Section>) {
   const metadata = dedent`
     ---
     title: Functions overview
-    tableOfContents: false
+    tableOfContents:
+      maxHeadingLevel: 2
     next: false
     ---
 
@@ -63,7 +64,7 @@ function renderIndex(sections: Record<string, Section>) {
   `
 
   const content = Object.values(sections)
-    .map(section => `# ${section.name}\n\n${section.functions.join('\n\n')}`)
+    .map(section => `## ${section.name}\n\n${section.functions.join('\n\n')}`)
     .join('\n\n')
 
   return metadata + '\n\n' + content

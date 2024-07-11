@@ -73,28 +73,25 @@ export default defineConfig({
   },
 })
 
-function radashi() {
-  return [
-    {
-      name: 'radashi',
-      async configResolved() {
-        console.log('Pulling radashi...')
-        if (existsSync('radashi')) {
-          await exec('git pull', { cwd: 'radashi', stdio: 'inherit' })
-        } else {
-          await exec(
-            'git clone https://github.com/radashi-org/radashi --depth 1',
-            { stdio: 'inherit' }
-          )
-        }
+async function radashi() {
+  console.log('Pulling radashi...')
+  if (existsSync('radashi')) {
+    await exec('git pull', { cwd: 'radashi', stdio: 'inherit' })
+  } else {
+    await exec('git clone https://github.com/radashi-org/radashi --depth 1', {
+      stdio: 'inherit',
+    })
+  }
 
-        console.log('Generating API reference index page...')
-        const content = await renderReferenceIndex()
-        writeFileSync('src/content/docs/reference/index.mdx', content)
-      },
-    },
+  const heft = await renderHeftJson()
+
+  console.log('Generating API reference index page...')
+  const content = await renderReferenceIndex()
+  writeFileSync('src/content/docs/reference/index.mdx', content)
+
+  return [
     virtual({
-      'radashi/heft': renderHeftJson,
+      'virtual:radashi/heft': heft,
     }),
   ]
 }
@@ -133,7 +130,6 @@ function generateSidebar(): SidebarItem[] {
       attrs: { class: 'h3' },
     },
     {
-      label: 'Reference',
       items: Object.entries(
         group(
           glob.sync('radashi/docs/**/*.mdx').map(file => {

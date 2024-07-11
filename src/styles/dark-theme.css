@@ -26,14 +26,9 @@
     /* padding-top: 2rem; */
     /* padding-inline-start: var(--sl-sidebar-item-padding-inline); */
   }
-  ul {
-    --sl-sidebar-item-padding-inline: 0rem;
-    list-style: none;
-    padding: 0;
-  }
   .content-panel {
-    padding-right: 14vw;
-    padding-left: 4vw;
+    margin-right: 14vw;
+    margin-left: 4vw;
   }
   .header {
     border: none;

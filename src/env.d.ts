@@ -1,5 +1,5 @@
 /// <reference path="../.astro/types.d.ts" />
-/// <reference types="astro/client" />
+/// <reference types="@astrojs/starlight/global.d.ts" />
 
 declare module 'virtual:radashi/heft' {
   const bytesPerFunction: Record<string, number>

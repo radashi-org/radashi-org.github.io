@@ -1,11 +1,14 @@
 ---
-import { objectify } from 'radashi'
 import { Icon } from '@astrojs/starlight/components'
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
 import { Markdown } from '@astropub/md'
 import { createClient } from '@supabase/supabase-js'
-import path from 'node:path'
+import { formatCss, interpolate, modeOklch, parseHex, useMode } from 'culori/fn'
 import fs from 'node:fs'
+import path from 'node:path'
+import { objectify } from 'radashi'
+
+useMode(modeOklch)
 
 export type LodashFeature = {
   name: string
@@ -55,15 +58,13 @@ async function loadDatabaseItems() {
 const items = await loadDatabaseItems()
 const itemsByName = objectify(items, item => item.name)
 
-function getColorofRelvance(relevance: number) {
-  // green => #00C4A4
-  // yellow => #E8A734
-  // orange => #E37E5F
-  // Color range: orange (30°) -> yellow (60°) -> green (120°) as relevance goes from 0 to 1
-  const hue = 50 + Math.min(70, relevance * 70) // 30-120 degrees
-  const saturation = 100 // Always fully saturated
-  const lightness = 50 // Constant lightness for vibrant colors
-  return `hsl(${hue}, ${saturation}%, ${lightness}%)`
+function getRelevanceColor(relevance: number) {
+  return formatCss(
+    interpolate(
+      [parseHex('#E37E5F'), parseHex('#E8A734'), parseHex('#00C4A4')],
+      'oklch'
+    )(Math.pow(relevance, 1.08) / 100)
+  )
 }
 ---
 
@@ -72,7 +73,7 @@ function getColorofRelvance(relevance: number) {
     The circles like <circle-progress
       class="small inline-block !mt-0 translate-y-18% mx-1"
       animation="none"
-      style={`--ring-color: ${getColorofRelvance(80)};`}
+      style={`--ring-color: ${getRelevanceColor(80)};`}
       value={80}
       max="100"
       text-format="value"></circle-progress> to the right of the function name represent
@@ -81,6 +82,7 @@ function getColorofRelvance(relevance: number) {
     > function has the most weekly downloads of any Lodash function, hence its rating
     of 100 out of 100.
   </p>
+  <input type="search" id="search" placeholder="Search" />
   <div class="sort-buttons flex flex-row justify-end">
     <div role="button" data-sort-by="weekly_downloads_num" data-descending>
       <Icon name="download" class="w-6 h-6" />
@@ -101,8 +103,8 @@ function getColorofRelvance(relevance: number) {
               ) * 100
             )
 
-            const relevanceColor = getColorofRelvance(
-              item.weekly_downloads_num / items[0].weekly_downloads_num
+            const relevanceColor = getRelevanceColor(
+              (100 * item.weekly_downloads_num) / items[0].weekly_downloads_num
             )
 
             const descriptionHeader = (
@@ -127,7 +129,7 @@ function getColorofRelvance(relevance: number) {
             )
 
             return (
-              <li data-name={item.name} class="py-6">
+              <li class="radashi-func py-6" data-name={item.name}>
                 <h2 class="relative flex flex-row !color-$sl-color-white !text-size-$sl-text-h3">
                   <img
                     src={`/parity/${item.status}.svg`}
@@ -144,7 +146,7 @@ function getColorofRelvance(relevance: number) {
                     text-format="value"
                   />
                 </h2>
-                <div class="notes">
+                <div class="impl-notes">
                   {item.notes ? (
                     <>
                       {descriptionHeader}
@@ -177,14 +179,16 @@ function getColorofRelvance(relevance: number) {
 
 <script>
   import type { LodashFeature } from './lodash-parity.astro'
-  import { alphabetical, sort } from 'radashi'
+  import { alphabetical, mapify, max, sort, sum } from 'radashi'
+  import { jaroWinkler } from '@skyra/jaro-winkler'
   import 'js-circle-progress'
 
   const itemElements = document.querySelectorAll('li[data-name]')
 
   declare const itemsByName: Record<string, LodashFeature>
 
-  document.querySelector('.sort-buttons')?.addEventListener('click', event => {
+  const sortingWidget = document.querySelector('.sort-buttons')!
+  sortingWidget.addEventListener('click', event => {
     const button = (event.target as HTMLElement).closest('[role="button"]')
     if (button) {
       const sortBy = button.getAttribute('data-sort-by')
@@ -212,13 +216,76 @@ function getColorofRelvance(relevance: number) {
       })
     }
   })
-</script>
 
-<style is:global>
-  .notes li {
-    list-style: disc;
+  const filterWidget = document.querySelector('#search')!
+  filterWidget.addEventListener('input', event => {
+    const search = event.target as HTMLInputElement
+    const query = search.value.trim()
+    const queries = query.split(' ').map(q => q.toLowerCase())
+
+    const elements = Array.from(
+      document.querySelectorAll<HTMLElement>('.radashi-func')
+    )
+    const scores =
+      query !== ''
+        ? elements.map(element => {
+            const name = element.getAttribute('data-name')!
+            const notes = (itemsByName[name].notes ?? '')
+              .split(' ')
+              .map(n => n.toLowerCase())
+
+            return (
+              sum(
+                queries.map(q => {
+                  const relevantNotes = notes.map(n => fuzzyMatch(n, q))
+
+                  return Math.max(
+                    (fuzzyMatch(name.toLowerCase(), q) * 7) / 12,
+                    (max(relevantNotes)! * 5) / 12
+                  )
+                })
+              ) / queries.length
+            )
+          })
+        : []
+
+    const maxScore = max(scores) ?? 0
+    const requiredScore =
+      maxScore < 7 / 12
+        ? query.length > 1
+          ? Math.max(maxScore * 0.9, 0.6)
+          : 0.5
+        : 0.5
+
+    console.log({ maxScore, requiredScore, scores })
+    const scoresByElement = mapify(
+      elements,
+      element => element,
+      i => scores[i]
+    )
+    const sortedElements = elements
+      .filter((_, i) => scores[i] > requiredScore)
+      .sort((a, b) => scores[a] - scores[b])
+
+    elements.forEach((element, i) => {
+      const score = scores[i]
+      if (query !== '') {
+        if (score > requiredScore) {
+          console.log(element.getAttribute('data-name'), score)
+        }
+        element.style.display = score > requiredScore ? '' : 'none'
+        element.dataset.score = score.toString()
+      } else {
+        element.style.display = ''
+        delete element.dataset.score
+      }
+    })
+  })
+
+  function fuzzyMatch(target: string, query: string) {
+    return jaroWinkler(target.slice(0, query.length), query)
   }
-</style>
+</script>
 
 <style>
   li hr {

@@ -19,8 +19,8 @@ pnpm-debug.log*
 .DS_Store
 
 # forks
-radashi/
-starlight/
+/radashi
+/starlight
 
 # generated files
 src/content/docs/reference/index.mdx
