@@ -61,8 +61,8 @@ const {
       console.log({ h1 })
       h1.append(document.getElementById('heft')!)
     }
-    setTimeout(() => {
-      const swup = globalThis.__swup
+    globalThis.swupEffects ??= []
+    globalThis.swupEffects.push(swup => {
       swup.hooks.on('content:replace', () => {
         const url = swup.getCurrentUrl()
         console.log({ url })
@@ -79,7 +79,7 @@ const {
 
         update()
       })
-    }, 10)
+    })
     update()
   </script>
 </StarlightPage>
