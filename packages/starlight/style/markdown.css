@@ -115,7 +115,7 @@
 }
 .sl-markdown .sl-markdown-content pre:not(:where(.not-content *)) {
 	border: 1px solid var(--sl-color-gray-5);
-	padding: 0.75rem 1rem;
+	padding: 0;
 	font-size: var(--sl-text-code);
 	tab-size: 2;
 }

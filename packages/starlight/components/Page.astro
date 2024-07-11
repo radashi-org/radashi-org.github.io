@@ -72,47 +72,6 @@ const pagefindEnabled =
 					scroll-padding-top: calc(1.5rem + var(--sl-nav-height));
 				}
 			}
-
-			/* html {
-				--origin-x: calc(var(--click-x, 0.5) * 100%);
-				--origin-y: calc(var(--click-y, 0.5) * 100%);
-			}
-
-			main {
-				position: relative;
-			}
-
-			html .transition-reveal:not(.is-previous-container) {
-				background: var(--sl-color-bg);
-				clip-path: circle(75% at 50% 50%);
-				background: blue !important;
-				min-height: 100vh;
-			}
-
-			html.is-animating .transition-reveal:not(.is-previous-container) {
-				clip-path: circle(0% at var(--origin-x) var(--origin-y));
-			}
-
-			html.is-changing .transition-reveal:not(.is-previous-container) {
-				position: absolute;
-				background: red !important;
-				width: 100%;
-				top: 0;
-				z-index: 2;
-
-				transition:
-					clip-path 0.4s cubic-bezier(0.5, 0, 0.15, 1),
-					mask-position 0.4s cubic-bezier(0.5, 0, 0.15, 1),
-					-webkit-mask-position 0.4s cubic-bezier(0.5, 0, 0.15, 1);
-			}
-
-			html.is-changing .transition-reveal.is-previous-container {
-				position: absolute;
-				top: 0;
-				z-index: 1;
-				left: 0;
-			} */
-
 			/* Define a transition duration during page visits */
 			html.is-changing .transition-fade {
 				transition: opacity 0.125s;
@@ -124,6 +83,15 @@ const pagefindEnabled =
 			}
 		</style>
 		<ThemeProvider {...Astro.props} />
+		<script>
+			import Swup from 'swup';
+
+			declare global {
+				var __swup: Swup;
+			}
+
+			globalThis.__swup = new Swup();
+		</script>
 	</head>
 	<body>
 		<SkipLink {...Astro.props} />
@@ -169,30 +137,5 @@ const pagefindEnabled =
 				</main>
 			</TwoColumnContent>
 		</PageFrame>
-		<script>
-			import Swup from 'swup';
-			// import SwupParallelPlugin from '@swup/parallel-plugin';
-
-			declare global {
-				var swup: Swup;
-			}
-
-			globalThis.swup = new Swup();
-			// globalThis.swup = new Swup({
-			// 	plugins: [new SwupParallelPlugin()],
-			// });
-
-			// swup.hooks.on('visit:start', (context) => {
-			// 	let x = 0.5;
-			// 	let y = 0.5;
-			// 	const event = context.trigger.event as MouseEvent;
-			// 	if (event && typeof event.clientX === 'number') {
-			// 		x = event.clientX / window.innerWidth;
-			// 		y = event.clientY / window.innerHeight;
-			// 	}
-			// 	document.documentElement.style.setProperty('--click-x', x.toString());
-			// 	document.documentElement.style.setProperty('--click-y', y.toString());
-			// });
-		</script>
 	</body>
 </html>

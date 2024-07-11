@@ -32,7 +32,7 @@ const { sublist, nested } = Astro.props;
 									class:list={['sidebar-icon', entry.icon.attrs?.class]}
 								/>
 							)}
-							<span>{entry.label}</span>
+							{entry.label != null && <span>{entry.label}</span>}
 							{entry.badge && (
 								<Badge
 									variant={entry.badge.variant}
@@ -41,7 +41,7 @@ const { sublist, nested } = Astro.props;
 								/>
 							)}
 						</a>
-					) : (
+					) : entry.label != null ? (
 						<details
 							open={flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed}
 						>
@@ -60,6 +60,8 @@ const { sublist, nested } = Astro.props;
 							</summary>
 							<Astro.self sublist={entry.entries} nested />
 						</details>
+					) : (
+						<Astro.self sublist={entry.entries} nested />
 					)}
 				</li>
 			)
@@ -138,12 +140,17 @@ const { sublist, nested } = Astro.props;
 		border-radius: 0.25rem;
 		text-decoration: none;
 		color: var(--sl-color-gray-2);
-		padding: 0.3em var(--sl-sidebar-item-padding-inline);
+		padding: 0.1em var(--sl-sidebar-item-padding-inline);
 		line-height: 1.4;
 
 		span {
 			flex-shrink: 0;
 		}
+	}
+
+	:global(:where(a)) {
+		font-size: 1.08rem !important;
+		margin-left: 0.1rem;
 	}
 
 	a:hover,
@@ -157,6 +164,15 @@ const { sublist, nested } = Astro.props;
 		font-weight: 600;
 		color: var(--sl-color-text-invert);
 		background-color: var(--sl-color-text-accent);
+	}
+
+	.group-label {
+		margin-top: 1.7rem;
+		font-weight: 550;
+
+		* {
+			font-size: 0.96rem !important;
+		}
 	}
 
 	a > *:not(:last-child),

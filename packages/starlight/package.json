@@ -26,6 +26,7 @@
   "type": "module",
   "exports": {
     ".": "./index.ts",
+    "./global.d.ts": "./global.d.ts",
     "./components": "./components.ts",
     "./components/LanguageSelect.astro": {
       "types": "./components/LanguageSelect.astro.tsx",

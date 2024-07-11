@@ -6,7 +6,7 @@ import { stripLeadingAndTrailingSlashes } from '../utils/path';
 
 const SidebarBaseSchema = z.object({
 	/** The visible label for this item in the sidebar. */
-	label: z.string(),
+	label: z.optional(z.string()),
 	/** Translations of the `label` for each supported language. */
 	translations: z.record(z.string()).default({}),
 	/** Adds a badge to the link item */

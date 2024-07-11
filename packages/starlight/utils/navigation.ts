@@ -19,7 +19,7 @@ const SlugKey = Symbol('SlugKey');
 
 export interface Link {
 	type: 'link';
-	label: string;
+	label: string | undefined;
 	href: string;
 	isCurrent: boolean;
 	icon: { src: string; attrs?: Record<string, string> } | undefined;
@@ -29,7 +29,7 @@ export interface Link {
 
 interface Group {
 	type: 'group';
-	label: string;
+	label: string | undefined;
 	entries: (Link | Group | Separator)[];
 	collapsed: boolean;
 	badge: Badge | undefined;
@@ -312,7 +312,7 @@ export function getSidebar(pathname: string, locale: string | undefined): Sideba
 /** Turn the nested tree structure of a sidebar into a flat list of all the links. */
 export function flattenSidebar(sidebar: SidebarEntry[]): Link[] {
 	return sidebar.flatMap((entry) =>
-		entry.type === 'group' ? flattenSidebar(entry.entries) : entry
+		entry.type === 'separator' ? [] : entry.type === 'group' ? flattenSidebar(entry.entries) : entry
 	);
 }
 

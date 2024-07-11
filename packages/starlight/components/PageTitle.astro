@@ -1,10 +1,12 @@
 ---
 import { PAGE_TITLE_ID } from '../constants';
 import type { Props } from '../props';
+
+const { title, description } = Astro.props.entry.data;
 ---
 
-<h1 id={PAGE_TITLE_ID}>{Astro.props.entry.data.title}</h1>
-<p>{Astro.props.entry.data.description}</p>
+<h1 id={PAGE_TITLE_ID}>{title}</h1>
+{description && <p>{description}</p>}
 
 <style>
 	h1 {
@@ -17,7 +19,8 @@ import type { Props } from '../props';
 	}
 
 	:root p {
-		margin-top: 0.8rem;
-		color: var(--sl-color-accent-high);
+		margin-top: 0.6rem;
+		color: #bddef2;
+		font-style: italic;
 	}
 </style>

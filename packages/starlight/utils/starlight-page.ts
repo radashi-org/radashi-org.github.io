@@ -194,7 +194,7 @@ export async function generateStarlightPageRouteData({
 		? normalizeSidebarProp(props.sidebar)
 		: getSidebar(url.pathname, localeData.locale);
 	const headings = props.headings ?? [];
-	const pageDocsEntry: StarlightPageDocsEntry = {
+	const pageDocsEntry = {
 		id,
 		slug,
 		body: '',
@@ -206,7 +206,7 @@ export async function generateStarlightPageRouteData({
 				hidden: false,
 			},
 		},
-	};
+	} satisfies StarlightPageDocsEntry;
 	const entry = pageDocsEntry as StarlightDocsEntry;
 	const entryMeta: StarlightRouteData['entryMeta'] = {
 		dir: props.dir ?? localeData.dir,
