@@ -1,6 +1,8 @@
 /// <reference types="astro/client" />
 
-declare var __swup: import('swup').default;
+type Swup = import('swup').default;
+
+declare var swupEffects: ((swup: Swup) => void)[] | undefined;
 
 declare var StarlightThemeProvider: {
 	updatePickers(theme?: string): void;

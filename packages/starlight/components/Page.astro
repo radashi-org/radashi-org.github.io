@@ -87,10 +87,16 @@ const pagefindEnabled =
 			import Swup from 'swup';
 
 			declare global {
-				var __swup: Swup;
+				var swupEffects: ((swup: Swup) => void)[] | undefined;
 			}
 
-			globalThis.__swup = new Swup();
+			const swup = new Swup();
+			globalThis.swupEffects?.forEach((effect) => effect(swup));
+			globalThis.swupEffects ??= [];
+			globalThis.swupEffects.push = (...effects) => {
+				effects.forEach((effect) => effect(swup));
+				return 0;
+			};
 		</script>
 	</head>
 	<body>
