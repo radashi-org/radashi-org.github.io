@@ -125,11 +125,13 @@ const pagefindEnabled =
 								</ContentPanel>
 							) : (
 								<>
-									<ContentPanel {...Astro.props}>
-										<PageTitle {...Astro.props} />
-										{Astro.props.entry.data.draft && <DraftContentNotice {...Astro.props} />}
-										{Astro.props.isFallback && <FallbackContentNotice {...Astro.props} />}
-									</ContentPanel>
+									{Astro.props.entry.data.template !== 'splash' && (
+										<ContentPanel {...Astro.props}>
+											<PageTitle {...Astro.props} />
+											{Astro.props.entry.data.draft && <DraftContentNotice {...Astro.props} />}
+											{Astro.props.isFallback && <FallbackContentNotice {...Astro.props} />}
+										</ContentPanel>
+									)}
 									<ContentPanel {...Astro.props}>
 										<MarkdownContent {...Astro.props}>
 											<slot />
