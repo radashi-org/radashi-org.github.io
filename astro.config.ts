@@ -5,7 +5,7 @@ import unocss from '@unocss/astro'
 import mdAstro from '@astropub/md'
 import virtual from 'vite-plugin-virtual'
 import exec from '@cush/exec'
-import { existsSync, writeFileSync } from 'fs'
+import { existsSync, writeFileSync, mkdirSync } from 'fs'
 import { renderHeftJson } from './scripts/render-heft-json'
 import { renderReferenceIndex } from './scripts/render-reference-index'
 import { group } from 'radashi'
@@ -86,6 +86,7 @@ async function radashi() {
 
   console.log('Generating API reference index page...')
   const content = await renderReferenceIndex()
+  mkdirSync('src/content/docs/reference', { recursive: true })
   writeFileSync('src/content/docs/reference/index.mdx', content)
 
   return [
