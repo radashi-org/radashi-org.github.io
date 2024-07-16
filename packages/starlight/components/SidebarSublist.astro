@@ -69,6 +69,18 @@ const { sublist, nested } = Astro.props;
 	}
 </ul>
 
+<script>
+	swup.hooks.on('content:replace', () => {
+		const url = swup.getCurrentUrl();
+
+		const prevPageLink = document.querySelector('.sidebar-content [aria-current="page"]');
+		prevPageLink?.removeAttribute('aria-current');
+
+		const currPageLink = document.querySelector(`.sidebar-content a[href="${url}"]`);
+		currPageLink?.setAttribute('aria-current', 'page');
+	});
+</script>
+
 <style>
 	hr {
 		display: block;

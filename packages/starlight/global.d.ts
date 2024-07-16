@@ -2,7 +2,7 @@
 
 type Swup = import('swup').default;
 
-declare var swupEffects: ((swup: Swup) => void)[] | undefined;
+declare var swup: Swup;
 
 declare var StarlightThemeProvider: {
 	updatePickers(theme?: string): void;

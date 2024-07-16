@@ -209,6 +209,7 @@
     "swup": "^4.6.1",
     "unified": "^11.0.4",
     "unist-util-visit": "^5.0.0",
-    "vfile": "^6.0.1"
+    "vfile": "^6.0.1",
+    "vite-plugin-bundled-entry": "^0.5.1"
   }
 }

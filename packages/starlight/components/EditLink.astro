@@ -12,12 +12,14 @@ if (editUrl?.pathname.includes('/reference/')) {
 			editUrl.origin
 		);
 	}
+} else {
+	editUrl = undefined;
 }
 ---
 
 {
 	editUrl && (
-		<a href={editUrl} class="sl-flex" style="margin-left: 1em">
+		<a href={editUrl} class="sl-flex">
 			<Icon name="pencil" />
 			{labels['page.editLink']}
 		</a>
@@ -30,6 +32,7 @@ if (editUrl?.pathname.includes('/reference/')) {
 		align-items: center;
 		text-decoration: none;
 		color: var(--sl-color-gray-3);
+		margin-left: 1em;
 	}
 	a:hover {
 		color: var(--sl-color-white);

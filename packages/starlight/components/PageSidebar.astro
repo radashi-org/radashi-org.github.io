@@ -5,20 +5,14 @@ import MobileTableOfContents from 'virtual:starlight/components/MobileTableOfCon
 import TableOfContents from 'virtual:starlight/components/TableOfContents';
 ---
 
-{
-	Astro.props.toc && (
-		<>
-			<div class="lg:sl-hidden">
-				<MobileTableOfContents {...Astro.props} />
-			</div>
-			<div class="right-sidebar-panel sl-hidden lg:sl-block">
-				<div class="sl-container">
-					<TableOfContents {...Astro.props} />
-				</div>
-			</div>
-		</>
-	)
-}
+<div class="lg:sl-hidden">
+	<MobileTableOfContents {...Astro.props} />
+</div>
+<div class="right-sidebar-panel sl-hidden lg:sl-block">
+	<div class="sl-container">
+		<TableOfContents {...Astro.props} />
+	</div>
+</div>
 
 <style>
 	.right-sidebar-panel {

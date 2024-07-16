@@ -12,6 +12,7 @@ import { createTranslationSystemFromFs } from './utils/translations-fs';
 import { runPlugins, type StarlightUserConfigWithPlugins } from './utils/plugins';
 import { processI18nConfig } from './utils/i18n';
 import type { StarlightConfig } from './types';
+import bundledEntryPlugin from 'vite-plugin-bundled-entry';
 
 export default function StarlightIntegration({
 	plugins,
@@ -29,6 +30,18 @@ export default function StarlightIntegration({
 				logger,
 				updateConfig,
 			}) => {
+				config.vite.plugins = [
+					config.vite.plugins,
+					bundledEntryPlugin({
+						id: 'swup.min.js',
+						outFile: 'swup.min.js',
+						entryPoint: new URL('./utils/swup.ts', import.meta.url).pathname,
+						esbuildOptions: {
+							format: 'iife',
+						},
+					}),
+				];
+
 				// Run plugins to get the updated configuration and any extra Astro integrations to load.
 				const pluginResult = await runPlugins(opts, plugins, {
 					command,

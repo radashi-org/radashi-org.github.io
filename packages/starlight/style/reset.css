@@ -25,6 +25,10 @@ body {
 	background-color: var(--sl-color-bg);
 }
 
+dialog {
+	color: var(--sl-color-text);
+}
+
 input,
 button,
 textarea,

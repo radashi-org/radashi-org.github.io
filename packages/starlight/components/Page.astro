@@ -35,14 +35,18 @@ const pagefindEnabled =
 	Astro.props.entry.slug !== '404' &&
 	!Astro.props.entry.slug.endsWith('/404') &&
 	Astro.props.entry.data.pagefind !== false;
+
+const hasSidebar = Astro.props.hasSidebar ? 'true' : null;
+const hasToc = Astro.props.toc ? 'true' : null;
+const hasHero = Astro.props.entry.data.hero ? 'true' : null;
 ---
 
 <html
 	lang={Astro.props.lang}
 	dir={Astro.props.dir}
-	data-has-toc={Boolean(Astro.props.toc)}
-	data-has-sidebar={Astro.props.hasSidebar}
-	data-has-hero={Boolean(Astro.props.entry.data.hero)}
+	data-has-toc={hasToc}
+	data-has-sidebar={hasSidebar}
+	data-has-hero={hasHero}
 	data-theme="dark"
 >
 	<head>
@@ -72,38 +76,15 @@ const pagefindEnabled =
 					scroll-padding-top: calc(1.5rem + var(--sl-nav-height));
 				}
 			}
-			/* Define a transition duration during page visits */
-			html.is-changing .transition-fade {
-				transition: opacity 0.125s;
-				opacity: 1;
-			}
-			/* Define the styles for the unloaded pages */
-			html.is-animating .transition-fade {
-				opacity: 0;
-			}
 		</style>
 		<ThemeProvider {...Astro.props} />
-		<script>
-			import Swup from 'swup';
-
-			declare global {
-				var swupEffects: ((swup: Swup) => void)[] | undefined;
-			}
-
-			const swup = new Swup();
-			globalThis.swupEffects?.forEach((effect) => effect(swup));
-			globalThis.swupEffects ??= [];
-			globalThis.swupEffects.push = (...effects) => {
-				effects.forEach((effect) => effect(swup));
-				return 0;
-			};
-		</script>
+		<script src="/@id/swup.min.js" defer={false}></script>
 	</head>
 	<body>
 		<SkipLink {...Astro.props} />
 		<PageFrame {...Astro.props}>
 			<Header slot="header" {...Astro.props} />
-			{Astro.props.hasSidebar && <Sidebar slot="sidebar" {...Astro.props} />}
+			<Sidebar slot="sidebar" {...Astro.props} />
 			<TwoColumnContent {...Astro.props}>
 				<PageSidebar slot="right-sidebar" {...Astro.props} />
 				<main
@@ -111,7 +92,40 @@ const pagefindEnabled =
 					lang={Astro.props.entryMeta.lang}
 					dir={Astro.props.entryMeta.dir}
 				>
-					<div id="swup" class="page transition-fade">
+					<div
+						class="page transition-fade"
+						data-has-toc={hasToc}
+						data-has-sidebar={hasSidebar}
+						data-has-hero={hasHero}
+					>
+						<script is:inline>
+							(function () {
+								const parentElement = document.currentScript?.parentElement;
+								console.log('[Page] init script', { parentElement });
+
+								const { hasSidebar, hasToc, hasHero } = parentElement?.dataset || {};
+
+								function setData(element, key, value) {
+									if (value == null) {
+										delete element.dataset[key];
+									} else {
+										element.dataset[key] = value;
+									}
+								}
+
+								const htmlElement = document.documentElement;
+								setData(htmlElement, 'hasSidebar', hasSidebar);
+								setData(htmlElement, 'hasToc', hasToc);
+								setData(htmlElement, 'hasHero', hasHero);
+
+								console.log({ hasSidebar, hasToc, hasHero });
+
+								const sidebar = document.getElementById('starlight__sidebar');
+								if (sidebar) {
+									sidebar.style.display = hasSidebar ? 'block' : 'none';
+								}
+							})();
+						</script>
 						{/* TODO: Revisit how this logic flows. */}
 						<Banner {...Astro.props} />
 						{

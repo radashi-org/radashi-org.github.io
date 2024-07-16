@@ -3,29 +3,25 @@ import Icon from '../user-components/Icon.astro';
 import TableOfContentsList from './TableOfContents/TableOfContentsList.astro';
 import type { Props } from '../props';
 
-const { labels, toc } = Astro.props;
+const { labels, toc = { minHeadingLevel: 1, maxHeadingLevel: 1, items: [] } } = Astro.props;
 ---
 
-{
-	toc && (
-		<mobile-starlight-toc data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
-			<nav aria-labelledby="starlight__on-this-page--mobile">
-				<details id="starlight__mobile-toc">
-					<summary id="starlight__on-this-page--mobile" class="sl-flex">
-						<div class="toggle sl-flex">
-							{labels['tableOfContents.onThisPage']}
-							<Icon name={'right-caret'} class="caret" size="1rem" />
-						</div>
-						<span class="display-current" />
-					</summary>
-					<div class="dropdown">
-						<TableOfContentsList toc={toc.items} isMobile />
-					</div>
-				</details>
-			</nav>
-		</mobile-starlight-toc>
-	)
-}
+<mobile-starlight-toc data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
+	<nav aria-labelledby="starlight__on-this-page--mobile">
+		<details id="starlight__mobile-toc">
+			<summary id="starlight__on-this-page--mobile" class="sl-flex">
+				<div class="toggle sl-flex">
+					{labels['tableOfContents.onThisPage']}
+					<Icon name={'right-caret'} class="caret" size="1rem" />
+				</div>
+				<span class="display-current"></span>
+			</summary>
+			<div class="dropdown">
+				<TableOfContentsList toc={toc.items} isMobile />
+			</div>
+		</details>
+	</nav>
+</mobile-starlight-toc>
 
 <style>
 	nav {

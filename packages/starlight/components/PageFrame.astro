@@ -5,13 +5,13 @@ import type { Props } from '../props';
 const { hasSidebar, labels } = Astro.props;
 ---
 
-<div class="page sl-flex">
+<div class="swup page-frame sl-flex">
 	<header class="header"><slot name="header" /></header>
 	{
 		hasSidebar && (
 			<nav class="sidebar" aria-label={labels['sidebarNav.accessibleLabel']}>
 				<MobileMenuToggle {...Astro.props} />
-				<div id="starlight__sidebar" class="sidebar-pane">
+				<div id="starlight__sidebar" class="sidebar-pane" data-swup-persist="starlight__sidebar">
 					<div class="sidebar-content sl-flex">
 						<slot name="sidebar" />
 					</div>
@@ -19,11 +19,31 @@ const { hasSidebar, labels } = Astro.props;
 			</nav>
 		)
 	}
-	<div class="main-frame"><slot /></div>
+	<script is:inline>
+		(function () {
+			const sidebarPane = document.querySelector('.sidebar-pane');
+			console.log('sidebarPane =>', sidebarPane);
+			if (sidebarPane) {
+				const scrollPosition = sidebarPane.getAttribute('data-scroll-top');
+				console.log('scrollPosition =>', scrollPosition);
+				if (scrollPosition) {
+					sidebarPane.scrollTop = +scrollPosition;
+				}
+				sidebarPane.addEventListener(
+					'scroll',
+					() => {
+						sidebarPane.setAttribute('data-scroll-top', '' + sidebarPane.scrollTop);
+					},
+					{ passive: true }
+				);
+			}
+		})();
+	</script>
+	<div class="main-frame transition-fade"><slot /></div>
 </div>
 
 <style>
-	.page {
+	.page-frame {
 		flex-direction: column;
 		min-height: 100vh;
 	}
