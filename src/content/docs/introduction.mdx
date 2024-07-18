@@ -1,0 +1,32 @@
+---
+title: 'Introducing Radashi'
+description: 'Build the next Lodash with us.'
+---
+
+- The success of Lodash is undeniable
+- While we are grateful that Lodash exists, we started Radashi to help guide a new generation of utility libraries that want to refine the ethos of Lodash for the modern era of JavaScript.
+- Look, I'm not gonna lie to you. Lodash has more functions and covers more use cases. Well, truth is, that's not even Radashi's primary objective. Nonetheless, we do maintain a [“Lodash parity”](/lodash-parity) status page for those who'd like to know the differences.
+- In addition, Lodash doesn't have everything that Radashi has. You could even say that Radashi is looking to cover more ground than Lodash, to embrace new patterns and discover idiomatic ways to solve common problems.
+- Some might say Lodash is more “battle tested”, but Radashi keeps things minimal, so it's actually quite straight-forward to anticipate and write tests for every usage pattern. In fact, Radashi has full test coverage.
+- But “battle testing” goes beyond just unit tests, it's also about browser support. It's fair to assume that Lodash probably has better browser support than Radashi, but that comes at an (often substantial) cost in terms of bundle size. At the time of this writing, Radashi works in 92% of browsers used globally (see our [Browser Support](/browser-support) page), and we believe this is a good compromise to make (your mileage may vary).
+- Bloat
+  - I define “bloat” as a mixture of “scope creep” and “over-engineering”.
+  - Try to keep each function self-contained. One of Radashi's main principles is to keep the source code easy to read. This means keeping functions short, using modern syntax, and adding comments when necessary. 
+    - It also means avoiding new abstractions whenever possible. Mostly related to “avoid new abstractions” is the idea of “no internal functions” (i.e. functions that can't be imported from Radashi if you decide to fork the function).
+  - We shouldn't try to cover every use case. You can easily fork a single function in Radashi and add whatever you like. Your forked function may even deserve a spot in Radashi's roster (so send pull requests!). Learn how to publish “your own Radashi” that merges NPM `radashi` and your custom functions and changes [in this guide](/fork-radashi).
+  - Syntax sugar is a scourge. When someone reads my codebase, I want them to have to learn as few concepts as possible. That means keeping to vanilla JavaScript whenever it's practical. If you're going to abstract something, do it because it makes the code more readable (enough so to warrant the overhead of learning another abstraction) and/or less error-prone. One example is the `isNil` function, which prevents typos where `!==` should be `!=` but you were on auto-pilot.
+- Trust the type checker
+  - Radashi is TypeScript-first and so we believe the type checker can save the JavaScript engine a lot of work. In particular, I'm talking about type-checking arguments to one of Radashi's functions. You don't need `arg !== undefined` checks when TypeScript has your back, and so Radashi doesn't do those checks. This leads to less bloat and more performance.
+- Polymorphism
+  - In general, Radashi leans toward saying "no" to polymorphic functions.
+  - Of course, some functions demand polymorphism, and we're not hardliners enough to reject those useful functions. This rule is focused on rejecting “problematic polymorphism” (rather than “every polymorphism”) in addition to taking a skeptical stance on polymorphism in general.
+  - Polymorphism often makes your code harder to debug. For example, if you pass a function that expects a string, but you pass a number, you'll get a runtime error.
+- Breaking the rules
+  - Polymorphism is only acceptable if its risk of misuse is low or zero, and it covers a popular use case. The definition of “popular use case” is vague, of course, so the popularity has to be extra clear when using it as an excuse to add polymorphism.
+  - All in all, if breaking a rule of [Our Ethos](/our-ethos) contributes to an easier to learn and more intuitive library, then it's a win.
+- I'm not the boss; I'm just the guy who forked Radash.
+  - I will maintain custodianship until more leadership join the effort.
+  - If you show passion for the project, you can also be a custodian.
+  - If you don't care to mold the philosophy and would only like to help merge PRs, you're still welcome to join the Radashi core team.
+  - Apply to the core team by posting [in this discussion](https://github.com/orgs/radashi-org/discussions/4) or reaching out to me [@retropragma](https://x.com/retropragma) on X.
+  - Either way, your contributions are welcome. Your opinions are welcome. Your feedback is welcome.

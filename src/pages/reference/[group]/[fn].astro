@@ -55,31 +55,10 @@ const {
     <strong class="font-700">{heft[frontmatter.title]}</strong> bytes
   </div>
   <Content />
-  <script>
-    function update() {
-      const h1 = document.querySelector(':not(.is-previous-container) h1')!
-      console.log({ h1 })
-      h1.append(document.getElementById('heft')!)
-    }
-    globalThis.swupEffects ??= []
-    globalThis.swupEffects.push(swup => {
-      swup.hooks.on('content:replace', () => {
-        const url = swup.getCurrentUrl()
-        console.log({ url })
 
-        const prevPageLink = document.querySelector(
-          '.sidebar-content [aria-current="page"]'
-        )!
-        prevPageLink.removeAttribute('aria-current')
-
-        const currPageLink = document.querySelector(
-          `.sidebar-content a[href="${url}"]`
-        )!
-        currPageLink.setAttribute('aria-current', 'page')
-
-        update()
-      })
-    })
-    update()
+  <script is:inline define:vars={{ title: frontmatter.title }}>
+    console.log('[FunctionPage] mount %s', title)
+    const h1 = document.querySelector(':not(.is-previous-container) h1')
+    h1.append(document.getElementById('heft'))
   </script>
 </StarlightPage>

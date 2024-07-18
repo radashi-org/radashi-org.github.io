@@ -1,0 +1,151 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+import { Markdown } from '@astropub/md'
+import * as fs from 'node:fs'
+
+const packageJson = JSON.parse(fs.readFileSync('radashi/package.json', 'utf8'))
+
+const regions = [
+  { name: 'Global', code: '' },
+  { name: 'USA', code: 'US' },
+  { name: 'Europe', code: 'alt-eu' },
+  { name: 'China', code: 'CN' },
+]
+
+const iconMap: Record<string, string> = {
+  and_chr: 'https://browsersl.ist/chrome-FUOAzAXq.svg',
+  and_ff: 'https://browsersl.ist/and_ff-B8qQgkEL.svg',
+  and_qq: 'https://browsersl.ist/and_qq-CyCymH51.svg',
+  and_uc: 'https://browsersl.ist/and_uc-BvWD04mY.svg',
+  android: 'https://browsersl.ist/android-G_KcbQhm.svg',
+  chrome: 'https://browsersl.ist/chrome-FUOAzAXq.svg',
+  edge: 'https://browsersl.ist/edge-DCBetAoj.svg',
+  firefox: 'https://browsersl.ist/and_ff-B8qQgkEL.svg',
+  ios_saf: 'https://browsersl.ist/safari-D6h9xXw0.svg',
+  node: 'https://browsersl.ist/node-BuvO4gDH.svg',
+  op_mob: 'https://browsersl.ist/opera-BVJoyTbY.svg',
+  opera: 'https://browsersl.ist/opera-BVJoyTbY.svg',
+  safari: 'https://browsersl.ist/safari-D6h9xXw0.svg',
+  samsung: 'https://browsersl.ist/samsung-Dn4OZBtI.svg',
+}
+
+const supportQuery = encodeURIComponent(
+  packageJson.browserslist.join(',')
+).replace('%20', '+')
+
+const supportResponse = await Promise.all(
+  regions.map(region =>
+    fetch(
+      'https://browsersl.ist/api/browsers?q=' +
+        supportQuery +
+        '&region=' +
+        region.code
+    ).then(res => res.json())
+  )
+)
+
+function semverCompare(a: string, b: string) {
+  var pa = a.split('.')
+  var pb = b.split('.')
+  for (var i = 0; i < 3; i++) {
+    var na = Number(pa[i])
+    var nb = Number(pb[i])
+    if (na > nb) return 1
+    if (nb > na) return -1
+    if (!isNaN(na) && isNaN(nb)) return 1
+    if (isNaN(na) && !isNaN(nb)) return -1
+  }
+  return 0
+}
+
+function wrap(s: string, left: string, right = left) {
+  return left + s + right
+}
+
+const rowData: {
+  browser: string
+  version: string
+  coverage: string
+}[] = []
+
+for (const browser of supportResponse[0].browsers) {
+  rowData.push({
+    browser: `<img src="${iconMap[browser.id]}" style="float: left; margin-right: 8px; margin-top: 2px;" width="24" height="24" /> ${browser.name}`,
+    version:
+      '≥ ' +
+      Object.keys(browser.versions)
+        .map(v => v.split('-')[0])
+        .sort(semverCompare)[0],
+    coverage:
+      browser.coverage != null
+        ? wrap(browser.coverage.toFixed(2) + '%', '`')
+        : '–',
+  })
+}
+
+const regionCoverage = supportResponse.map((region, index) => {
+  const regionName = regions[index].name
+  const link = `https://browsersl.ist/#q=${supportQuery}&region=${regions[index].code}`
+  return {
+    name: `[${regionName}](${link})`,
+    coverage: wrap(region.coverage.toFixed(2) + '%', '`'),
+  }
+})
+
+function toMarkdownColumns(data: any[]) {
+  return data
+    .map(row => '| ' + Object.values(row).join(' | ') + ' |')
+    .join('\n')
+}
+
+const markdown = `Browser support is a crucial factor to consider when choosing a utility library
+like Radashi. It determines which browsers and versions your application will be compatible with,
+potentially affecting your user base and the features you can utilize.
+
+While Radashi aims to strike a balance between modern functionality and broad compatibility, it's
+important to note that you may need to compile your application bundle using tools like
+\`@babel/preset-env\`,
+[Vite's legacy plugin](https://www.npmjs.com/package/@vitejs/plugin-legacy), or something similar
+to ensure compatibility with older browsers. This process can transpile modern JavaScript features
+used in Radashi down to more widely supported syntax, expanding your potential audience while still
+allowing you to leverage the library's full capabilities.
+
+### The Query
+
+Radashi currently uses the following [Browserslist](https://github.com/browserslist/browserslist) query:
+
+\`\`\`
+${packageJson.browserslist.join('\n')}
+\`\`\`
+
+If you'd like to understand Browserslist better, check out [this exceptional article](https://www.alexander-morse.com/blog/passably-explained-browserslist/) by Alexander Morse.
+
+### Coverage
+
+Audience coverage is an estimate of which browsers and versions are most likely to use your
+application. It is based on data from Browserslist and may not reflect the actual usage rate.
+
+| Region | Coverage |
+| --- | ---: |
+${toMarkdownColumns(regionCoverage)}
+
+China's lower coverage is mainly due to a lack of support for IE 11.
+
+| Browser | Version | Coverage |
+| --- | --- | ---: |
+${toMarkdownColumns(rowData)}
+
+### Quality Assurance
+
+To ensure that Radashi keeps its promise of broad compatibility, we use ESLint with [\`eslint-plugin-compat\`](https://github.com/amilajack/eslint-plugin-compat) by Amila Welihinda
+`
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'Browser Support',
+    description: 'Discover which browsers and versions Radashi supports.',
+  }}
+>
+  <Markdown of={markdown} />
+</StarlightPage>

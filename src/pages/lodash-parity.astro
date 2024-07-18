@@ -135,7 +135,11 @@ function getRelevanceColor(relevance: number) {
                     src={`/parity/${item.status}.svg`}
                     class="w-14 h-14 !absolute top-0 left--8 translate-x--100% translate-y--0.3rem"
                   />
-                  {item.name}
+                  <a
+                    href={`https://lodash.com/docs/4.17.15#${item.name}`}
+                    target="_blank">
+                    {item.name}
+                  </a>
                   <div class="flex-1" />
                   <circle-progress
                     class="inline-block !mt-0 ml-1rem translate--y-0.1rem"
@@ -183,111 +187,130 @@ function getRelevanceColor(relevance: number) {
   import { jaroWinkler } from '@skyra/jaro-winkler'
   import 'js-circle-progress'
 
-  const itemElements = document.querySelectorAll('li[data-name]')
-
   declare const itemsByName: Record<string, LodashFeature>
 
-  const sortingWidget = document.querySelector('.sort-buttons')!
-  sortingWidget.addEventListener('click', event => {
-    const button = (event.target as HTMLElement).closest('[role="button"]')
-    if (button) {
-      const sortBy = button.getAttribute('data-sort-by')
-      const descending =
-        button.hasAttribute('data-descending') &&
-        button.getAttribute('data-descending') !== 'false'
+  function mount() {
+    const itemElements = document.querySelectorAll('li[data-name]')
 
-      let items = Array.from(itemElements, itemElement => {
-        itemElement.remove()
-        const name = itemElement.getAttribute('data-name')!
-        return { ...itemsByName[name], element: itemElement }
-      })
-      if (sortBy === 'name') {
-        items = alphabetical(
-          items,
-          item => item.name,
-          descending ? 'desc' : 'asc'
-        )
-      } else {
-        items = sort(items, item => item.weekly_downloads_num, descending)
-      }
-      const article = document.querySelector('article')!
-      items.forEach(item => {
-        article.appendChild(item.element)
-      })
-    }
-  })
+    const sortingWidget = document.querySelector('.sort-buttons')!
+    sortingWidget.addEventListener('click', event => {
+      const button = (event.target as HTMLElement).closest('[role="button"]')
+      if (button) {
+        const sortBy = button.getAttribute('data-sort-by')
+        const descending =
+          button.hasAttribute('data-descending') &&
+          button.getAttribute('data-descending') !== 'false'
 
-  const filterWidget = document.querySelector('#search')!
-  filterWidget.addEventListener('input', event => {
-    const search = event.target as HTMLInputElement
-    const query = search.value.trim()
-    const queries = query.split(' ').map(q => q.toLowerCase())
-
-    const elements = Array.from(
-      document.querySelectorAll<HTMLElement>('.radashi-func')
-    )
-    const scores =
-      query !== ''
-        ? elements.map(element => {
-            const name = element.getAttribute('data-name')!
-            const notes = (itemsByName[name].notes ?? '')
-              .split(' ')
-              .map(n => n.toLowerCase())
-
-            return (
-              sum(
-                queries.map(q => {
-                  const relevantNotes = notes.map(n => fuzzyMatch(n, q))
-
-                  return Math.max(
-                    (fuzzyMatch(name.toLowerCase(), q) * 7) / 12,
-                    (max(relevantNotes)! * 5) / 12
-                  )
-                })
-              ) / queries.length
-            )
-          })
-        : []
-
-    const maxScore = max(scores) ?? 0
-    const requiredScore =
-      maxScore < 7 / 12
-        ? query.length > 1
-          ? Math.max(maxScore * 0.9, 0.6)
-          : 0.5
-        : 0.5
-
-    console.log({ maxScore, requiredScore, scores })
-    const scoresByElement = mapify(
-      elements,
-      element => element,
-      i => scores[i]
-    )
-    const sortedElements = elements
-      .filter((_, i) => scores[i] > requiredScore)
-      .sort((a, b) => scores[a] - scores[b])
-
-    elements.forEach((element, i) => {
-      const score = scores[i]
-      if (query !== '') {
-        if (score > requiredScore) {
-          console.log(element.getAttribute('data-name'), score)
+        let items = Array.from(itemElements, itemElement => {
+          itemElement.remove()
+          const name = itemElement.getAttribute('data-name')!
+          return { ...itemsByName[name], element: itemElement }
+        })
+        if (sortBy === 'name') {
+          items = alphabetical(
+            items,
+            item => item.name,
+            descending ? 'desc' : 'asc'
+          )
+        } else {
+          items = sort(items, item => item.weekly_downloads_num, descending)
         }
-        element.style.display = score > requiredScore ? '' : 'none'
-        element.dataset.score = score.toString()
-      } else {
-        element.style.display = ''
-        delete element.dataset.score
+        const article = document.querySelector('article')!
+        items.forEach(item => {
+          article.appendChild(item.element)
+        })
       }
     })
-  })
 
-  function fuzzyMatch(target: string, query: string) {
-    return jaroWinkler(target.slice(0, query.length), query)
+    const filterWidget = document.querySelector('#search')!
+    filterWidget.addEventListener('input', event => {
+      const search = event.target as HTMLInputElement
+      const query = search.value.trim()
+      const queries = query.split(' ').map(q => q.toLowerCase())
+
+      const elements = Array.from(
+        document.querySelectorAll<HTMLElement>('.radashi-func')
+      )
+      const scores =
+        query !== ''
+          ? elements.map(element => {
+              const name = element.getAttribute('data-name')!
+              const notes = (itemsByName[name].notes ?? '')
+                .split(' ')
+                .map(n => n.toLowerCase())
+
+              return (
+                sum(
+                  queries.map(q => {
+                    const relevantNotes = notes.map(n => fuzzyMatch(n, q))
+
+                    return Math.max(
+                      (fuzzyMatch(name.toLowerCase(), q) * 7) / 12,
+                      (max(relevantNotes)! * 5) / 12
+                    )
+                  })
+                ) / queries.length
+              )
+            })
+          : []
+
+      const maxScore = max(scores) ?? 0
+      const requiredScore =
+        maxScore < 7 / 12
+          ? query.length > 1
+            ? Math.max(maxScore * 0.9, 0.6)
+            : 0.5
+          : 0.5
+
+      console.log({ maxScore, requiredScore, scores })
+      const scoresByElement = mapify(
+        elements,
+        element => element,
+        i => scores[i]
+      )
+      const sortedElements = elements
+        .filter((_, i) => scores[i] > requiredScore)
+        .sort((a, b) => scores[a] - scores[b])
+
+      elements.forEach((element, i) => {
+        const score = scores[i]
+        if (query !== '') {
+          if (score > requiredScore) {
+            console.log(element.getAttribute('data-name'), score)
+          }
+          element.style.display = score > requiredScore ? '' : 'none'
+          element.dataset.score = score.toString()
+        } else {
+          element.style.display = ''
+          delete element.dataset.score
+        }
+      })
+    })
+
+    function fuzzyMatch(target: string, query: string) {
+      return jaroWinkler(target.slice(0, query.length), query)
+    }
   }
+
+  mount()
+  const url = swup.getCurrentUrl()
+  swup.hooks.on(
+    'content:replace',
+    () => url === swup.getCurrentUrl() && mount()
+  )
 </script>
 
 <style>
+  .radashi-func {
+    list-style: none;
+  }
+
+  .radashi-func h2 a {
+    color: inherit;
+    font-size: 1em !important;
+    text-decoration: none;
+  }
+
   li hr {
     width: 100%;
     border: 1px solid rgba(128, 128, 128, 0.3) !important;

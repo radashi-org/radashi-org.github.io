@@ -30,8 +30,8 @@ importers:
         specifier: 1.0.0-beta.0
         version: 1.0.0-beta.0
       radashi:
-        specifier: 12.2.0-beta.85fb266
-        version: 12.2.0-beta.85fb266
+        specifier: 12.2.0-beta.4aac7d7
+        version: 12.2.0-beta.4aac7d7
     devDependencies:
       '@alloc/prettier-config':
         specifier: ^1.0.0
@@ -1937,8 +1937,8 @@ packages:
   queue-tick@1.0.1:
     resolution: {integrity: sha512-kJt5qhMxoszgU/62PLP1CJytzd2NKetjSRnyuj31fDd3Rlcz3fzlFdFLD1SItunPwyqEOkca6GbV612BWfaBag==}
 
-  radashi@12.2.0-beta.85fb266:
-    resolution: {integrity: sha512-yTw+A6KmQHA4oxlYy2F8P86aNXjjB8pZDK63yt/HCNg7UaOH9r4oh5VwxvY4q3nfLh8Bw0Cw1hZ6mAqiRTn/5g==}
+  radashi@12.2.0-beta.4aac7d7:
+    resolution: {integrity: sha512-RSMjIHchnFeiz5QDf7XA1vOu/60cV2nsEXdsX8+EEI1cdsuvq+6r2GqvTZZ9f8X4VSdo2NbKfwcE6YW1z41ixw==}
     engines: {node: '>=16.0.0'}
 
   rc@1.2.8:
@@ -4615,7 +4615,7 @@ snapshots:
 
   queue-tick@1.0.1: {}
 
-  radashi@12.2.0-beta.85fb266: {}
+  radashi@12.2.0-beta.4aac7d7: {}
 
   rc@1.2.8:
     dependencies:

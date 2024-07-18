@@ -62,7 +62,7 @@
   [aria-current='page']:hover,
   [aria-current='page']:focus {
     font-weight: 300;
-    opacity: 0.2;
+    opacity: 0.5;
     color: white;
     background-color: #0000;
   }

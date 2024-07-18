@@ -1,0 +1,28 @@
+---
+title: Our Ethos
+description: 'How the Radashi community makes decisions.'
+---
+
+First and foremost, Radashi's vision is to carry on the vision of Radash.
+
+The creator of Radash gave us all the following advice in his writings in [`.github/contributing.md`](https://github.com/sodiray/radash/blob/069b26cdd7d62e6ac16a0ad3baa1c9abcca420bc/.github/contributing.md):
+
+> - When coding, try not to create internal APIs (any function or module that is not exported to be used by the client).
+> - Also, try not to use functions from other Radashi modules. This is a softer rule but we want to make it easy for readers to understand a function without having to navigate the codebase. As a utility library users should ideally be able to copy/paste a function from Radashi into their project. Most Radashi functions should be easy to write in isolation.
+> - If an implementation needs more than ~20 lines of code it might be better suited for another package or library. This is another softer rule.
+
+Alongside those guidelines, I'll add the following:
+
+- **Tests are good:** When contributing a fix or feature, always include tests! We're aiming for 100% line coverage (no line of code left untested), but even that doesn't guarantee all edge cases are accounted for. Take care to think of these edge cases, so it's easier for us to trust your contribution!
+
+- **Documentation is good:** We can't merge your contribution until it's been documented. If you're not proficient in English, let us know and we can help! Consider using ChatGPT to ensure the docs are clear and grammatically correct.
+
+- **Abstraction over sugar:** Can something already be done simply with vanilla JS? Then it's not a good fit for Radashi. Our functions exist to enable common use cases that are awkward to do alone.
+
+- **Is there a common use case?** Radashi functions aim to strike a balance between simplicity and utility. No one wants their application to contain a bunch of code that never gets used, so we err on the side of caution and keep it simple. Worse comes to worst, you can always copy-paste the implementation and customize it to suit your application's esoteric needs.
+
+- **Performant vs readable:** Radashi functions also try to balance between performance and brevity. Our functions need to be easily understood. This keeps the contribution barrier on the lower end, and it makes forking a single function less intimidating. On the other hand, we don't want Radashi functions to disrespect the end user by slowing down your application.
+
+### Contributing
+
+[Share your thoughts](https://github.com/orgs/radashi-org/discussions/20) on how we can improve the decision-making of Radashi's stewards through changes to our ethos.

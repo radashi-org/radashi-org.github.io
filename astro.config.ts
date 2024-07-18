@@ -22,7 +22,7 @@ export default defineConfig({
   integrations: [
     mdAstro(),
     starlight({
-      title: 'My Docs',
+      title: 'Radashi',
       tableOfContents: false,
       head: [
         {
@@ -98,37 +98,37 @@ async function radashi() {
 
 function generateSidebar(): SidebarItem[] {
   return [
-    {
-      label: 'Getting Started',
-      link: 'getting-started',
-      attrs: { class: 'h3' },
-    },
-    {
-      label: 'Core Concepts',
-      link: 'core-concepts',
-      attrs: { class: 'h3' },
-    },
-    {
-      label: 'Installation',
-      link: 'installation',
-      attrs: { class: 'h3' },
-      icon: {
-        src: '/Install-dark.svg',
-        attrs: {
-          // width: '24rem',
-          // height: '24rem',
-          fill: 'currentColor',
-        },
-      },
-    },
+    h3('Introduction'),
+    h3('Installation'),
+    h3('Our Ethos'),
+    h3('Contributing'),
+    h3('Browser Support'),
+    h3('Lodash Parity'),
     {
       separator: '0.6px solid rgba(240, 240, 240, 0.1)',
     },
+    h3('Community', {
+      icon: '/Community-dark.svg',
+      link: 'https://github.com/orgs/radashi-org/discussions',
+    }),
+    h3('Github', {
+      icon: '/Github-dark.svg',
+      link: 'https://github.com/radashi-org/radashi',
+    }),
+    h3('NPM', {
+      icon: '/Npm-dark.svg',
+      link: 'https://www.npmjs.com/package/radashi',
+    }),
+    h3('JSR.io', {
+      icon: '/JSR-dark.svg',
+      link: 'https://jsr.io/@radashi-org/radashi',
+    }),
     {
-      label: 'Lodash Parity',
-      link: 'lodash-parity',
-      attrs: { class: 'h3' },
+      separator: '0.6px solid rgba(240, 240, 240, 0.1)',
     },
+    h3('All Functions', {
+      link: 'reference/',
+    }),
     {
       items: Object.entries(
         group(
@@ -151,4 +151,24 @@ function generateSidebar(): SidebarItem[] {
       ),
     },
   ]
+}
+
+function h3(
+  label: string,
+  opts: { icon?: string; link?: string } = {}
+): SidebarItem {
+  return {
+    label,
+    link: opts.link ?? label.toLowerCase().replace(/\s+/g, '-'),
+    attrs: {
+      class: 'h3',
+      target: opts.link && /^https?:/.test(opts.link) ? '_blank' : undefined,
+    },
+    icon: opts.icon
+      ? {
+          src: opts.icon,
+          attrs: { fill: 'currentColor' },
+        }
+      : undefined,
+  }
 }

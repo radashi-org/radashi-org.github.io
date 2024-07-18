@@ -1,0 +1,13 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+
+const [changelog] = await Astro.glob('../../radashi/CHANGELOG.md')
+---
+
+<StarlightPage frontmatter={{ title: 'Changelog' }}>
+  <changelog.Content />
+  <script is:inline>
+    const parent = document.currentScript.parentElement
+    parent.querySelector('h1').remove()
+  </script>
+</StarlightPage>
