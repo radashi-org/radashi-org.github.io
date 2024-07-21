@@ -1,0 +1,56 @@
+---
+title: Show Me A Better Utility Library
+description: No seriously, I want to know...
+---
+
+Let me finish that headline with: “...that meets these criteria”.
+
+But hold on. Before we talk “criteria”, let me answer your inevitable question of “Better than what?”. The answer is [**Radashi**](https://radashi-org.github.io/), the _soon-to-be_ best utility library for TypeScript fans who don't want to go full *Functional Programming*™️. In other words, you enjoy the Lodash way, which I would describe as _idiomatic JavaScript_.
+
+#### “But how's it better than Lodash?”
+
+First off, you can't just say that one library is _better_ than another. As any seasoned developer knows, it's all about the tradeoffs. While I have admiration for Lodash and the masterpiece it once was, and while I could certainly wait for Lodash 5, I recently discovered another utility library called _Radash_ (which _Radashi_ is based on). Radash has a loose philosophy, one that is not comprehensively described in any one place, but if you read its introduction and contributing guide, you'd likely be able to piece together a good chunk of **Radashi's ethos**, a document written by me that lists the design principles to be followed when reviewing proposals and making decisions. Radashi has a lot to thank Radash for and is honored to carry its vision forward in a respectfully **more sustainable** and **more principled** way.
+
+- Strengths
+  - Modern
+    - Use modern ESM syntax and TypeScript
+    - Tree-shakeable
+      - First and foremost, we all know tree-shaking is a must these days if you want to keep your startup performance slick. Radashi has `sideEffects: false` in its `package.json` file, so any exports you don't use will be tree-shaken away.
+    - Use Biome for code formatting & linting
+    - Use Vitest for testing
+  - Minimal
+    - Banish imports of internal modules (i.e. functions that **you, the user** cannot import from Radashi). Lodash prefixes these “internal modules” with an underscore. But this can make forking Lodash a pain in the ass.
+    - Easy to copy-paste. Every function in Radashi has its own module, and these modules only ever import from `radashi`. This means you can go to [our Github page](https://github.com/radashi-org/radashi), wait for it to load, press the `t` key, type "all", press Enter to visit the source file, copy its code directly into your project (without any changes), and you're ready to make changes and use them. Just the fact that you can do this so easily makes Radashi easier to adapt your project's needs.
+    - Keep code size low without sacrificing performance
+    - Avoid syntax sugar unless it meaningfully improves “read-ability” or reduces “bug rate” or “tech debt”
+    - Avoid adding functions that only cover uncommon use cases. Likewise, avoid extending functions with options/parameters that only cover an uncommon use case.
+  - Robust
+    - Changes are automatically linted before being merged to `main`
+    - Browser compatibility checks are in place. Check out compatibility on our [Browser Support](/browser-support) page.
+  - Top-notch static types
+    - We strive for 100% correct types and we're well-practiced on the intricacies of complex TypeScript generics. There's little more frustrating than a library with incorrect or incomplete types.
+  - High-quality documentation site
+  - Easy to customize
+  - Easy to contribute
+  - Automatic beta releases
+  - Preview releases
+  - Active maintainers
+    - Of course, I can't say how active John David Dalton is on Lodash 5.
+    - Currently, I'm the most active maintainer of Radashi, but others are already helping to review PRs and contributing their own PRs.
+    - My current goal is to grow the Radashi core team as much as possible. My end goal is to have Radashi be a community effort. For now, that means the barrier to joining the core team is practically non-existent, though you do need to contribute (be it by reviewing PRs, contributing your own PRs, or offering your perspective in design discussions) at least a couple times in a 3 month period.
+    - I will gladly give publishing privilege to anyone who demonstrates passion and expertise over their 2 months on the core team. These privileged few are the “stewards of Radashi” that will keep Radashi evolving and responsive to contributors.
+    - If you'd like to join the effort, [reach out here](https://github.com/orgs/radashi-org/discussions/4) or DM me on X at [@retropragma](https://x.com/retropragma).
+- Parity
+  - Use cases (mention "Lodash Parity" page)
+  - Full test coverage
+  - Benchmarks, perf regression detection
+- Weaknesses
+  - Not battle-tested? True, but we have full test coverage and we're very responsive to bug
+    reports.
+  - Not enough stars? True, but you (the reader) can help on that front. Goto [our Github page](https://github.com/radashi-org/radashi) and give us a star to help others find us.
+  - Something else? Share your ideas and critique in [our Github discussions](https://github.com/radashi-org/radashi/discussions).
+- Give us a try
+  - We have a StackBlitz for you to easily test drive Radashi. [Click here]() to try.
+  - TODO: write a code block containing `pnpm install radashi` command
+- Funding
+  - Currently, Radashi has no sponsors and it doesn't yet have an OpenCollective page. If you'd like to sponsor or donate to the Radashi effort, [let us know](https://github.com/orgs/radashi-org/discussions/129).
