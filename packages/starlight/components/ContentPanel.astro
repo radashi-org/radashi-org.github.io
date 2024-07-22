@@ -9,6 +9,10 @@ import type { Props } from '../props';
 <style>
 	.content-panel {
 		padding: 1.5rem var(--sl-content-pad-x);
+
+		html[data-has-toc] & {
+			margin-right: 0 !important;
+		}
 	}
 	.content-panel + .content-panel {
 		border-top: 1px solid var(--sl-color-hairline);

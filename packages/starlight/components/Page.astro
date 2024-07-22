@@ -60,7 +60,10 @@ if (lastUpdated == null) {
 				file = 'src/content/docs/' + slug + '.mdx';
 			}
 
-			const { stdout } = await execa('git', ['log', '-1', '--format=%cd', file], { cwd });
+			const { stdout } = await execa('git', ['log', '-1', '--format=%cd', file], {
+				cwd,
+				noThrow: true,
+			});
 
 			console.trace({ slug, file, stdout, cwd });
 

@@ -23,10 +23,10 @@
 	margin-bottom: 1.3rem;
 }
 
-.sl-markdown-content :not(h1, h2, h3, h4, h5, h6) + :is(h4):not(:where(.not-content *)) {
+.sl-markdown-content :is(h4):not(:where(.not-content *)) {
 	margin-top: 4rem;
-	color: #ffc56e;
-	font-weight: 400 !important;
+	/* color: #ffc56e; */
+	font-weight: 500 !important;
 }
 
 .sl-markdown-content :is(h3) {
