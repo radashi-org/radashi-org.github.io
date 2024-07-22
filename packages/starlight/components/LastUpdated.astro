@@ -1,16 +1,18 @@
 ---
 import type { Props } from '../props';
 
-const { labels, lang, lastUpdated } = Astro.props;
+const { labels, lang, lastUpdated, lastUpdatedLink } = Astro.props;
 ---
 
 {
 	lastUpdated && (
 		<p>
-			{labels['page.lastUpdated']}{' '}
-			<time datetime={lastUpdated.toISOString()}>
-				{lastUpdated.toLocaleDateString(lang, { dateStyle: 'medium', timeZone: 'UTC' })}
-			</time>
+			<a href={lastUpdatedLink} style={{ pointerEvents: lastUpdatedLink ? '' : 'none' }}>
+				{labels['page.lastUpdated']}
+				<time datetime={lastUpdated.toISOString()}>
+					{lastUpdated.toLocaleDateString(lang, { dateStyle: 'medium', timeZone: 'UTC' })}
+				</time>
+			</a>
 		</p>
 	)
 }

@@ -32,6 +32,7 @@ export interface StarlightRouteData extends Route {
 	toc: { minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined;
 	/** JS Date object representing when this page was last updated if enabled. */
 	lastUpdated: Date | undefined;
+	lastUpdatedLink: string | undefined;
 	/** URL object for the address where this page can be edited if enabled. */
 	editUrl: URL | undefined;
 	/** Record of UI strings localized for the current page. */

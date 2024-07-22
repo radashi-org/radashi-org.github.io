@@ -39,6 +39,46 @@ const pagefindEnabled =
 const hasSidebar = Astro.props.hasSidebar ? 'true' : null;
 const hasToc = Astro.props.toc ? 'true' : null;
 const hasHero = Astro.props.entry.data.hero ? 'true' : null;
+
+let lastUpdated = Astro.props.lastUpdated;
+let lastUpdatedLink: string | undefined;
+
+if (lastUpdated == null) {
+	const fetchLastUpdate = async () => {
+		try {
+			const { execa } = await import('execa');
+			const { slug } = Astro.props;
+
+			let cwd = process.cwd();
+			let file: string;
+
+			if (slug.startsWith('reference/')) {
+				cwd = 'radashi';
+				file = 'docs/' + slug.replace(/^reference\//, '') + '.mdx';
+				lastUpdatedLink = `https://github.com/radashi-org/radashi/commits/main/${file}`;
+			} else {
+				file = 'src/content/docs/' + slug + '.mdx';
+			}
+
+			const { stdout } = await execa('git', ['log', '-1', '--format=%cd', file], { cwd });
+
+			console.trace({ slug, file, stdout, cwd });
+
+			if (!stdout) {
+				console.error('No stdout from git log');
+				return undefined;
+			}
+
+			return new Date(stdout);
+		} catch (error) {
+			console.error('Error fetching last commit date:', error);
+			return undefined;
+		}
+	};
+
+	lastUpdated = await fetchLastUpdate();
+}
+console.log('[Page] lastUpdated', lastUpdated);
 ---
 
 <html
@@ -150,7 +190,11 @@ const hasHero = Astro.props.entry.data.hero ? 'true' : null;
 										<MarkdownContent {...Astro.props}>
 											<slot />
 										</MarkdownContent>
-										<Footer {...Astro.props} />
+										<Footer
+											{...Astro.props}
+											lastUpdated={lastUpdated}
+											lastUpdatedLink={lastUpdatedLink}
+										/>
 									</ContentPanel>
 								</>
 							)
