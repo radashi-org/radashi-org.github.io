@@ -1,27 +1,85 @@
 ---
 title: Our Ethos
-description: 'How the Radashi community makes decisions.'
+description: 'The guiding principles of Radashi development and community'
 ---
 
-First and foremost, Radashi's vision is to carry on the vision of Radash.
+Radashi's ethos is rooted in pragmatism, flexibility, and community-driven development. We aim to provide a modern, customizable utility library that serves the needs of TypeScript developers while maintaining simplicity and reliability. This document serves as a living guide for our development process and community interactions, subject to evolution as our project grows and adapts to the changing landscape of software development.
 
-The creator of Radash gave us all the following advice in his writings in [`.github/contributing.md`](https://github.com/sodiray/radash/blob/069b26cdd7d62e6ac16a0ad3baa1c9abcca420bc/.github/contributing.md):
+## Core Principles
 
-> - When coding, try not to create internal APIs (any function or module that is not exported to be used by the client).
-> - Also, try not to use functions from other Radashi modules. This is a softer rule but we want to make it easy for readers to understand a function without having to navigate the codebase. As a utility library users should ideally be able to copy/paste a function from Radashi into their project. Most Radashi functions should be easy to write in isolation.
-> - If an implementation needs more than ~20 lines of code it might be better suited for another package or library. This is another softer rule.
+### Pragmatic TypeScript Utility
 
-Alongside those guidelines, I'll add the following:
+Radashi is designed for TypeScript developers who appreciate utility libraries without fully embracing Functional Programming. We aim to provide a modern, TypeScript-first approach to common programming tasks, balancing practicality with advanced features.
 
-- **Tests are good:** When contributing a fix or feature, always include tests! We're aiming for 100% line coverage (no line of code left untested), but even that doesn't guarantee all edge cases are accounted for. Take care to think of these edge cases, so it's easier for us to trust your contribution!
+### Customization and Flexibility
 
-- **Documentation is good:** We can't merge your contribution until it's been documented. If you're not proficient in English, let us know and we can help! Consider using ChatGPT to ensure the docs are clear and grammatically correct.
+At the heart of Radashi is the priority of customizability, allowing developers to tailor the library to their specific project needs. We provide tools and guidance for creating personalized versions of Radashi, empowering users to shape the library according to their unique requirements.
 
-- **Abstraction over sugar:** Can something already be done simply with vanilla JS? Then it's not a good fit for Radashi. Our functions exist to enable common use cases that are awkward to do alone.
+### Minimalist Design
 
-- **Is there a common use case?** Radashi functions aim to strike a balance between simplicity and utility. No one wants their application to contain a bunch of code that never gets used, so we err on the side of caution and keep it simple. Worse comes to worst, you can always copy-paste the implementation and customize it to suit your application's esoteric needs.
+Radashi embraces a minimalist design philosophy. Our functions are focused, clear, and predictable, avoiding unnecessary complexity. We carefully consider each addition to the library, prioritizing readability and practical utility to ensure that every feature serves a valuable purpose.
 
-- **Performant vs readable:** Radashi functions also try to balance between performance and brevity. Our functions need to be easily understood. This keeps the contribution barrier on the lower end, and it makes forking a single function less intimidating. On the other hand, we don't want Radashi functions to disrespect the end user by slowing down your application.
+### Modern Architecture
+
+Built with ESM and TypeScript from the ground up, Radashi leverages modern development practices. We optimize for tree-shaking to keep bundles lean and utilize cutting-edge tools like Biome and Vitest, ensuring that Radashi remains at the forefront of JavaScript development.
+
+### Robust and Reliable
+
+We strive for perfect TypeScript support and maintain comprehensive test coverage across all functions. Performance benchmarks and browser compatibility checks are integral to our development process, ensuring that Radashi remains dependable across various environments.
+
+## Development Guidelines
+
+### Function Independence
+
+We avoid creating internal APIs or functions not exported for client use. Dependencies between Radashi modules are minimized to maintain simplicity and ease of understanding, allowing each function to stand on its own as much as possible.
+
+### Concise Implementations
+
+Radashi functions are designed to be concise, generally not exceeding ~20 lines of code. Complex implementations that require more extensive code may be better suited for separate packages or libraries, maintaining the library's focus on simplicity.
+
+### Copy-Paste Friendly
+
+Each function in Radashi is designed to be easily transferable to a user's project with zero modifications. This approach supports quick customization and integration, allowing developers to use Radashi functions flexibly within their own codebases.
+
+### Test-Driven Development
+
+All contributions to Radashi must include comprehensive tests, aiming for 100% line coverage. We emphasize the importance of considering edge cases carefully in test design, ensuring robust and reliable functionality across various scenarios.
+
+### Documentation First
+
+Clear and accurate documentation is required for all new features and changes in Radashi. We prioritize clarity and grammatical correctness in our documentation, ensuring that users can easily understand and implement Radashi's features.
+
+## Design Philosophy
+
+### Abstraction over Syntactic Sugar
+
+Radashi functions are designed to enable common use cases that are awkward to implement in vanilla JavaScript. We avoid replicating functionality that's already simple in standard JavaScript, focusing instead on providing valuable abstractions.
+
+### Balance Utility and Simplicity
+
+Our functions address common use cases without overcomplicating the library. We err on the side of simplicity to avoid bloat and unused code, ensuring that Radashi remains lean and focused on essential utilities.
+
+### Performance and Readability Trade-offs
+
+Radashi strives for a balance between performance and code brevity. We prioritize understandability to maintain a low contribution barrier and ease of customization, while still ensuring that our functions perform efficiently.
+
+### Strategic Feature Parity
+
+We implement popular functions based on usage data, without aiming for full parity with other libraries. This approach allows us to innovate on API design while maintaining familiarity where appropriate, creating a unique and valuable utility library.
+
+## Community and Contribution
+
+### Open to Feedback and Contributions
+
+Radashi actively seeks real-world feedback to improve reliability and performance. We value and encourage community contributions, recognizing that diverse perspectives enhance the library's utility and robustness.
+
+### Transparent Development
+
+We openly acknowledge areas for growth and actively work to address them. Regular updates and beta releases keep the community informed and involved, fostering an environment of open collaboration and continuous improvement.
+
+### Collaborative Decision Making
+
+Major changes to this ethos or the library's direction are open for community discussion. We welcome amendments and re-drafts of this document through official channels, ensuring that Radashi's development remains aligned with the needs and values of its user community.
 
 ## Amendments
 
