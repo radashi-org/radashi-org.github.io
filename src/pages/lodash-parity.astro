@@ -130,12 +130,13 @@ function getRelevanceColor(relevance: number) {
 
             return (
               <li class="radashi-func py-6" data-name={item.name}>
-                <h2 class="relative flex flex-row !color-$sl-color-white !text-size-$sl-text-h3">
+                <h2 class="relative flex flex-row">
                   <img
                     src={`/parity/${item.status}.svg`}
                     class="w-14 h-14 !absolute top-0 left--8 translate-x--100% translate-y--0.3rem"
                   />
                   <a
+                    class="!color-$sl-color-white !text-size-$sl-text-h3 decoration-none"
                     href={`https://lodash.com/docs/4.17.15#${item.name}`}
                     target="_blank">
                     {item.name}
@@ -303,12 +304,6 @@ function getRelevanceColor(relevance: number) {
 <style>
   .radashi-func {
     list-style: none;
-  }
-
-  .radashi-func h2 a {
-    color: inherit;
-    font-size: 1em !important;
-    text-decoration: none;
   }
 
   li hr {
