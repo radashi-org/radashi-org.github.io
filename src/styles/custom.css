@@ -10,14 +10,9 @@
     margin-top: 1rem;
     margin-left: -2rem;
     border-radius: 1rem;
-    transition: background-color 0.1s ease-in-out;
 
     h3 {
       margin-top: 0;
-    }
-
-    &:hover {
-      background-color: rgba(240, 240, 240, 0.05);
     }
 
     p {

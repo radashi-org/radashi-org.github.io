@@ -3,29 +3,48 @@ title: Why We Need Another Utility Library
 description: A call to arms for TypeScript developers
 ---
 
-:::note[Too Long, Didn't Read]
+<details>
+<summary>Too Long, Didn't Read</summary>
 
-[Radashi](https://github.com/radashi-org/radashi) is a new TypeScript-first utility library focused on minimalism, customizability, and a strong community focus. It's still in its early stages, which means it needs your support more than ever. By [giving us a star](https://github.com/radashi-org/radashi) on GitHub, you're not just showing your appreciation; you're actively contributing to healthy competition in the utility library space.
+The ecosystem of utility functions is needlessly fragmented, stifled by a lack of collaboration and standardization. Popular utility libraries are under-maintained and/or have a centralized authority. We need a utility library that is structured to foster collaboration and innovation.
 
-**“Show me the functions!”** Sure thing, you'll want [this page.](/reference)
+Imagine a world where TypeScript developers can effortlessly share their utility functions with each other. This is the vision of Radashi.
 
-:::
+[Radashi](https://github.com/radashi-org/radashi) is a new TypeScript-first utility library focused on minimalism, customizability, and a strong ethos. But it's more than that. It's also a growing community of like-minded TypeScript developers who are passionate about sharing useful functions with each other (no gatekeepers).
 
-Utility libraries are essential for efficient programming, allowing developers to avoid rewriting common functions. However, in our rapidly evolving JavaScript landscape, we face several challenges with existing solutions.
+It's still in its early stages, which means it needs your support more than ever. By [giving us a star](https://github.com/radashi-org/radashi) on GitHub, you're not just showing your appreciation; you're actively contributing to healthy competition in the utility library space.
 
-Traditional utility libraries, though useful, often suffer from centralized control, leading to friction in implementing incremental improvements. This centralization can stifle innovation and limit the ability of the community to contribute effectively. Moreover, keeping pace with changes in syntax and tooling can be a struggle for these established libraries.
+**"Show me the functions!"** Sure thing, you'll want [this page.](/reference)
 
-Another significant issue is the lack of customizability. Developers often find themselves using only a fraction of a library's functions, yet are forced to include the entire package, leading to unnecessary bloat in their projects. The ability to cherry-pick only the needed functions without hassle remains an unmet need.
+Come back and read this post when you've got time. 👍
 
-Furthermore, the JavaScript community lacks a unified platform for sharing and adopting utility functions. Developers frequently reinvent the wheel, writing similar functions across different projects, when a shared resource could save time and promote best practices.
+</details>
 
-Imagine a world where these problems are solved. Picture a large community of TypeScript developers gathering around a single web page to share their utility functions. In this ideal scenario, all functions are written with the same design guidelines, ensuring consistency and quality. Developers can effortlessly copy these functions into their own curated set of utilities, tailoring their toolkit to their specific needs without unnecessary overhead.
+<div style="height: 1rem" />
 
-This vision represents a decentralized, collaborative ecosystem where your contributions can be seamlessly adopted by others, and vice versa. It's a world where a shared design ethos and common tooling setup reduce barriers to continuous enhancement, fostering a thriving community eager to expand each other's JavaScript toolkits.
+Utility libraries are essential for efficient programming, preventing the need to rewrite common functions. However, in the ever-changing JavaScript ecosystem, existing solutions now face several challenges. By the end of this post, my hope is that you'll not only see the problem, but also see a solution. So what challenges are we facing?
 
-In this imagined future, there's no need for approval from a random maintainer to share or adopt a useful function. Instead, the community itself becomes the curator, with popular and well-designed functions rising to the top through collective use and improvement.
+##### Bottleneck Control
 
-This is the future of utility libraries we should strive for - one that addresses the shortcomings of its predecessors while embracing the power of community collaboration and individual customization.
+Traditional utility libraries often suffer from **centralized control**, hindering incremental improvements and community contributions. This often leads to maintainer burnout, which makes the problem worse. Migrating to modern syntax and tooling has been a low priority for established libraries.
+
+##### Stifled Customization
+
+A significant issue is the **lack of customizability**. Developers often want to supplement a popular utility library with their own functions or replacements but encounter friction in doing so. This limitation slows down innovation and collaboration.
+
+##### Ecosystem Chaos
+
+Furthermore, the JavaScript community lacks a **unified platform** for sharing and adopting utility functions, leading to **unnecessary fragmentation** of the ecosystem. Developers often reinvent the wheel across different projects when a shared resource could save time and promote best practices.
+
+##### Imagine This...
+
+Imagine a world where these problems are solved: a large community of TypeScript developers sharing utility functions around one foundation. All functions follow the same design guidelines, ensuring **consistency and quality**. Developers can **effortlessly copy and customize** these functions, tailoring their toolkit without unnecessary overhead.
+
+This vision represents a decentralized, collaborative ecosystem where contributions are seamlessly adopted by others, all while **reducing risk exposure by not depending on self-interested maintainers**. It fosters a thriving community eager to expand each other's JavaScript toolkits, with popular and well-designed functions rising to the top through collective use and improvement.
+
+This is the future of utility libraries we should strive for — one that addresses the shortcomings of its predecessors while embracing the power of community collaboration and individual customization.
+
+And that's where **Radashi** enters the picture.
 
 ### Wait... what is Radashi?
 
@@ -37,15 +56,16 @@ But as a library, Radashi stands out with its:
 
 - **Principled design**
 - **Minimal bundle impact**
+- **Innovative functions**
 - **Pragmatism** (popular use cases, an approachable number of functions)
 - **Customizability**
 - **A strong community focus**
 
 It builds on three years of active development from its now dormant predecessor, Radash, which has become the fastest-growing Lodash alternative with **over 100K weekly downloads**.
 
-Radashi is set to become a solid foundation for all of us to gather around, like [a town square](https://github.com/radashi-org/radashi/pulls), efficiently sharing our TypeScript utility functions, all while practicing adherence to **the Radashi ethos**. For this to happen, **we need your help**, so let's see if I can't persuade you to join us.
+Radashi is set to become **a solid foundation** for all of us to gather around, like a town square, efficiently sharing our TypeScript utility functions, while we embrace **the Radashi ethos**. For this to happen, **we need your help**, so let's see if I can't persuade you to join us.
 
-## What Matters
+## Our Principles
 
 #### Design with Purpose
 
@@ -65,6 +85,14 @@ By limiting the number of functions to those most commonly needed, we prevent th
 
 However, we also recognize the power of **community demand**. If a particular function gains significant popularity and support from our users, we're open to including it. After all, in the end, democracy wins - if the community wants a function badly enough, we'll listen and probably add it to the official Radashi.
 
+#### Blazing New Trails
+
+Radashi is a trailblazer in the JavaScript ecosystem, anticipating developers' evolving needs and addressing emerging challenges in modern JavaScript and TypeScript. We're not afraid to **challenge conventions** and explore uncharted territory.
+
+You'll find unique, widely applicable functions in Radashi that you won't see elsewhere. We constantly seek fresh approaches to common problems, fostering innovation that shapes JavaScript's evolution.
+
+This forward-thinking approach keeps Radashi at the cutting edge, providing developers with essential tools they didn't know they needed. By pushing boundaries, we're redefining what a utility library can be in the modern JavaScript landscape.
+
 #### Your Vision, Our Canvas
 
 Traditional utility libraries are often challenging to customize, with maintaining a fork being more trouble than it's worth due to outdated syntax or unfamiliar codebases. Radashi addresses this issue with its own [template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) on GitHub.
@@ -83,6 +111,8 @@ Radashi publishes a beta version daily at 05:00 AM UTC if a PR has been merged i
 
 Anyone can become a maintainer by applying [here](https://github.com/orgs/radashi-org/discussions/4). As a maintainer, you're expected to uphold the Radashi ethos, and with dedication, you may become a Radashi steward, granting you the ability to veto PRs and publish stable versions to NPM. Come join us, we're always looking to expand the core team!
 
+## Our Audience
+
 ### Is Radashi Your Perfect Match?
 
 Radashi is designed for:
@@ -96,6 +126,12 @@ Radashi is designed for:
 - Those looking for a community-driven solution to find and share utility functions for TypeScript
 - Developers who want to contribute to and benefit from a collaborative environment
 - Those who believe in the power of the free market to drive innovation, as Radashi's success will push Lodash and other utility libraries to improve and evolve
+
+Radashi is **NOT** designed for:
+
+- Developers who like to reinvent the wheel
+- Developers who cram lots of functionality into a single function
+- Developers who hate collaborating with others
 
 ### Join the Movement
 
