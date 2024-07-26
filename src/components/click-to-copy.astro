@@ -1,0 +1,31 @@
+<script is:inline define:vars={{ selector: Astro.props.selector }}>
+  console.log('ClickToCopy!')
+  document.addEventListener('DOMContentLoaded', () => {
+    const clickableCodes = document.querySelectorAll(selector)
+    console.log(clickableCodes)
+
+    clickableCodes.forEach(code => {
+      code.style.cursor = 'pointer'
+
+      code.addEventListener('click', () => {
+        const textToCopy = code.textContent
+        navigator.clipboard
+          .writeText(textToCopy)
+          .then(() => {
+            // Optional: Provide visual feedback
+            const originalText = code.textContent
+            code.textContent = 'Copied!'
+            setTimeout(() => {
+              code.textContent = originalText
+            }, 1000)
+          })
+          .catch(err => {
+            console.error('Failed to copy text: ', err)
+          })
+      })
+
+      // Optional: Add a title attribute for better UX
+      code.title = 'Click to copy'
+    })
+  })
+</script>

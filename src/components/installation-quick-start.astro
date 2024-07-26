@@ -1,0 +1,111 @@
+---
+import ClickToCopy from './click-to-copy.astro'
+
+const methods = [
+  {
+    label: 'PNPM',
+    command: 'pnpm install radashi',
+  },
+  {
+    label: 'Bun',
+    command: 'bun install radashi',
+  },
+  {
+    label: 'Yarn',
+    command: 'yarn add radashi',
+  },
+  {
+    label: 'NPM',
+    command: 'npm install radashi',
+  },
+  {
+    label: 'JSR',
+    command: 'jsr add @radashi-org/radashi',
+  },
+  {
+    label: 'Deno',
+    command: 'deno add @radashi-org/radashi',
+  },
+]
+---
+
+<div class="flex flex-col gap-0.2">
+  {
+    methods.map(({ label, command }) => (
+      <button
+        onclick="copyInstallCommand(this)"
+        class:list={[
+          'quick-copy flex flex-row rounded-0.6rem !self-start !p-0 overflow-hidden border-0 cursor-pointer',
+          label.toLowerCase(),
+        ]}>
+        <span class="label px-1.125rem py-0.8125rem color-#1e1b1a text-1rem tracking--0.011em font-800 whitespace-nowrap">
+          {label}
+        </span>
+        <span class="command font-mono pl-1.125rem py-0.8125rem pr-1.495rem color-#1e1b1a text-1rem tracking--0.011em whitespace-nowrap">
+          {command}
+        </span>
+      </button>
+    ))
+  }
+</div>
+
+<script is:inline>
+  function copyInstallCommand(button) {
+    const command = button.querySelector('.command').textContent
+    navigator.clipboard.writeText(command).then(() => {
+      const commandElement = button.querySelector('.command')
+      const originalText = commandElement.textContent
+      commandElement.textContent = 'Copied!'
+      setTimeout(() => {
+        commandElement.textContent = originalText
+      }, 2000)
+    })
+  }
+</script>
+
+<style>
+  .quick-copy {
+    &.pnpm {
+      background: #ffbc96;
+
+      .label {
+        background: #ffceb2;
+      }
+    }
+    &.yarn {
+      background: #e1cdb5;
+
+      .label {
+        background: #eadbc9;
+      }
+    }
+    &.npm {
+      background: #fab0b0;
+
+      .label {
+        background: #ffcaca;
+      }
+    }
+    &.bun {
+      background: #e9b2ff;
+
+      .label {
+        background: #f0cbff;
+      }
+    }
+    &.deno {
+      background: #b4e4bd;
+
+      .label {
+        background: #c7ecce;
+      }
+    }
+    &.jsr {
+      background: #b3dbff;
+
+      .label {
+        background: #c5e3ff;
+      }
+    }
+  }
+</style>

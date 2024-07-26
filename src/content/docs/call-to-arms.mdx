@@ -1,0 +1,38 @@
+- Why we need another utility library
+
+  - Utility libraries will always make sense. It's always better to avoid rewriting the wheel if you can help it. Reducing the number of dependencies is a growing concern (for risk exposure).
+  - A modern utility library has not yet achieved widespread success. We're in a transitional period where JavaScript standards are evolving rapidly, both on the syntax front and tooling front.
+  - Popular utility libraries have always felt like dictatorships (or at least oligarchies), which has resulted in regrettable friction in terms of incremental improvement. The hassle-free customizability of Radashi aims to break away from this inefficiency.
+  - We need a “future proof” utility library with a thriving community who are excited to help expand each other's JavaScript toolkits. By revolving around a common base (Radashi), we can improve compatibility by all focusing on a single design ethos (the Radashi ethos), allowing members of Radashi's community to share in each other's work with ease.
+
+- What Radashi is
+
+  - TypeScript-first utility library that excels in principled design, bundle impact, pragmatism, customizability, and a community focus
+  - Radashi builds upon 3 years of work from its predecessor, Radash, which is currently the fastest growing Lodash alternative with 100K+ weekly downloads.
+  - **Principled design**
+    - Behind every great library is a set of design principles, sometimes written down, most times not. In Radashi's case, we have the living document [“Our Ethos”](/our-ethos) that acts as an anchor in our decision making.
+    - We believe this kind of document is a must-have for any open source project that wishes to maintain a high standard while accepting contributions from a diverse community.
+    - Anyone can suggest changes to the document, thereby allowing our ethos to evolve with our community's needs.
+  - **Bundle impact**
+    - One cannot talk JavaScript utility libraries without mentioning Lodash. In the context of bundle impact, Lodash often favors flexibility (e.g. polymorphism) over simplicity. Naturally, that means there's room for a utility library that is more conservative than Lodash in terms of how featureful a function should be.
+    - It's part of Radashi's ethos to embrace a minimalist design philosophy. Often times, this means not contorting the code (a.k.a. code golfing) to achieve some neglible performance boost. Radashi does not follow strict conformance to minimalism, but it does greatly inform our design/review process.
+  - **Pragmatism**
+    - The only principle above minimalism in Radashi's ethos is pragmatism. Thanks to modern bundlers, tree-shaking allows modern utility libraries to bloat the installation with thousands of functions. But just because you can, doesn't mean you should.
+    - Obviously, Radashi wants to support the most popular use cases. But what about the fringe use cases? If a new function being proposed is a bit fringe, it's more likely to be merged than if it was a PR adding an option to an existing function. But that doesn't mean it _will_ be merged as a new function. This is the hardest part of building a utility library (“What deserves to be here?”). Luckily, with Radashi's customizability, the official Radashi package can be more conservative about letting in new functions.
+    - In the end, populism should win in the context of general utility libraries. The more functions we can support, the more knowledge there is that is transferable between projects.
+  - **Customizability**
+    - Historically, utility libraries have been difficult to customize. Maintaining a fork is often more trouble than it's worth. Perhaps it uses outdated syntax or tooling. It can also be uncomfortable working in someone else's codebase.
+    - Radashi has its own [template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) on GitHub that comes pre-configured to extend Radashi with new functions and even forked functions. This allows you to publish “your own Radashi” to NPM, serving your utilities with Radashi in one package.
+    - Don't worry about synchronizing your fork with the Radashi repository. The Radashi template will automatically keep your fork in sync with the Radashi repository, based on the `radashi` version you set in `package.json`.
+    - Trust me, you've gotta try it to believe it. [Follow this guide](/your-own-radashi) to get started with your own Radashi!
+  - **Community**
+    - Putting the community's needs first is a big part of Radashi's ethos. Customizability is one way we do this. It also means taking everyone's perspective seriously. It means being open to new ideas and new perspectives. It means being friendly and appreciative.
+    - Radashi publishes a beta version every day at 05:00AM UTC if a PR was merged. Using our template repository, you can get PRs even sooner with the `pnpm pr import 123` command.
+    - Anyone can become a maintainer. There's no barrier to entry. You can start reviewing and merging PRs today. All you need to do is [apply here](https://github.com/orgs/radashi-org/discussions/4). You're expected to uphold the Radashi ethos. With enough dedication, you may become a Radashi steward, which grants you with the ability to veto PRs and publish stable versions of Radashi to NPM.
+
+- Who Radashi is for
+
+  - You've liked Lodash's approach to idiomatic JavaScript in the past, but found one or more of these things concerning: Bundle impact, Unresponsive maintainer, Opaque decision making, Difficult to customize
+  - You write your own utility functions and you're sick of maintaining them. You want someone else to maintain them.
+  - You want a community that is the go-to place for finding and sharing utility functions for TypeScript. You're willing to help grow that community by being an active member.
+  - You believe in the free market. You believe Radashi's existence will push Lodash and other utility libraries to innovate and improve.

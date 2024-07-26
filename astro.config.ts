@@ -98,12 +98,26 @@ async function radashi() {
 
 function generateSidebar(): SidebarItem[] {
   return [
-    h3('Introduction'),
-    h3('Installation'),
-    h3('Our Ethos'),
-    h3('Contributing'),
-    h3('Browser Support'),
-    h3('Lodash Parity'),
+    {
+      label: 'Getting Started',
+      items: [
+        h3('Introduction'), //
+        h3('Installation'),
+        h3('Our Ethos'),
+      ],
+    },
+    {
+      separator: '0.6px solid rgba(240, 240, 240, 0.1)',
+    },
+    {
+      label: 'Quick Links',
+      items: [
+        h3('Lodash Parity'),
+        h3('Browser Support'),
+        h3('Your Own Radashi'),
+        h3('Contributing'),
+      ],
+    },
     {
       separator: '0.6px solid rgba(240, 240, 240, 0.1)',
     },

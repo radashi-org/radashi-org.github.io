@@ -1,0 +1,413 @@
+---
+title: Your Own Radashi
+description: Fork it your way.
+tableOfContents:
+  minHeadingLevel: 2
+---
+
+Now you can customize Radashi without forking. Instead, you will clone our _template repository_, which makes it hassle-free to add new functions or override existing ones.
+
+**Pre-Requisites**
+
+- Git
+- [Node.js](https://nodejs.org/en/download/package-manager) v16+
+- [GitHub CLI](https://cli.github.com/) (optional, but recommended)
+
+##### How It Works
+
+The template repository (known as “the Radashi template”) has everything you need to get started. It scaffolds a single NPM package for your Radashi, along with every package script you'll ever need (build, lint, format, etc). Your Radashi will depend on the `radashi` NPM package and re-export from it everything you didn't override yet.
+
+## Getting Started
+
+### Create your Radashi repository
+
+The two recommended ways to start with the _Radashi template_ are:
+
+1. **Through the GitHub UI**  
+   Follow [this link](https://github.com/new?template_name=radashi-template&template_owner=radashi-org) to create a new repository through your browser. Once created, you can clone it to your local machine.
+
+2. **Through the GitHub CLI**  
+   Run the following command in your terminal:
+   ```
+   gh repo create radashi-<your-username> --template radashi-org/radashi-template --public --clone
+   ```
+
+**Manual clone**
+
+Alternatively, you may clone the template repository manually. This is not recommended, since you'll have to set up the git remote manually.
+
+```
+git clone https://github.com/radashi-org/radashi-template <your-repo-name>
+```
+
+### Install dependencies
+
+We use PNPM in this guide, but you can use whatever suits your preference.
+
+```
+pnpm install
+```
+
+The only dependency is the `radashi` npm package.
+
+Its development-only dependencies include:
+
+- **Biome** (TypeScript linting + formatting)
+- **Vitest** (unit tests, type tests, + benchmarking)
+- **Prettier** (JSON/MDX formatting)
+- **TypeScript** (type-checking)
+- **@types/node** (TypeScript types for Node.js)
+
+The final development dependency is `radashi-helper`, the command-line tool that powers our Radashi-specific package scripts. But we'll learn more about that as we go.
+
+### Project structure
+
+Next up, a quick primer on how the project is structured.
+
+There are 4 “core folders” in the project:
+
+- `src`: The functions implemented.
+- `tests`: The unit tests for the functions.
+- `benchmarks`: The benchmarks for the functions.
+- `docs`: The documentation for the functions.
+
+These start out empty, but they fill up as you create your own functions.
+
+##### Forked functions
+
+Any function in Radashi can be forked, allowing you to edit its source code, tests, docs, etc. Any other functions that depend on it will automatically use your version instead of the original.
+
+These forked functions are called **“overrides”**. As such, they are stored in the `overrides` folder, which has the same core folders within it.
+
+## Creation
+
+### Create your first function
+
+You have a very specific need and the solution is complex enough (or the problem frequent enough) and its use cases broad enough that it needs its own function.
+
+What better place to store this function than with the rest of your TypeScript toolkit? (Radashi, of course!) What kind of functions you keep in **your** Radashi is up to you. You might want to stay true to the [Radashi ethos](/our-ethos) or you could decide to include new functions for more specific needs. You decide!
+
+Imagine you're trapped in a world where nonsensical programs are in high demand, and bizarrely simple utility functions are the hottest trend in software development. In this strange realm, your first priority is to make it easier to say "Hello" – because apparently, that's a pressing need. You decide that this absolutely warrants a new function, which you'll be calling `hello`!
+
+```
+pnpm fn add hello
+```
+
+##### Pick a Function Group
+
+You'll be prompted for which group the function should be added to. You may create a new group or pick an existing one. Use your arrow keys to select a group, then press Enter to confirm.
+
+In this case, you picked the `string` group, since the `hello` function will be returning a string.
+
+Now you should've had a few files created for you:
+
+- `src/string/hello.ts`
+- `tests/string/hello.test.ts`
+- `benchmarks/string/hello.bench.ts`
+- `docs/string/hello.mdx`
+
+##### Pick an Editor
+
+You'll be prompted for how you wish to open the new `src/string/hello.ts` file.
+
+Please select your preferred editor. Use your arrow keys to select an editor, then press Enter to confirm. After, you should see the editor open to the new file.
+
+##### Hello Boilerplate
+
+If you poke around the new files a bit, you'll see that each file includes some boilerplate. It's best if you embrace the boilerplate, rather than deleting it, as doing so will make it easier to contribute your function back to Radashi later.
+
+### Opening files
+
+Now you can edit the function, tests, benchmarks, and docs as you see fit.
+
+- **Edit the function**:
+  ```
+  pnpm open hello
+  ```
+  ```
+  pnpm open hello -s
+  ```
+- **Edit the tests**:
+  ```
+  pnpm open hello -t
+  ```
+- **Edit the benchmarks**:
+  ```
+  pnpm open hello -b
+  ```
+- **Edit the docs**:
+  ```
+  pnpm open hello -d
+  ```
+- **Edit all of them**:
+  ```
+  pnpm open hello -tbds
+  ```
+  ```
+  pnpm open hello -A
+  ```
+
+## Testing
+
+### Learning Vitest
+
+> Note: If you have experience with Vitest, you can skip this section.
+
+After 3 weeks of dedicated work, you now have your `hello` function where you want it. Naturally, it's a bonified masterpiece.
+
+````ts
+/**
+ * Returns a greeting in the specified language.
+ *
+ * @example
+ * ```ts
+ * hello('World') // "Hello, World!"
+ * hello('World', 'fr') // "Bonjour, World!"
+ * ```
+ */
+export function hello(subject: string, lang?: string) {
+  const hello = lang === 'fr' ? 'Bonjour' : 'Hello'
+  return `${hello}, ${subject}!`
+}
+````
+
+Now it's time to write the unit tests (or you already wrote the tests before implementing the function, if you're a fan of TDD).
+
+The tests are written with [Vitest](https://vitest.dev/), so let's take a brief look at the Vitest API basics. The entire Vitest API is globally accessible, since we have [`globals`](https://vitest.dev/config/#globals) in our `vitest.config.ts`.
+
+#### describe
+
+The `fn add` command will include a `describe` block as part of the test file's boilerplate. Put all your `test` calls in here. If your function has optional arguments, you may wish to nest a `describe` block within the main `describe` block to contain the tests for each optional argument.
+
+[Learn more](https://vitest.dev/api/#describe) about the `describe` function.
+
+```ts
+import * as _ from 'radashi'
+
+describe('hello', () => {
+  /** Tests go here... */
+})
+```
+
+#### test
+
+Many projects favor the `it` alias instead, but Radashi prefers using `test` with a short description of what's being tested, **never including the expected outcome**.
+
+The `expect` calls already describe the expected outcome. If the expected outcome is not easily deciphered, you should add a `//` comment above the `expect` call with more details.
+
+[Learn more](https://vitest.dev/api/#test) about the `test` function.
+
+```ts
+import * as _ from 'radashi'
+
+describe('hello', () => {
+  test('without language argument', () => {
+    /** Assertions go here... */
+  })
+  test('with explicit language', () => {
+    /** Assertions go here... */
+  })
+})
+```
+
+#### expect
+
+The `expect` function is for asserting some expectation about the value you're testing. It wraps a value and provides a bunch of assertion methods. You may have multiple `expect` calls in a single test. You should never call `expect` outside of a `test` callback.
+
+[Learn more](https://vitest.dev/api/expect.html) about the `expect` function.
+
+```ts
+import * as _ from 'radashi'
+
+describe('hello', () => {
+  test('without language argument', () => {
+    expect(_.hello('World')).toBe('Hello, World!')
+  })
+  test('with explicit language', () => {
+    expect(_.hello('my friend', 'en')).toBe('Hello, my friend!')
+    expect(_.hello('mon ami', 'fr')).toBe('Bonjour, mon ami!')
+  })
+  test('with unsupported language', () => {
+    // Default to English.
+    expect(_.hello('mi amigo', 'es')).toBe('Hello, mi amigo!')
+  })
+})
+```
+
+#### Vitest's other features
+
+The three functions covered above are the ones you'll use most, but it helps to be aware of what else you can do with Vitest.
+
+- **Mocking a Function**: Using `vi.fn`, you can track the calls to a callback or even fake a return value. This reduces a lot of boilerplate for faking and tracking in tests. [Link](https://vitest.dev/guide/mocking#functions)
+
+- **Mocking a Module**: Using `vi.mock`, you can mock a module's implementation. [Link](https://vitest.dev/api/vi.html#vi-mock)
+
+- **Fake Timers**: Use `vi.useFakeTimers` to control when a `setTimeout` will trigger. [Link](https://vitest.dev/guide/mocking.html#timers)
+
+- **Snapshots**: Using `.toMatchSnapshot` or `.toMatchInlineSnapshot`, you can snapshot the value of a variable and compare it to the previous snapshot. [Link](https://vitest.dev/guide/snapshot.html)
+
+- **Type Tests**: Create a `*.test-d.ts` file in the tests folder. Then, using `expectTypeOf` and the `--typecheck` flag, you can test the types of your functions. [Link](https://vitest.dev/guide/testing-types.html)
+
+### Running the tests
+
+To run all of the tests (with code coverage):
+
+```
+pnpm test
+```
+
+**Never heard of “code coverage”?** Check out [this explanation by Atassian](https://www.atlassian.com/continuous-delivery/software-testing/code-coverage).
+
+To run tests for a single function (with code coverage):
+
+```
+pnpm test hello
+```
+
+The given function name can be partial. It may be any function in your `src` or your `overrides` folders, but it needs a test file in the relevant `tests` folder.
+
+By default, `pnpm test` will run in watch mode when executed in a local environment. While in CI (e.g. GitHub actions), it will run in non-watch mode.
+
+## Collaboration
+
+### Overriding
+
+Sometimes, a function in Radashi doesn't meet your needs. We have a special process for easily overriding functions in Radashi.
+
+:::note[We want your feedback!]
+
+There's no shame in overriding functions. All that we ask is that you at least [open a discussion](https://github.com/orgs/radashi-org/discussions/new?category=ideas) about it as well, so the Radashi team can decide if what you need maybe belongs in the official Radashi.
+
+:::
+
+Try running this command:
+
+```
+pnpm override first
+```
+
+Alright, so that should've copied the `first` function from Radashi into your own Radashi. Check your `overrides` folder!
+
+Everything in your `overrides` folder is yours to edit. You can edit the function, tests, benchmarks, and docs as you see fit.
+
+When you run `pnpm dev` or `pnpm build` next, your version of the function will be used instead of the original.
+
+### Importing a PR
+
+> Note: This step requires the [GitHub CLI](https://cli.github.com/).
+
+Say there's a pull request in the Radashi repo that you'd like to import into your own Radashi (regardless of whether the PR is open or closed).
+
+Try running this command:
+
+```
+pnpm pr import 29
+```
+
+The command above will copy all of the changes from [this PR](https://github.com/radashi-org/radashi/pull/29) into your own Radashi. In this case, that means you'll now have a `src/object/reduceKeys.ts` file and a related test file.
+
+If the PR adds a new function, that function should now exist in your `src` folder. If the PR edited an existing function, that function should exist in your `overrides` folder.
+
+### Submitting a PR
+
+> Note: This step requires the [GitHub CLI](https://cli.github.com/).
+
+You've done all the work, wrote the docs page, added a benchmark. Now it's time to contribute your work back to Radashi, if you believe it fits with our ethos.
+
+```
+pnpm pr create
+```
+
+## Maintenance
+
+### Bundling
+
+We use [ESBuild](https://esbuild.github.io/) to bundle your Radashi in development and production.
+
+##### Development
+
+Create a bundle for development (sourcemap included) by running the following command:
+
+```
+pnpm dev
+```
+
+It also watches for changes in your `src` and `overrides` folders and rebuilds the bundle automatically.
+
+##### Production
+
+Build your Radashi without a sourcemap by running the following command:
+
+```
+pnpm build
+```
+
+### Publishing
+
+When you're ready to publish your Radashi to NPM, run the following command:
+
+```
+pnpm shipit
+```
+
+### Linting
+
+Check your code for any issues by running the following command:
+
+```
+pnpm lint
+```
+
+The `lint` command uses the following tools:
+
+- the TypeScript compiler
+- [Biome](https://biomejs.dev/) for linting your TypeScript files for common mistakes
+- [ESLint](https://eslint.org/) with only the [eslint-plugin-compat](https://www.npmjs.com/package/eslint-plugin-compat) plugin for catching issues with using non-standard JavaScript features. (Ideally we could get a Biome plugin for this)
+
+### Formatting
+
+Keep your code style consistent by running the following command:
+
+```
+pnpm format
+```
+
+The Radashi template includes two formatting tools out-of-the-box. One is [Biome](https://biomejs.dev/), which is for linting and formatting your TypeScript files. Since Biome is still a young project, we still need [Prettier](https://prettier.io/) for formatting your JSON and MDX files.
+
+##### Format On Save
+
+The template repo includes a `.vscode/settings.json` file set up to automatically format your code on save (if you use VSCode or Cursor).
+
+##### IDE Extensions
+
+You will be prompted to install VSCode extensions by the workspace. It's recommended to install the extensions.
+
+- [**Biome**](https://marketplace.visualstudio.com/items?itemName=biomejs.biome) lints and formats your TypeScript files.
+- [**Prettier**](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) formats your JSON and MDX files.
+- [**Vitest**](https://marketplace.visualstudio.com/items?itemName=vitest.explorer) for DX improvements when testing.
+
+## Documentation
+
+### Automation
+
+With large language models, it's easier than ever to document the simple utility functions you'll be creating.
+
+1. Once your function is implemented and its tests are passing, copy the function and tests and paste them into **ChatGPT** (preferably GPT-4), **Claude** (preferably Claude 3.5 Sonnet), or some other LLM.
+
+2. Before hitting send, paste in this prompt:
+
+   ```txt wrap=true
+   Write the Markdown documentation for this function. It has a frontmatter title (should be the function name) and description (brief one about the function's purpose). The first thing is a `### Usage` heading followed by a less formal but still professional description that is comprehensive. Finally, include a Markdown code block showing a few concise real-world examples. In the examples, use `_.` prefix to call the function, and use a namespace import (`import * as _`) when importing "radashi" (the package that holds the function).
+   ```
+
+3. The LLM's web UI will probably render the Markdown as HTML. You should be able to copy the Markdown through a "Copy" button somewhere near the output.
+
+4. Paste the Markdown into your function's `.mdx` file. Check the code examples to see if they make sense. Fact-check the description.
+
+5. (Optional) Tell the LLM in that same conversation:
+
+   ```txt wrap=true
+   Great, now give me the `/**` / `*/` JS comment block with only the function description and an @example tag followed by a Markdown code block on the next line.
+   ```
+
+6. Commit to your repository when satisfied.

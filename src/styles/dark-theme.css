@@ -22,9 +22,11 @@
     /* margin-inline-start: var(--sl-sidebar-item-padding-inline); */
     border-inline-start: none;
     font-weight: 300;
-    color: #ff6464;
     /* padding-top: 2rem; */
     /* padding-inline-start: var(--sl-sidebar-item-padding-inline); */
+  }
+  #starlight__sidebar summary {
+    color: #ff6464;
   }
   .content-panel {
     margin-right: 14vw;

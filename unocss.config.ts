@@ -4,7 +4,11 @@ export default {
   presets: [unocssMini()],
   content: {
     pipeline: {
-      include: ['src/pages/**/*.astro', 'src/content/**/*.mdx'],
+      include: [
+        'src/components/**/*.astro',
+        'src/pages/**/*.astro',
+        'src/content/**/*.mdx',
+      ],
       exclude: ['**/node_modules/**'],
     },
   },

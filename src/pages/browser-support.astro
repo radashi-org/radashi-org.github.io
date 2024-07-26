@@ -102,13 +102,15 @@ const markdown = `Browser support is a crucial factor to consider when choosing 
 like Radashi. It determines which browsers and versions your application will be compatible with,
 potentially affecting your user base and the features you can utilize.
 
+##### Legacy Transformations
+
 While Radashi aims to strike a balance between modern functionality and broad compatibility, it's
-important to note that you may need to compile your application bundle using tools like
-\`@babel/preset-env\`,
-[Vite's legacy plugin](https://www.npmjs.com/package/@vitejs/plugin-legacy), or something similar
-to ensure compatibility with older browsers. This process can transpile modern JavaScript features
-used in Radashi down to more widely supported syntax, expanding your potential audience while still
-allowing you to leverage the library's full capabilities.
+important to note that you may need to compile your application bundle using tools like:
+- \`@babel/preset-env\`
+- [Vite's legacy plugin](https://www.npmjs.com/package/@vitejs/plugin-legacy)
+- or something similar 
+
+…to ensure compatibility with browsers older than we officially support (like IE 11).
 
 ### The Query
 
@@ -120,24 +122,32 @@ ${packageJson.browserslist.join('\n')}
 
 If you'd like to understand Browserslist better, check out [this exceptional article](https://www.alexander-morse.com/blog/passably-explained-browserslist/) by Alexander Morse.
 
+### Quality Assurance
+
+To ensure that Radashi keeps its promise of broad compatibility, we use ESLint with only the [\`eslint-plugin-compat\`](https://github.com/amilajack/eslint-plugin-compat) plugin by Amila Welihinda.
+
+When you run \`pnpm lint\` in the Radashi repository, ESLint will check that all the functions in Radashi are compatible with the browsers specified in the \`browserlist\` query in our \`package.json\` file.
+
 ### Coverage
 
-Audience coverage is an estimate of which browsers and versions are most likely to use your
-application. It is based on data from Browserslist and may not reflect the actual usage rate.
+"Coverage" refers to audience coverage, which is an estimated percentage of users likely to be using devices that Radashi officially supports. This estimate is based on Browserslist data and is not intended to reflect the actual usage rate of your specific website or application.
+
+This coverage data is automatically updated whenever the Radashi docs are rebuilt and re-deployed. This page was generated on **${new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}**.
+
+##### Location-Based Coverage
 
 | Region | Coverage |
 | --- | ---: |
 ${toMarkdownColumns(regionCoverage)}
 
-China's lower coverage is mainly due to a lack of support for IE 11.
+##### IE 11
+China's lower coverage is mainly due to a lack of support for IE 11 on Radashi's part. Radashi does not intend to support IE 11.
+
+##### Device-Based Coverage
 
 | Browser | Version | Coverage |
 | --- | --- | ---: |
 ${toMarkdownColumns(rowData)}
-
-### Quality Assurance
-
-To ensure that Radashi keeps its promise of broad compatibility, we use ESLint with [\`eslint-plugin-compat\`](https://github.com/amilajack/eslint-plugin-compat) by Amila Welihinda
 `
 ---
 

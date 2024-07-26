@@ -1,0 +1,55 @@
+---
+title: Contributing to Radashi
+description: We've been waiting for you...
+---
+
+**Thank you for investing your time in contributing to Radashi.**
+
+Note that this document explains how to contribute through a fork of Radashi. If you're looking to contribute through a Radashi template, check out [this page](/your-own-radashi#contributing) instead.
+
+### You have a question?
+
+If you have a general question about Radashi, how to use it, the roadmap, or an idea to chat about you can ask it on the [discussions](https://github.com/radashi-org/radashi/discussions) page. Before you do, search to see if it's been asked before. If a related topic doesn't exist, you can start a new one.
+
+### You have a problem?
+
+If you have an issue with Radashi, you want to report a bug, or you need an improvement you can create an issue on the [issues](https://github.com/radashi-org/radashi/issues) page. Before you do, search to see if it's already been brought up. If a similar issue doesn't exist, you can create a new one.
+
+### You want to contribute?
+
+Before adding new functions or features, please review our design principles. If you're just fixing some existing code, you can skip this step.
+
+<a href="/our-ethos" class="block pt-6 pb-8">
+  <img
+    src="https://github.com/radashi-org/radashi/raw/main/.github/img/ethos-button.png"
+    alt="The ethos of Radashi"
+    width="250px"
+  />
+</a>
+
+Scan through the [existing issues](https://github.com/radashi-org/radashi/issues) to find one that interests you. As a general rule, we don’t assign issues to anyone. If you find an issue to work on, you are welcome to open a PR with a fix. Feel free to ask questions about the implementation or design in a comment on the issue before diving in.
+
+### You want to write code?
+
+- To get started, run `pnpm i` in the project's root directory to install the dependencies.
+- You can add a new function with `pnpm add-function <group-name>/<function-name>`. This will create the necessary files and open a PR with the new function. Try to use a `group-name` that already exists, if possible (check the `src` directory). Note that you will need to manually export the function from `src/mod.ts` before you can use it.
+- You can run the unit tests with `pnpm test`. They require Node v16+. You can run `nvm use` in the root directory to change to the correct Node version. Passing tests and 100% code coverage is required.
+- You can lint your code with `pnpm lint` and format it with `pnpm format`. You'll want to do both before sending a pull request.
+- To get familiar with the existing code, it's recommended to look through the docs and the codebase in parallel. For each function in the docs, find the implementation in the source and skim over the code.
+
+### You're ready to push a change?
+
+Once you've made your changes on a fork of the Radashi repo, create a pull request to the `main` branch of the [radashi](https://github.com/radashi-org/radashi) repository. If you made a **breaking change**, please target the `next` branch instead.
+
+- Be sure to fill in a description that lets readers and reviewers understand both the implementation and intent of your changes.
+- Don't forget to [link the PR to an issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) if you are solving one.
+- Enable the checkbox to [allow maintainer edits](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork) so the branch can be updated for a merge.
+- Remember to create a new branch with your changes, rather than using your fork's `main` branch in the PR. [Using main can cause issues.](https://hynek.me/articles/pull-requests-branch/)
+
+Once you submit your PR, one of Radashi's maintainers will review it. They might ask questions or request additional information.
+
+### Your PR gets merged!
+
+Congratulations! 🥳
+
+Stable versions of Radashi are published manually. Beta versions are published automatically, every day, at 5:00AM UTC (if a PR has been merged). Your PR will be updated with a comment when your PR is included in a beta release.
