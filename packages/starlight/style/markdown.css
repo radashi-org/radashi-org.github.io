@@ -7,16 +7,26 @@
 }
 
 .sl-markdown-content
-	:not(a, strong, em, del, span, input, code)
-	+ :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
+	:not(a, strong, em, del, span, input, code, hr)
+	+ :not(a, strong, em, del, span, input, code, hr, :where(.not-content *)) {
 	margin-top: 1rem;
 }
 
 /* Headings after non-headings have more spacing. */
 .sl-markdown-content
 	:not(h1, h2, h3, h4, h5, h6)
-	+ :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+	+ :is(h1, h2, h3):not(:where(.not-content *)) {
+	margin-top: 5rem;
+}
+.sl-markdown-content
+	:not(h1, h2, h3, h4, h5, h6)
+	+ :is(h4):not(:where(.not-content *)) {
 	margin-top: 4rem;
+}
+.sl-markdown-content
+	:not(h1, h2, h3, h4, h5, h6)
+	+ :is(h5, h6):not(:where(.not-content *)) {
+	margin-top: 2.5rem;
 }
 
 .sl-markdown-content ul ul:not(:where(not-content *)) {
@@ -24,21 +34,15 @@
 }
 
 .sl-markdown-content :is(h4):not(:where(.not-content *)) {
-	margin-top: 4rem;
-	/* color: #ffc56e; */
+	margin-top: 5rem;
 	font-weight: 500 !important;
 }
 
 .sl-markdown-content :is(h3) {
-	margin-top: 4rem;
+	margin-top: 5rem;
 	color: #ffeee1;
 	font-weight: 600 !important;
 }
-/* .sl-markdown-content :is(h2) {
-	margin-top: 4rem;
-	color: #f7862f;
-	font-weight: 600 !important;
-} */
 
 .sl-markdown-content :first-child:where(h1, h2, h3, h4, h5, h6) {
 	margin-top: 0;
@@ -106,11 +110,11 @@
 }
 
 .sl-markdown-content a:not(:where(.not-content *)) {
-	color: rgb(246, 234, 234);
-	font-weight: 500;
+	color: rgb(234, 224, 224);
+	font-weight: 430;
 	text-decoration-color: var(--sl-color-accent);
 	text-decoration-style: solid;
-	text-decoration-thickness: 0.125em;
+	text-decoration-thickness: 0.09em;
 	text-underline-offset: 0.14em;
 	text-underline-position: from-font;
 	transition:
@@ -168,7 +172,8 @@
 
 .sl-markdown-content hr:not(:where(.not-content *)) {
 	border: 0;
-	border-bottom: 1px solid var(--sl-color-hairline);
+	border-bottom: 1px solid var(--sl-color-gray-5);
+  margin: 1.8rem 0;
 }
 
 /* <details> and <summary> styles */

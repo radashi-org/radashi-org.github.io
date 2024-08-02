@@ -156,6 +156,9 @@ importers:
       astro-expressive-code:
         specifier: ^0.35.3
         version: 0.35.3(astro@4.11.5(@types/node@18.16.19)(terser@5.31.1)(typescript@4.9.5))
+      astro-tooltips:
+        specifier: ^0.6.2
+        version: 0.6.2
       bcp-47:
         specifier: ^2.1.0
         version: 2.1.0
@@ -1686,6 +1689,9 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
+  '@popperjs/core@2.11.8':
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+
   '@rollup/plugin-alias@3.1.9':
     resolution: {integrity: sha512-QI5fsEvm9bDzt32k39wpOwZhVzRcL5ydcffUHMyLVaVaLeC70I8TJZ17F1z1eMoLu4E/UOcH9BWVkKpIKdrfiw==}
     engines: {node: '>=8.0.0'}
@@ -2230,6 +2236,9 @@ packages:
     resolution: {integrity: sha512-f1L1m3J3EzZHDEox6TXmuKo5fTSbaNxE/HU0S0UQmvlCowtOKnU/LOsoDwsbQSYGKz+fdLRPsCjFMiKqEoyfcw==}
     peerDependencies:
       astro: ^4.0.0-beta || ^3.3.0
+
+  astro-tooltips@0.6.2:
+    resolution: {integrity: sha512-I9uXbchctnRqbc0mnxKcBRfweMuql/U+619+MzNvq3kANc7xthOXj6cMNgAkTaXoHJLdFMKL3Fx6vB5cyiiRXg==}
 
   astro@4.11.5:
     resolution: {integrity: sha512-TCRhuaLwrxwMhS8S1GG+ZTdrAXigX9C8E/YUTs/r2t+owHxDgwl86IV9xH1IHrCPoqhK6civyAQNOT+GKmkb0A==}
@@ -5696,6 +5705,9 @@ packages:
     resolution: {integrity: sha512-d2eda04AN/cPOR89F7Xv5bK/jrQEhmcLFe6HFldoeO9AJtps+fqEnh486vnT/8y4bw38pSyxDcTCAq+Ks2aJTg==}
     engines: {node: '>=14.0.0'}
 
+  tippy.js@6.3.7:
+    resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
+
   tmp@0.0.33:
     resolution: {integrity: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==}
     engines: {node: '>=0.6.0'}
@@ -8023,6 +8035,8 @@ snapshots:
     dependencies:
       playwright: 1.44.1
 
+  '@popperjs/core@2.11.8': {}
+
   '@rollup/plugin-alias@3.1.9(rollup@2.79.1)':
     dependencies:
       rollup: 2.79.1
@@ -8592,6 +8606,10 @@ snapshots:
     dependencies:
       astro: 4.11.5(@types/node@18.16.19)(terser@5.31.1)(typescript@4.9.5)
       rehype-expressive-code: 0.35.3
+
+  astro-tooltips@0.6.2:
+    dependencies:
+      tippy.js: 6.3.7
 
   astro@4.11.5(@types/node@18.16.19)(terser@5.31.1)(typescript@4.9.5):
     dependencies:
@@ -13169,6 +13187,10 @@ snapshots:
   tinypool@0.8.4: {}
 
   tinyspy@2.2.0: {}
+
+  tippy.js@6.3.7:
+    dependencies:
+      '@popperjs/core': 2.11.8
 
   tmp@0.0.33:
     dependencies:

@@ -160,6 +160,7 @@
       "types": "./components/Search.astro.tsx",
       "import": "./components/Search.astro"
     },
+    "./icons": "./components/Icons.ts",
     "./internal": "./internal.ts",
     "./props": "./props.ts",
     "./schema": "./schema.ts",
@@ -195,6 +196,7 @@
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
     "astro-expressive-code": "^0.35.3",
+    "astro-tooltips": "^0.6.2",
     "bcp-47": "^2.1.0",
     "execa": "^9.3.0",
     "hast-util-from-html": "^2.0.1",

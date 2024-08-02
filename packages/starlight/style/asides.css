@@ -46,4 +46,5 @@
 
 .starlight-aside__content a {
 	color: var(--sl-color-asides-text-accent);
+	text-decoration-color: var(--sl-color-asides-text-accent);
 }

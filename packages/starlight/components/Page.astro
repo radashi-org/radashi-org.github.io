@@ -31,6 +31,8 @@ import '../style/asides.css';
 // Important that this is the last import so it can override built-in styles.
 import 'virtual:starlight/user-css';
 
+import { Tooltips } from 'astro-tooltips';
+
 const pagefindEnabled =
 	Astro.props.entry.slug !== '404' &&
 	!Astro.props.entry.slug.endsWith('/404') &&
@@ -40,7 +42,7 @@ const hasSidebar = Astro.props.hasSidebar ? 'true' : null;
 const hasToc = Astro.props.toc ? 'true' : null;
 const hasHero = Astro.props.entry.data.hero ? 'true' : null;
 
-let lastUpdated = Astro.props.lastUpdated;
+let lastUpdated = Astro.props.lastUpdated ?? null;
 let lastUpdatedLink: string | undefined;
 
 if (lastUpdated == null) {
@@ -60,28 +62,23 @@ if (lastUpdated == null) {
 				file = 'src/content/docs/' + slug + '.mdx';
 			}
 
-			const { stdout } = await execa('git', ['log', '-1', '--format=%cd', file], {
+			const { stdout, exitCode } = await execa('git', ['log', '-1', '--format=%cd', file], {
 				cwd,
-				noThrow: true,
+				reject: false,
 			});
 
-			console.trace({ slug, file, stdout, cwd });
-
-			if (!stdout) {
-				console.error('No stdout from git log');
-				return undefined;
+			if (exitCode === 0 && stdout) {
+				return new Date(stdout);
 			}
-
-			return new Date(stdout);
+			return null;
 		} catch (error) {
 			console.error('Error fetching last commit date:', error);
-			return undefined;
+			return null;
 		}
 	};
 
 	lastUpdated = await fetchLastUpdate();
 }
-console.log('[Page] lastUpdated', lastUpdated);
 ---
 
 <html
@@ -121,6 +118,7 @@ console.log('[Page] lastUpdated', lastUpdated);
 			}
 		</style>
 		<ThemeProvider {...Astro.props} />
+		<Tooltips interactive={false} />
 		<script src="/@id/swup.min.js" defer={false}></script>
 	</head>
 	<body>

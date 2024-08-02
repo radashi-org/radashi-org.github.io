@@ -109,6 +109,10 @@ const { sublist, nested } = Astro.props;
 		padding-inline-start: var(--sl-sidebar-item-padding-inline);
 	}
 
+	ul.top-level li:first-child summary {
+		margin-top: 0;
+	}
+
 	.large {
 		font-size: var(--sl-text-lg);
 	}
@@ -161,7 +165,7 @@ const { sublist, nested } = Astro.props;
 		}
 	}
 
-	:global(:where(a)) {
+	a {
 		font-size: 1.08rem !important;
 		margin-left: 0.1rem;
 	}
