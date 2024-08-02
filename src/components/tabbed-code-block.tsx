@@ -2,9 +2,11 @@ import clsx from 'clsx'
 import { useEffect, useLayoutEffect, useRef, useState } from 'preact/hooks'
 
 export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
+  const rootRef = useRef<HTMLDivElement>(null)
   const codeContainerRef = useRef<HTMLDivElement>(null)
   const [codeBlocks] = useState(() => [] as HTMLElement[])
   const [currentIndex, setCurrentIndex] = useState(-1)
+  const [offScreen, setOffScreen] = useState(false)
 
   function setCodeBlock(index: number) {
     const previousIndex = currentIndex
@@ -91,8 +93,32 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
     }
   }, [currentIndex, isPaused])
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setOffScreen(!entry.isIntersecting)
+      },
+      {
+        root: null,
+        rootMargin: '-15% 0px -15% 0px', // 70% of the screen vertically
+        threshold: 0,
+      }
+    )
+
+    if (rootRef.current) {
+      observer.observe(rootRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  let paused = isPaused
+  if (offScreen) {
+    paused = true
+  }
+
   return (
-    <div>
+    <div ref={rootRef}>
       <div
         class="not-content flex flex-row items-center mt-3"
         onMouseEnter={() => setPaused(true)}
