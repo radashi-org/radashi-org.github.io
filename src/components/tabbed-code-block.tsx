@@ -7,9 +7,10 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
   const [codeBlocks] = useState(() => [] as HTMLElement[])
   const [currentIndex, setCurrentIndex] = useState(-1)
   const [offScreen, setOffScreen] = useState(false)
+  const [mousedOver, setMousedOver] = useState(false)
 
   let [isPaused, setPaused] = useState(true)
-  if (offScreen) {
+  if (offScreen || mousedOver) {
     isPaused = true
   }
 
@@ -115,8 +116,8 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
     <div ref={rootRef}>
       <div
         class="not-content flex flex-row items-center mt-3"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}>
+        onMouseEnter={() => setMousedOver(true)}
+        onMouseLeave={() => setMousedOver(false)}>
         {props.names.map((name, index) => (
           <div
             role="button"
@@ -129,7 +130,7 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
                 class={clsx([
                   'h-2.6px w-full rounded-full transition-650',
                   currentIndex === index
-                    ? isPaused
+                    ? mousedOver
                       ? 'bg-#fffa85'
                       : 'bg-$sl-color-accent'
                     : 'bg-#8a6e6f opacity-50',
