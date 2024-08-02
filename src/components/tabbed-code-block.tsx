@@ -42,10 +42,10 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
         }
 
         child.addEventListener('mouseenter', () => {
-          setPaused(true)
+          setMousedOver(true)
         })
         child.addEventListener('mouseleave', () => {
-          setPaused(false)
+          setMousedOver(false)
         })
         // Let mobile devices click to pause/play
         child.addEventListener('click', () => {

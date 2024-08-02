@@ -1,177 +1,137 @@
 ---
 title: Introducing Radashi
-description: The Emerging Best Utility Library for Pragmatic TypeScript Developers
+description: A new frontier in TypeScript utility libraries.
 ---
 
-Are you a TypeScript enthusiast who appreciates utility libraries but doesn't want to go full Functional Programming™? Meet **Radashi**, the utility library that's set to become your new best friend. If you've enjoyed the Lodash approach to idiomatic JavaScript, Radashi might be exactly what you're looking for – _with a twist_.
+Welcome to Radashi! We're here to make your development life easier with a collection of super handy functions designed for modern JavaScript and TypeScript developers. Think of Radashi as a friendly toolbelt that’s all about simplicity, customization, and community.
 
-## The Journey to Excellence
+## Key Features
 
-While Radashi is still in its early stages, it's built on a solid foundation. We've inherited the best parts of a dormant utility library that boasts over 100,000 weekly downloads and three years of active development. But we're not just resting on past laurels – we're pushing boundaries.
+#### ✨ Built for TypeScript
 
-What truly sets Radashi apart is its core philosophy, the "ethos of Radashi". These design principles are carefully crafted to cater specifically to non-FP TypeScript developers, making Radashi the go-to choice for those who appreciate pragmatic, idiomatic JavaScript approaches.
+Radashi is made with TypeScript at its core. This means our functions not only help you write better code but also catch errors early, making your development smoother and more reliable.
 
-But here's where Radashi truly shines: it's not just about what we offer out of the box. It's about empowering you to shape the library to fit your needs perfectly.
+import { TabbedCodeBlock } from '../../components/tabbed-code-block'
 
-:::tip[Customization is Key]
-Radashi's standout feature is its unparalleled customizability. We've made it incredibly easy to tailor the library to your specific project needs. This flexibility is a game-changer, allowing you to craft the perfect imperative TypeScript utility library for your unique requirements.
-:::
+<TabbedCodeBlock names={['select', 'sum']} client:load>
 
-Excited? You should be. Let's explore the features that make Radashi a cut above the rest.
+```ts
+import { select } from 'radashi'
 
-## Key Strengths
+// Example: Filtering and transforming a list of products
+const products = [
+  { id: 1, name: 'Laptop', price: 1000, inStock: true },
+  { id: 2, name: 'Phone', price: 800, inStock: false },
+  { id: 3, name: 'Tablet', price: 500, inStock: true },
+  { id: 4, name: 'Headphones', price: 100, inStock: true },
+]
 
-### Modern Architecture
+const affordableInStockProducts = select(
+  products,
+  product => ({ name: product.name, price: product.price }),
+  product => product.inStock && product.price < 600
+)
+// => [{ name: 'Tablet', price: 500 }, { name: 'Headphones', price: 100 }]
+```
 
-Radashi isn't just riding the TypeScript wave – it's surfing it like a pro. Here's how:
+```ts
+import { sum } from 'radashi'
 
-- **ESM and TypeScript Native**: We're built from the ground up with modern ESM syntax and TypeScript. The result? Clean, type-safe code that's a joy to work with.
+// Example: Sum the ages of all users
+const users = [
+  { name: 'Alice', age: 30 },
+  { name: 'Bob', age: 25 },
+  { name: 'Charlie', age: 35 },
+]
 
-- **Tree-shaking Optimized**: With `sideEffects: false` in our `package.json`, we ensure that unused exports are eliminated. You only pay for what you use, keeping your bundle lean and mean.
+const totalAge = sum(users, user => user.age)
+// => 90
+```
 
-- **Cutting-edge Tools**: We've embraced [Biome](https://biomejs.dev/) for formatting and linting, and [Vitest](https://vitest.dev/) for our testing framework. This means faster development cycles and rock-solid reliability.
+</TabbedCodeBlock>
 
-By leveraging these modern tools and practices, Radashi isn't just current – it's future-proof. We're positioned to evolve alongside JavaScript, always adhering to best practices and performance standards.
+#### 🎯 Smart Function Choices
 
-### Minimalist Design
+We pick our functions based on real needs and popular use cases. Our goal is to give you just what you need without the extra fluff, keeping everything straightforward and useful.
 
-In a world of bloated libraries, Radashi stands out by embracing simplicity without sacrificing functionality:
+<TabbedCodeBlock names={['select', 'sum']} client:load>
 
-- **Clear and Predictable**: Instead of relying heavily on polymorphism, we prefer separate, well-named functions for different use cases. This promotes clearer code and better tree-shaking opportunities.
+```ts
+import { select } from 'radashi'
 
-- **Focused Functionality**: We carefully consider each addition to the library. Functions that act as "syntax sugar" are avoided unless they significantly improve your code's readability, reduce bug rates, or minimize technical debt.
+// Example: Filtering and transforming a list of products
+const products = [
+  { id: 1, name: 'Laptop', price: 1000, inStock: true },
+  { id: 2, name: 'Phone', price: 800, inStock: false },
+  { id: 3, name: 'Tablet', price: 500, inStock: true },
+  { id: 4, name: 'Headphones', price: 100, inStock: true },
+]
 
-- **Copy-Paste Friendly**: Need just one function? No problem. Each function in Radashi has its own module, importing only from `radashi` itself (no relative paths). You can effortlessly copy individual functions directly from our GitHub repository into your project, without any changes needed before you can use them. This is also great for quick customization.
+const affordableInStockProducts = select(
+  products,
+  product => ({ name: product.name, price: product.price }),
+  product => product.inStock && product.price < 600
+)
+// => [{ name: 'Tablet', price: 500 }, { name: 'Headphones', price: 100 }]
+```
 
-- **No Internal Imports**: If there's a function in Radashi, there's a 100% chance you can use it, and it's both well-documented and tested. While the pattern of "private functions only for internal use" may be good for [DRY programming](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), it's not great for keeping the codebase as approachable, customizable, and bloat-free as possible.
+```ts
+import { sum } from 'radashi'
 
-  - Radashi tries to keep functions isolated from each other when possible, helping you be efficient when figuring out which code to change.
+// Example: Sum the ages of all users
+const users = [
+  { name: 'Alice', age: 30 },
+  { name: 'Bob', age: 25 },
+  { name: 'Charlie', age: 35 },
+]
 
-This minimalist approach ensures that Radashi remains efficient and easy to use, with a structure that supports both simplicity and effectiveness in your projects.
+const totalAge = sum(users, user => user.age)
+// => 90
+```
 
-### Robust and Reliable
+</TabbedCodeBlock>
 
-At Radashi, we don't just talk about quality – we build it into every line of code:
+#### 🪶 Lightweight and Efficient
 
-- **TypeScript Excellence**: We aim for nothing less than perfect TypeScript support. Our team excels in complex TypeScript generics, striving for 100% correct types throughout the library.
+We keep things simple to make sure your projects stay light and fast. With Radashi, you don’t have to worry about adding unnecessary bulk to your code.
 
-- **Comprehensive Testing**: Radashi maintains full test coverage, ensuring every function behaves as expected across various scenarios. We also employ performance benchmarks to catch potential regressions.
+{/* TODO: Show off some implementations */}
 
-- **Browser Compatibility**: We've implemented checks to ensure broad support across different browsers and versions. For specifics, check out our [Browser Support](/browser-support) page.
+#### 🛠️ Easy to Customize
 
-- **Automated Quality Checks**: Our linting process runs before any changes hit the `main` branch, ensuring consistent style and quality across the entire codebase.
+Want to add your own touch? You can easily extend Radashi with your own functions using our template repository. Make it yours and even share your custom versions with the community.
 
-This commitment to robustness means you can trust Radashi in projects of any scale, from small applications to large enterprise systems.
+{/* TODO: Add an Asciinema demo of how to extend Radashi */}
 
-### Customization-Friendly
+#### 🤝 Community-Powered
 
-One of Radashi's standout features is its exceptional customizability:
+Radashi thrives on contributions and new ideas. We welcome everyone to join in, share their knowledge, and help the library grow. Our open process and regular updates keep us in tune with what developers need.
 
-- **Easy Setup**: Our [template repository](https://github.com/radashi-org/radashi-template) and [CLI helper](https://github.com/radashi-org/radashi-helper) make creating your own version of Radashi a breeze.
+{/* TODO: Add our contributors here */}
 
-- **Straightforward Overrides**: Adding your own functions or overriding existing ones is simple. After cloning the template, just run `pnpm install && pnpm radashi help` to get started.
+### Tackling Common Problems
 
-- **Contribution-Ready**: Made improvements you want to share? Contributing back to the main Radashi project is hassle-free.
+Radashi is here to solve some big issues in utility libraries:
 
-- **NPM Publishing**: Easily publish your customized version to NPM, sharing your tailored library with your team or the community.
+1. **Central Control**: We support a decentralized, community-driven approach.
+2. **Customization**: Easily extend Radashi with our [template repository](https://github.com/radashi-org/radashi-template).
+3. **Fragmentation**: We offer a unified platform for sharing and adopting TypeScript utility functions.
 
-- **Detailed Guidance**: Check out our comprehensive guide on [making Radashi your own](/your-own-radashi) for step-by-step instructions.
+### Our Core Values
 
-This focus on customization reflects our understanding that the "perfect" utility library is often project-specific. With Radashi, you have the power to shape the library to match your exact requirements.
+- **Purposeful Design**: Guided by our evolving ["Our Ethos"](/our-ethos) document
+- **Simplicity**: Keeping code light and efficient
+- **Pragmatism**: Focusing on what’s most useful
+- **Innovation**: Staying ahead of emerging needs
 
-### Developer-Centric Workflow
+&nbsp;
 
-We've implemented several features to enhance the development experience and keep the community engaged:
+---
 
-- **Automatic Beta Releases**: We publish a beta version daily at 05:00 AM UTC if there are any publishable changes, giving you early access to new features.
+Radashi helps you write cleaner, more efficient code by offering a curated set of TypeScript utility functions. Customize it to fit your needs, contribute your own functions, and collaborate with a community of developers to build a better JavaScript ecosystem.
 
-- **Preview Releases**: Comment `/publish` on your PR to trigger a release of a preview version to NPM, allowing immediate testing of your changes.
+**Ready to dive in?** Choose your next step with Radashi:
 
-- **Comprehensive Documentation**: Our high-quality documentation site is constantly updated to reflect the latest features and best practices.
-
-- **Active Maintenance**: We prioritize active maintenance and are actively growing our core team. We welcome anyone passionate about Radashi to join us. The barrier to entry is low - all we ask is that you help review PRs, participate in design discussions, and make a few contributions every quarter. Your expertise and enthusiasm are what we value most.
-
-- **Publishing Privileges**: Become a Radashi steward! After just two months of dedicated involvement, you can earn the power to shape our releases. It's your chance to directly influence Radashi's evolution and keep our community thriving with regular, impactful updates.
-
-Interested in shaping the future of Radashi? [Reach out here](https://github.com/orgs/radashi-org/discussions/4) or DM [@retropragma](https://x.com/retropragma) on X.
-
-### How Does Radashi Compare to Lodash?
-
-While we respect Lodash's legacy, Radashi takes a distinct philosophical direction. It's not about being universally "better" – it's about tradeoffs. Radashi builds on the philosophy of another library called Radash, which was then distilled into the "Radashi ethos," a set of design principles guiding our development.
-
-Our approach to parity with Lodash is strategic and data-driven:
-
-- We implement popular Lodash functions based on NPM package download counts, without aiming for full parity.
-- This approach lets us innovate with improved API designs while maintaining alignment with Lodash where appropriate.
-- Our [Lodash parity page](/lodash-parity) shows our progress, listing functions by popularity and implementation status.
-- We ensure reliability through comprehensive test coverage for all functions, whether Lodash-inspired or newly designed.
-- Performance benchmarks track efficiency and detect regressions. We plan to add direct Lodash comparisons for clearer performance insights.
-
-By balancing parity with innovation, we aim to make Radashi a familiar yet forward-thinking choice for developers transitioning from Lodash or seeking a modern TypeScript-first utility library.
-
-### Areas for Growth
-
-At Radashi, we believe in transparency and continuous improvement. We're aware of our current limitations and are actively working to address them:
-
-1. **Production Testing**
-
-   - As a newer library, Radashi hasn't yet been extensively battle-tested in large-scale production environments.
-   - We're actively seeking real-world feedback and use cases to improve reliability and performance.
-   - Your experiences with Radashi in production settings are invaluable to us and will shape the library's future development.
-
-2. **Community Building**
-
-   - We're in the early stages of growing our contributor base and user community.
-   - While we have active maintainers and increasing interest, we're working on boosting our visibility within the developer ecosystem.
-   - We encourage users to star our GitHub repository and participate in discussions to help others discover Radashi.
-
-3. **Feature Parity**
-
-   - While we don't aim to replicate all features of libraries like Lodash, we're continuously working to cover the most crucial use cases.
-   - Our [Lodash parity page](/lodash-parity) tracks our progress in this area.
-   - We're always open to community input on which features to prioritize.
-
-4. **Benchmarks**
-   - Our current benchmarks focus on Radashi's performance in isolation.
-   - We recognize the value of comparative benchmarks, particularly against established libraries like Lodash.
-   - Adding these comparisons is on our roadmap, and we welcome contributions from the community to help implement them.
-
-We view these areas not as weaknesses, but as opportunities for growth and improvement. We're committed to addressing them and are always open to feedback and contributions. If you have ideas, critiques, or want to help in any of these areas, we encourage you to share your thoughts in [our GitHub discussions](https://github.com/radashi-org/radashi/discussions).
-
-### Get Involved
-
-Ready to experience Radashi for yourself? Here's how you can get started and contribute to its development:
-
-1. **Try It Out**
-
-   ```
-   pnpm install radashi
-   ```
-
-   For a hands-on experience, check out our [StackBlitz demo]().
-
-2. **Explore and Contribute**
-
-   - Visit our [GitHub repository](https://github.com/radashi-org/radashi) to star the project, report issues, or contribute code.
-   - Join our [community discussions](https://github.com/radashi-org/radashi/discussions) to share ideas, ask questions, or provide feedback.
-
-3. **Make It Your Own**
-
-   - Use our template repository and CLI helper to create your customized version of Radashi.
-   - Check out our guide on [making Radashi your own](/your-own-radashi) for detailed instructions.
-
-4. **Spread the Word**
-   - If you find Radashi useful, consider sharing it with your network.
-   - Write about your experiences or create tutorials to help others discover the benefits of Radashi.
-
-### Funding
-
-Currently, Radashi has no sponsors and doesn't have an OpenCollective page. If you're interested in sponsoring or donating to the Radashi effort, please [let us know](https://github.com/orgs/radashi-org/discussions/129). Your support can help accelerate development and improve the library for everyone.
-
-### Recap
-
-Radashi represents a new approach to TypeScript utility libraries, combining modern architecture, minimalist design, and exceptional customizability. While we're still growing and improving, we believe our unique philosophy and developer-centric approach set us apart in the ecosystem.
-
-We invite you to join us on this journey. Whether you're looking for a more tailored utility library, want to contribute to an exciting open-source project, or simply want to explore a fresh take on TypeScript utilities, Radashi has something to offer.
-
-Together, let's shape the future of TypeScript utility libraries and create tools that truly serve the needs of pragmatic developers. Try Radashi today, and experience the difference for yourself!
+- [Installation](/installation): Try out Radashi in your project.
+- [Functions Overview](/reference): Explore the functions of Radashi.
+- [Contributing](/contributing): Help us improve Radashi.

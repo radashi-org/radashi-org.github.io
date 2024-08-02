@@ -97,32 +97,29 @@ async function radashi() {
 }
 
 function generateSidebar(): SidebarItem[] {
+  const separatorItem = {
+    separator: '0.6px solid rgba(240, 240, 240, 0.1)',
+  }
+
   return [
     {
       label: 'Getting Started',
       items: [
         h3('Introduction'), //
         h3('Installation'),
-        h3('Our Ethos'),
+        h3('Contributing'),
       ],
     },
-    {
-      separator: '0.6px solid rgba(240, 240, 240, 0.1)',
-    },
+    separatorItem,
     {
       label: 'Quick Links',
       items: [
-        // h3('Your Own Radashi'),
-        // h3('Open Library'),
+        h3('Our Ethos'), //
         h3('Browser Support'),
-        h3('Lodash Parity'),
-        h3('Contributing'),
         h3('Changelog'),
       ],
     },
-    {
-      separator: '0.6px solid rgba(240, 240, 240, 0.1)',
-    },
+    separatorItem,
     h3('Community', {
       icon: '/Community-dark.svg',
       link: 'https://github.com/orgs/radashi-org/discussions',
@@ -139,9 +136,7 @@ function generateSidebar(): SidebarItem[] {
       icon: '/JSR-dark.svg',
       link: 'https://jsr.io/@radashi-org/radashi',
     }),
-    {
-      separator: '0.6px solid rgba(240, 240, 240, 0.1)',
-    },
+    separatorItem,
     h3('All Functions', {
       link: 'reference/',
     }),
