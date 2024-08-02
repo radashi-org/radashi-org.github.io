@@ -8,6 +8,11 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
   const [currentIndex, setCurrentIndex] = useState(-1)
   const [offScreen, setOffScreen] = useState(false)
 
+  let [isPaused, setPaused] = useState(true)
+  if (offScreen) {
+    isPaused = true
+  }
+
   function setCodeBlock(index: number) {
     const previousIndex = currentIndex
     setCurrentIndex(index)
@@ -82,12 +87,11 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
     })
   }, [])
 
-  const [isPaused, setPaused] = useState(true)
   useEffect(() => {
     if (!isPaused) {
       const loop = setTimeout(() => {
         setCodeBlock((currentIndex + 1) % props.names.length)
-      }, 3000)
+      }, 2500)
 
       return () => clearTimeout(loop)
     }
@@ -99,23 +103,13 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
         setOffScreen(!entry.isIntersecting)
       },
       {
-        root: null,
-        rootMargin: '-15% 0px -15% 0px', // 70% of the screen vertically
-        threshold: 0,
+        rootMargin: '-50% 0px -37% 0px', // 70% of the screen vertically
       }
     )
 
-    if (rootRef.current) {
-      observer.observe(rootRef.current)
-    }
-
+    observer.observe(rootRef.current!)
     return () => observer.disconnect()
   }, [])
-
-  let paused = isPaused
-  if (offScreen) {
-    paused = true
-  }
 
   return (
     <div ref={rootRef}>
@@ -133,9 +127,11 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
             <div class="absolute left-0 bottom--1 w-full px-3">
               <div
                 class={clsx([
-                  'h-2.6px w-full rounded-full transition-250',
+                  'h-2.6px w-full rounded-full transition-650',
                   currentIndex === index
-                    ? 'bg-$sl-color-accent'
+                    ? isPaused
+                      ? 'bg-#fffa85'
+                      : 'bg-$sl-color-accent'
                     : 'bg-#8a6e6f opacity-50',
                 ])}></div>
             </div>
