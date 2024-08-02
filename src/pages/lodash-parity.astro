@@ -2,11 +2,10 @@
 import { Icon } from '@astrojs/starlight/components'
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
 import { Markdown } from '@astropub/md'
-import { createClient } from '@supabase/supabase-js'
 import { formatCss, interpolate, modeOklch, parseHex, useMode } from 'culori/fn'
-import fs from 'node:fs'
-import path from 'node:path'
 import { objectify } from 'radashi'
+import { supabase } from '../db/client'
+import { cachedToFile } from '../util/fileCache'
 
 useMode(modeOklch)
 
@@ -17,23 +16,7 @@ export type LodashFeature = {
   notes: string | null
 }
 
-async function loadDatabaseItems() {
-  const cachePath = './.cache/lodash-parity.json'
-  try {
-    const cache = fs.readFileSync(cachePath, 'utf-8')
-    const cacheMtime = fs.statSync(cachePath).mtime
-    const expiryTime = 1000 * 60 * 60 * 24 // 24 hours
-    if (Date.now() - cacheMtime.getTime() < expiryTime) {
-      return JSON.parse(cache) as LodashFeature[]
-    }
-  } catch {}
-
-  // Initialize Supabase client
-  const supabase = createClient(
-    import.meta.env.SUPABASE_URL,
-    import.meta.env.SUPABASE_ANON_KEY
-  )
-
+async function loadParityData() {
   // Fetch all rows from the lodash_parity table
   const {
     data: items,
@@ -50,12 +33,10 @@ async function loadDatabaseItems() {
   // Sort by most popular
   items.sort((a, b) => b.weekly_downloads_num - a.weekly_downloads_num)
 
-  fs.mkdirSync(path.dirname(cachePath), { recursive: true })
-  fs.writeFileSync(cachePath, JSON.stringify(items))
   return items
 }
 
-const items = await loadDatabaseItems()
+const items = await cachedToFile('lodash-parity', loadParityData)
 const itemsByName = objectify(items, item => item.name)
 
 function getRelevanceColor(relevance: number) {
@@ -69,7 +50,7 @@ function getRelevanceColor(relevance: number) {
 ---
 
 <StarlightPage frontmatter={{ title: 'Lodash Parity' }}>
-  <p class="mb-20">
+  <p>
     The circles like <circle-progress
       class="small inline-block !mt-0 translate-y-18% mx-1"
       animation="none"
@@ -82,15 +63,12 @@ function getRelevanceColor(relevance: number) {
     > function has the most weekly downloads of any Lodash function, hence its rating
     of 100 out of 100.
   </p>
+  <p class="mb-20">
+    <em
+      >If a Lodash function is missing, it's because it has {'<'} 10,000 weekly downloads.</em
+    >
+  </p>
   <input type="search" id="search" placeholder="Search" />
-  <div class="sort-buttons flex flex-row justify-end">
-    <div role="button" data-sort-by="weekly_downloads_num" data-descending>
-      <Icon name="download" class="w-6 h-6" />
-    </div>
-    <div role="button" data-sort-by="name">
-      <Icon name="alphabetical" class="w-6 h-6" />
-    </div>
-  </div>
   <article>
     {
       items ? (
@@ -171,11 +149,6 @@ function getRelevanceColor(relevance: number) {
       )
     }
   </article>
-  <p>
-    <em
-      >If a Lodash function is missing, it's because it has {'<'} 10,000 weekly downloads.</em
-    >
-  </p>
 </StarlightPage>
 
 <script define:vars={{ itemsByName }}>

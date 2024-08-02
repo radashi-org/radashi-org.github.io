@@ -3,5 +3,9 @@
   "editor.formatOnSave": true,
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode"
-  }
+  },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "rewrap.wrappingColumn": 75
 }

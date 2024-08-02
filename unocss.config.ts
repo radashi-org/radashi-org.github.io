@@ -5,6 +5,7 @@ export default {
   content: {
     pipeline: {
       include: [
+        'src/**/*.tsx',
         'src/components/**/*.astro',
         'src/pages/**/*.astro',
         'src/content/**/*.mdx',

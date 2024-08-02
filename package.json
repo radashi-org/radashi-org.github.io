@@ -16,13 +16,18 @@
     "@astropub/md": "^0.4.0",
     "@skyra/jaro-winkler": "^1.1.1",
     "@supabase/supabase-js": "^2.44.2",
+    "algoliasearch": "^4.24.0",
+    "clsx": "^2.1.1",
     "culori": "^4.0.1",
     "js-circle-progress": "1.0.0-beta.0",
-    "radashi": "12.2.0-beta.4aac7d7"
+    "preact": "^10.23.1",
+    "radashi": "12.2.0-beta.4aac7d7",
+    "shiki": "^1.12.1"
   },
   "devDependencies": {
     "@alloc/prettier-config": "^1.0.0",
     "@astrojs/check": "^0.7.0",
+    "@astrojs/preact": "^3.5.1",
     "@cush/exec": "^1.8.0",
     "@types/culori": "^2.1.1",
     "@unocss/astro": "^0.61.0",

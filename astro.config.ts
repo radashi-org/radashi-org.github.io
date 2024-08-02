@@ -1,18 +1,17 @@
-import { defineConfig } from 'astro/config'
+import preact from '@astrojs/preact'
 import starlight from '@astrojs/starlight'
 import { StarlightUserConfig } from '@astrojs/starlight/types'
-import unocss from '@unocss/astro'
 import mdAstro from '@astropub/md'
-import virtual from 'vite-plugin-virtual'
 import exec from '@cush/exec'
-import { existsSync, writeFileSync, mkdirSync } from 'fs'
+import unocss from '@unocss/astro'
+import { defineConfig } from 'astro/config'
+import glob from 'fast-glob'
+import { existsSync, mkdirSync, writeFileSync } from 'fs'
+import path from 'node:path'
+import { camel, group, title } from 'radashi'
+import virtual from 'vite-plugin-virtual'
 import { renderHeftJson } from './scripts/render-heft-json'
 import { renderReferenceIndex } from './scripts/render-reference-index'
-import { group } from 'radashi'
-import glob from 'fast-glob'
-import path from 'node:path'
-import { camel } from 'radashi'
-import { title } from 'radashi'
 
 type SidebarItem = (StarlightUserConfig['sidebar'] & object)[number]
 
@@ -60,12 +59,13 @@ export default defineConfig({
         baseUrl: 'https://github.com/radashi-org/radashi/edit/main/docs/',
       },
       expressiveCode: {
-        themes: ['starlight-dark'],
+        themes: ['github-dark-dimmed'],
       },
       sidebar: generateSidebar(),
       customCss: ['./src/styles/custom.css', './src/styles/dark-theme.css'],
     }),
     unocss(),
+    preact(),
   ],
   vite: {
     plugins: [radashi()],
@@ -112,10 +112,12 @@ function generateSidebar(): SidebarItem[] {
     {
       label: 'Quick Links',
       items: [
-        h3('Lodash Parity'),
+        // h3('Your Own Radashi'),
+        // h3('Open Library'),
         h3('Browser Support'),
-        h3('Your Own Radashi'),
+        h3('Lodash Parity'),
         h3('Contributing'),
+        h3('Changelog'),
       ],
     },
     {

@@ -1,0 +1,175 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+import { uid, unique } from 'radashi'
+import { supabase } from '../db/client'
+import { castComparator } from '../util/castComparator'
+import { cachedToFile } from '../util/fileCache'
+import { OpenLibraryIsland } from './open-library/island'
+
+async function loadOpenLibrary() {
+  type PrStatus = 'draft' | 'open' | 'closed' | 'merged'
+
+  type FunctionInfo = {
+    id: number
+    ref: string
+    group: string
+    name: string
+    pr_number: number
+    approval_rating: number
+    documentation: string | null
+    status: PrStatus
+    created_at: string
+    breaking: boolean
+    checks_passed: boolean
+    description: string | null
+    committed_at: string | null
+    committed_by: string | null
+    pr_author: { login: string; avatar_url: string } | null
+  }
+
+  const {
+    data: items,
+    error,
+  }: {
+    data: FunctionInfo[] | null
+    error: any
+  } = await supabase
+    .from('proposed_functions')
+    .select('*')
+    .order('committed_at', { ascending: false })
+    .limit(25)
+
+  if (!items) {
+    throw Error('Error fetching function data: ' + error.stack)
+  }
+
+  return items
+}
+
+let items = await cachedToFile('open-library', loadOpenLibrary)
+
+const toHourPrecisionDate = (date: Date | string | number) => {
+  date = new Date(date)
+  date.setMinutes(0, 0, 0)
+  return date
+}
+
+// Remove duplicate functions from the same author.
+items = unique(items.sort(castComparator('pr_number')), item => {
+  return `${item.name}-${item.committed_by ?? uid(8)}`
+}).sort(
+  castComparator([
+    {
+      mapping: item =>
+        item.committed_at != null
+          ? toHourPrecisionDate(item.committed_at).getTime()
+          : 0,
+      reverse: true,
+    },
+    { mapping: item => item.approval_rating, reverse: true },
+    item => item.name,
+  ])
+)
+---
+
+<StarlightPage
+  frontmatter={{
+    title: "Radashi's Open Library",
+    description: 'Expand your Radashi with functions from the community.',
+  }}
+>
+  <p>
+    The <strong>Open Library</strong> showcases utility functions from open pull
+    requests (PRs) in Radashi's GitHub repository. It includes:
+  </p>
+  <ul>
+    <li>Functions from open PRs</li>
+    <li>Functions from closed PRs tagged "open-library"</li>
+  </ul>
+  <p>
+    <strong>Note:</strong> Merged PRs become part of the official library and are
+    listed on the <a href="/reference">reference</a> page.
+  </p>
+  <p>
+    This virtual space encourages function sharing and community contribution.
+    While there is some light moderation, these PRs are neither audited nor
+    approved. <strong>Review code carefully before use in production.</strong>
+  </p>
+  <OpenLibraryIsland client:load items={items} class="mt-10" />
+</StarlightPage>
+
+<style>
+  :root {
+    --gray-border: #4e3d44;
+    --gray-dim: #85757c;
+    --gray: #93868c;
+    --gray-bright: #a99ca2;
+  }
+
+  :root :global(.documentation) {
+    margin-top: 1.4rem;
+    border-top: 1px solid rgba(240, 240, 240, 0.1);
+    padding-top: 0.8rem;
+    padding-bottom: 0.5rem;
+    font-family: var(--__sl-font);
+    cursor: default;
+
+    p {
+      line-height: var(--sl-line-height);
+    }
+
+    pre {
+      line-height: 1.4;
+    }
+
+    p,
+    ul,
+    ol {
+      &:not(:first-child) {
+        margin-top: 0.6rem;
+      }
+    }
+
+    li,
+    pre,
+    h2,
+    h3,
+    h4 {
+      &:not(:first-child) {
+        margin-top: 1.2rem;
+      }
+    }
+
+    h2 {
+      font-size: 0.88rem;
+      color: var(----sl-color-accent);
+    }
+
+    h3 {
+      color: var(--sl-color-text);
+    }
+
+    code {
+      font-size: var(--sl-text-code);
+      font-family: var(--__sl-font-mono);
+    }
+
+    :not(pre) > code {
+      background-color: var(--sl-color-bg-inline-code);
+      color: #eac183;
+      padding: 0.125rem 0.375rem;
+      font-size: var(--sl-text-code-sm);
+      border-radius: 4px;
+    }
+
+    pre {
+      background: #221f1f;
+      border: 0.6px solid #342f2f;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px 0px;
+      border-radius: 0.5rem;
+      padding: 0.9rem;
+      font-size: var(--sl-text-code);
+      tab-size: 2;
+    }
+  }
+</style>
