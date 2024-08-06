@@ -119,7 +119,7 @@ if (lastUpdated == null) {
 		</style>
 		<ThemeProvider {...Astro.props} />
 		<Tooltips interactive={false} />
-		<script src="/@id/swup.min.js" defer={false}></script>
+		<script src="../utils/swup.ts"></script>
 	</head>
 	<body>
 		<SkipLink {...Astro.props} />
@@ -140,12 +140,19 @@ if (lastUpdated == null) {
 						data-has-hero={hasHero}
 					>
 						<script is:inline>
+							// This script updates the <html> element's data-* attributes
+							// and sets the display style of the sidebar. It will rerun on
+							// each page navigation.
 							(function () {
 								const parentElement = document.currentScript?.parentElement;
-								console.log('[Page] init script', { parentElement });
 
 								const { hasSidebar, hasToc, hasHero } = parentElement?.dataset || {};
 
+								/**
+								 * @param {HTMLElement} element
+								 * @param {string} key
+								 * @param {any} value
+								 */
 								function setData(element, key, value) {
 									if (value == null) {
 										delete element.dataset[key];
@@ -158,8 +165,6 @@ if (lastUpdated == null) {
 								setData(htmlElement, 'hasSidebar', hasSidebar);
 								setData(htmlElement, 'hasToc', hasToc);
 								setData(htmlElement, 'hasHero', hasHero);
-
-								console.log({ hasSidebar, hasToc, hasHero });
 
 								const sidebar = document.getElementById('starlight__sidebar');
 								if (sidebar) {

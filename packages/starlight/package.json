@@ -192,6 +192,7 @@
     "@astrojs/mdx": "^3.1.0",
     "@astrojs/sitemap": "^3.1.5",
     "@pagefind/default-ui": "^1.0.3",
+    "@swup/astro": "^1.4.1",
     "@swup/parallel-plugin": "^0.4.0",
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
@@ -212,7 +213,6 @@
     "swup": "^4.6.1",
     "unified": "^11.0.4",
     "unist-util-visit": "^5.0.0",
-    "vfile": "^6.0.1",
-    "vite-plugin-bundled-entry": "^0.5.1"
+    "vfile": "^6.0.1"
   }
 }

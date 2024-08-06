@@ -144,6 +144,9 @@ importers:
       '@pagefind/default-ui':
         specifier: ^1.0.3
         version: 1.0.3
+      '@swup/astro':
+        specifier: ^1.4.1
+        version: 1.4.1(@types/babel__core@7.20.5)
       '@swup/parallel-plugin':
         specifier: ^0.4.0
         version: 0.4.0(@types/babel__core@7.20.5)(swup@4.6.1)
@@ -1934,8 +1937,46 @@ packages:
   '@surma/rollup-plugin-off-main-thread@2.2.3':
     resolution: {integrity: sha512-lR8q/9W7hZpMWweNiAKU7NQerBnzQQLvi8qnTDU/fxItPhtZVMbPV3lbCwjhIlNBe9Bbr5V+KHshvWmVSG9cxQ==}
 
+  '@swup/a11y-plugin@4.5.2':
+    resolution: {integrity: sha512-IppoSQDc1mLLhABsnaCuDVO8eyFR+QWH+QyegXMMq/+xslzJvAlVrdQORuhMDzJbP/FGY6UlFqLPPkgNjrs4wQ==}
+    peerDependencies:
+      swup: ^4.0.0
+
+  '@swup/astro@1.4.1':
+    resolution: {integrity: sha512-EPyYTUNfoG1ulqWfy9S7jJszfj/7xTxM7hgt/qmPNPDyaOZlxFU9UccBhFRh/AKxFTk+QJPKZmHjIoDwGqgs5w==}
+
+  '@swup/body-class-plugin@3.2.0':
+    resolution: {integrity: sha512-v8SOTeaCp+MfJHzg9T0kavBv2H+jk/6YM9ORKJnp8Ax5LIMdAfUNQa5/URurzHtJ8nGFJodVS5Lk/TXD9YaF3Q==}
+    peerDependencies:
+      swup: ^4.6.0
+
   '@swup/browserslist-config@1.0.1':
     resolution: {integrity: sha512-/3nBqG7LqmK1uqaCSTA6s2NwQBDQXNyLAFBzlX6uaxqjIQcAZyq6K+sgcQ40oj02Vn/2mLSkeL9DOfP7BPOwVA==}
+
+  '@swup/debug-plugin@4.1.0':
+    resolution: {integrity: sha512-R+RP4hjoeXrO+wowSswaTM4P05lu6iDg6UwdbQn0wfJ082KiUpH+DDwHYNOatxusKVExFuhLec+X9IbyAyiv8w==}
+    peerDependencies:
+      swup: ^4.0.0
+
+  '@swup/fade-theme@2.0.1':
+    resolution: {integrity: sha512-viQ23vcv47lTz2nYFSDqYR0cbfAEvWOtsNepERGDD221guwSHU7lNz3zDfvWsFGSjP/nCmMUGS5p204rizkdgw==}
+    peerDependencies:
+      swup: ^4.0.0
+
+  '@swup/forms-plugin@3.6.0':
+    resolution: {integrity: sha512-pRN6OR5wR27LvJqQOlCgu1fP9Z0ZsGauxWOE6nRCtjP1+98wlGTMiMsQ+jGvvs+IOK9IDTJQ7jvprnJAZaw9zw==}
+    peerDependencies:
+      swup: ^4.6.0
+
+  '@swup/head-plugin@2.2.0':
+    resolution: {integrity: sha512-8/p86H6Ypu+peAAnRZEugOdot3IHhWRMoP/19f9ZEOqErDnIpSWHOkiTI/dWAcHZ6Gbia67fu67cgD2Rag1eKQ==}
+    peerDependencies:
+      swup: ^4.6.0
+
+  '@swup/overlay-theme@2.0.1':
+    resolution: {integrity: sha512-8SGIvq8av5cFTxaYy1isZsQXWme2d1onE/cy4QpsyRlxiyhzXbYDAgrBLZzY0Ev8TGf3dYFxXg195eOMW1OP+Q==}
+    peerDependencies:
+      swup: ^4.0.0
 
   '@swup/parallel-plugin@0.4.0':
     resolution: {integrity: sha512-un37RpdFz2vuJV1r9Hr0nCl5qgloN/Z3SczC3wi1XfkiHtzZ8kFTcm5pIW5rUkDVwtCTil44mlAA/STouBEgDw==}
@@ -1946,8 +1987,46 @@ packages:
     resolution: {integrity: sha512-A9yiJeKTmQ9kac2Eo3MbMWW+Tiw23W5OSzAHVTCfW6n5zze6dexY3FLEUSDTcvRgciknvXfMZ9JTnebbvCKKWw==}
     hasBin: true
 
+  '@swup/plugin@4.0.0':
+    resolution: {integrity: sha512-3Kq31BJxnzoPg643YxGoWQggoU6VPKZpdE5CqqmP7wwkpCYTzkRmrfcQ29mGhsSS7xfS7D33iZoBiwY+wPoo2A==}
+
+  '@swup/preload-plugin@3.2.10':
+    resolution: {integrity: sha512-ukIbFDiWgF6p5UneoMnnpSQaUM28VgasFhKDpI/5CMMdLYjncLpCF53OEDEhjbo5q6xnNgcll7uBRojYfD4xdg==}
+    peerDependencies:
+      swup: ^4.0.0
+
   '@swup/prettier-config@1.1.0':
     resolution: {integrity: sha512-EF4DMdIGieEsuY2XK0PuLf7Uw7yUQOMbA6IdCMvvRvKXj03WLLpnNIFfFp+6hmMtXRSUE88VBpRyp6Giiu1Pbg==}
+
+  '@swup/progress-plugin@3.2.0':
+    resolution: {integrity: sha512-Ur+D4+aee9swR6pn7JbEyGMwVP1BTcN5ygjlno7IaSQ/vMZbuJ73po1RkKlIi86p+/PZ+1kynkH4K4eMZuHKKg==}
+    peerDependencies:
+      swup: ^4.0.0
+
+  '@swup/route-name-plugin@4.1.0':
+    resolution: {integrity: sha512-1tw3WeExEKwI3pVMXTptCGxFUDOSEpc63D741eeUCjjGW/f9q7ekuqEaPQd5YJ6POpzDjdt1jjuC9yv54CbeXA==}
+    peerDependencies:
+      swup: ^4.0.0
+
+  '@swup/scripts-plugin@2.1.0':
+    resolution: {integrity: sha512-JSMFsFCN9gn4q3m1Ccv0gq3gwRoZl6UGALOQO3OeQ8wOIq9vPC5dcUD3CMBuaPanksjR4GC8ZoukIjHrlT52fg==}
+    peerDependencies:
+      swup: ^4.2.0
+
+  '@swup/scroll-plugin@3.3.2':
+    resolution: {integrity: sha512-jwngTz8LZza8p7ZWqaqQIzkH8x4hwyPh8RbrJSwTKussx24YUQuV9sgjDCzvJ16k/aYk9NCCvqLbb+4TcT3jqA==}
+    peerDependencies:
+      swup: ^4.2.0
+
+  '@swup/slide-theme@2.0.1':
+    resolution: {integrity: sha512-tTKYg5qNie2FtLVBj64FqQqDwXO0B3UgNmvO5MU2A8RtPpNFYaWmtbomrVQX862SXOEjWF/arHzrNfxhuRVnAg==}
+    peerDependencies:
+      swup: ^4.0.0
+
+  '@swup/theme@2.1.0':
+    resolution: {integrity: sha512-nwAzx+GYySIYs6uSCFYGNdpLWv2z/mEryRD1gvmIqsaSP2N7sVd4mKAboraJAzIzbasRhTsTQzyN1LfLeti3AA==}
+    peerDependencies:
+      swup: ^4.0.0
 
   '@trysound/sax@0.2.0':
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -3243,6 +3322,9 @@ packages:
     resolution: {integrity: sha512-9UbaD6XdAL97+k/n+N7JwX46K/M6Zc6KcFYskrYL8wbBV/Uyk0CTAMY0VT+qiK5PM7AIc9aTWYtq65U7T+aCNQ==}
     engines: {node: '>=8'}
 
+  focus-options-polyfill@1.6.0:
+    resolution: {integrity: sha512-uyrAmLZrPnUItQY5wTdg31TO9GGZRGsh/jmohUg9oLmLi/sw5y7LlTV/mwyd6rvbxIOGwmRiv6LcTS8w7Bk9NQ==}
+
   follow-redirects@1.15.6:
     resolution: {integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==}
     engines: {node: '>=4.0'}
@@ -4317,6 +4399,9 @@ packages:
   mlly@1.5.0:
     resolution: {integrity: sha512-NPVQvAY1xr1QoVeG0cy8yUYC7FQcOx6evl/RjT1wL5FvzPnzOysoqB/jmx/DhssT2dYa8nxECLAaFI/+gVLhDQ==}
 
+  morphdom@2.7.4:
+    resolution: {integrity: sha512-ATTbWMgGa+FaMU3FhnFYB6WgulCqwf6opOll4CBzmVDTLvPMmUPrEv8CudmLPK0MESa64+6B89fWOxP3+YIlxQ==}
+
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -4437,6 +4522,9 @@ packages:
   object.assign@4.1.5:
     resolution: {integrity: sha512-byy+U7gp+FVwmyzKPYhW2h5l3crpmGsxl7X2s8y43IgxvG4g3QZ6CffDtsNQy1WsmZpQbO+ybo0AlW7TY6DcBQ==}
     engines: {node: '>= 0.4'}
+
+  on-demand-live-region@0.1.3:
+    resolution: {integrity: sha512-5IYdl43bMtB9Sz4B+Tvg3tkCZzsIEcgJ9xrH2Ge+4Z+t6uK+uAHHygopoyVxWFZd2N839jqOzd+kZLRr9bwOCg==}
 
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
@@ -5293,6 +5381,9 @@ packages:
   sax@1.2.4:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
 
+  scrl@2.0.0:
+    resolution: {integrity: sha512-BbbVXxrOn58Ge4wjOORIRVZamssQu08ISLL/AC2z9aATIsKqZLESwZVW5YR0Yz0C7qqDRHb4yNXJlQ8yW0SGHw==}
+
   search-insights@2.14.0:
     resolution: {integrity: sha512-OLN6MsPMCghDOqlCtsIsYgtsC0pnwVTyT9Mu6A3ewOj1DxvzZF6COrn2g86E/c05xbktB0XN04m/t1Z+n+fTGw==}
 
@@ -5643,6 +5734,11 @@ packages:
     resolution: {integrity: sha512-+N/Q9kV1+F+UeWYoSiULYo4xYSDQlTgb+ayMobAXPwMnLvop7oxKMo9OzIrX5x3eS4L4f2UHhc9axXwY8DpChg==}
     engines: {node: '>=10.13.0'}
     hasBin: true
+
+  swup-morph-plugin@1.3.0:
+    resolution: {integrity: sha512-vTqWYA5ZFkWMo54K8jlol5OCvboqRsELLfM1PUkS2IiL+1dDDChzMHa4ZBI5+yfl7bZUCWgd8EmuhMd/i/o+Qg==}
+    peerDependencies:
+      swup: ^4.6.0
 
   swup@4.6.1:
     resolution: {integrity: sha512-NPjtE00n2aT0QLDChefU7d/eqqz1zwLXsCCCLz7Vi/sLoszC3eicg3oVO0uLtwM1/qz0na3nGRNw3Avwm4VSfw==}
@@ -8218,7 +8314,67 @@ snapshots:
       magic-string: 0.25.9
       string.prototype.matchall: 4.0.11
 
+  '@swup/a11y-plugin@4.5.2(swup@4.6.1)':
+    dependencies:
+      '@swup/plugin': 4.0.0
+      focus-options-polyfill: 1.6.0
+      on-demand-live-region: 0.1.3
+      swup: 4.6.1
+
+  '@swup/astro@1.4.1(@types/babel__core@7.20.5)':
+    dependencies:
+      '@swup/a11y-plugin': 4.5.2(swup@4.6.1)
+      '@swup/body-class-plugin': 3.2.0(swup@4.6.1)
+      '@swup/debug-plugin': 4.1.0(swup@4.6.1)
+      '@swup/fade-theme': 2.0.1(swup@4.6.1)
+      '@swup/forms-plugin': 3.6.0(swup@4.6.1)
+      '@swup/head-plugin': 2.2.0(swup@4.6.1)
+      '@swup/overlay-theme': 2.0.1(swup@4.6.1)
+      '@swup/parallel-plugin': 0.4.0(@types/babel__core@7.20.5)(swup@4.6.1)
+      '@swup/preload-plugin': 3.2.10(swup@4.6.1)
+      '@swup/progress-plugin': 3.2.0(swup@4.6.1)
+      '@swup/route-name-plugin': 4.1.0(@types/babel__core@7.20.5)(swup@4.6.1)
+      '@swup/scripts-plugin': 2.1.0(swup@4.6.1)
+      '@swup/scroll-plugin': 3.3.2(swup@4.6.1)
+      '@swup/slide-theme': 2.0.1(swup@4.6.1)
+      swup: 4.6.1
+      swup-morph-plugin: 1.3.0(swup@4.6.1)
+    transitivePeerDependencies:
+      - '@types/babel__core'
+      - supports-color
+      - ts-node
+
+  '@swup/body-class-plugin@3.2.0(swup@4.6.1)':
+    dependencies:
+      '@swup/plugin': 4.0.0
+      swup: 4.6.1
+
   '@swup/browserslist-config@1.0.1': {}
+
+  '@swup/debug-plugin@4.1.0(swup@4.6.1)':
+    dependencies:
+      '@swup/plugin': 4.0.0
+      swup: 4.6.1
+
+  '@swup/fade-theme@2.0.1(swup@4.6.1)':
+    dependencies:
+      '@swup/theme': 2.1.0(swup@4.6.1)
+      swup: 4.6.1
+
+  '@swup/forms-plugin@3.6.0(swup@4.6.1)':
+    dependencies:
+      '@swup/plugin': 4.0.0
+      swup: 4.6.1
+
+  '@swup/head-plugin@2.2.0(swup@4.6.1)':
+    dependencies:
+      '@swup/plugin': 4.0.0
+      swup: 4.6.1
+
+  '@swup/overlay-theme@2.0.1(swup@4.6.1)':
+    dependencies:
+      '@swup/theme': 2.1.0(swup@4.6.1)
+      swup: 4.6.1
 
   '@swup/parallel-plugin@0.4.0(@types/babel__core@7.20.5)(swup@4.6.1)':
     dependencies:
@@ -8244,7 +8400,51 @@ snapshots:
       - supports-color
       - ts-node
 
+  '@swup/plugin@4.0.0':
+    dependencies:
+      swup: 4.6.1
+
+  '@swup/preload-plugin@3.2.10(swup@4.6.1)':
+    dependencies:
+      '@swup/plugin': 4.0.0
+      swup: 4.6.1
+
   '@swup/prettier-config@1.1.0': {}
+
+  '@swup/progress-plugin@3.2.0(swup@4.6.1)':
+    dependencies:
+      '@swup/plugin': 4.0.0
+      swup: 4.6.1
+
+  '@swup/route-name-plugin@4.1.0(@types/babel__core@7.20.5)(swup@4.6.1)':
+    dependencies:
+      '@swup/plugin': 3.0.1(@types/babel__core@7.20.5)
+      swup: 4.6.1
+    transitivePeerDependencies:
+      - '@types/babel__core'
+      - supports-color
+      - ts-node
+
+  '@swup/scripts-plugin@2.1.0(swup@4.6.1)':
+    dependencies:
+      '@swup/plugin': 4.0.0
+      swup: 4.6.1
+
+  '@swup/scroll-plugin@3.3.2(swup@4.6.1)':
+    dependencies:
+      '@swup/plugin': 4.0.0
+      scrl: 2.0.0
+      swup: 4.6.1
+
+  '@swup/slide-theme@2.0.1(swup@4.6.1)':
+    dependencies:
+      '@swup/theme': 2.1.0(swup@4.6.1)
+      swup: 4.6.1
+
+  '@swup/theme@2.1.0(swup@4.6.1)':
+    dependencies:
+      '@swup/plugin': 4.0.0
+      swup: 4.6.1
 
   '@trysound/sax@0.2.0': {}
 
@@ -10008,6 +10208,8 @@ snapshots:
 
   flattie@1.1.1: {}
 
+  focus-options-polyfill@1.6.0: {}
+
   follow-redirects@1.15.6(debug@4.3.5):
     optionalDependencies:
       debug: 4.3.5
@@ -11500,6 +11702,8 @@ snapshots:
       pkg-types: 1.0.3
       ufo: 1.3.2
 
+  morphdom@2.7.4: {}
+
   mri@1.2.0: {}
 
   mrmime@2.0.0: {}
@@ -11603,6 +11807,8 @@ snapshots:
       define-properties: 1.2.1
       has-symbols: 1.0.3
       object-keys: 1.1.1
+
+  on-demand-live-region@0.1.3: {}
 
   once@1.4.0:
     dependencies:
@@ -12655,6 +12861,8 @@ snapshots:
 
   sax@1.2.4: {}
 
+  scrl@2.0.0: {}
+
   search-insights@2.14.0: {}
 
   section-matter@1.0.0:
@@ -13089,6 +13297,12 @@ snapshots:
       csso: 4.2.0
       picocolors: 1.0.1
       stable: 0.1.8
+
+  swup-morph-plugin@1.3.0(swup@4.6.1):
+    dependencies:
+      '@swup/plugin': 4.0.0
+      morphdom: 2.7.4
+      swup: 4.6.1
 
   swup@4.6.1:
     dependencies:

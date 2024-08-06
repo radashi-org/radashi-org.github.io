@@ -69,18 +69,6 @@ const { sublist, nested } = Astro.props;
 	}
 </ul>
 
-<script>
-	swup.hooks.on('content:replace', () => {
-		const url = swup.getCurrentUrl();
-
-		const prevPageLink = document.querySelector('.sidebar-content [aria-current="page"]');
-		prevPageLink?.removeAttribute('aria-current');
-
-		const currPageLink = document.querySelector(`.sidebar-content a[href="${url}"]`);
-		currPageLink?.setAttribute('aria-current', 'page');
-	});
-</script>
-
 <style>
 	hr {
 		display: block;
@@ -123,6 +111,33 @@ const { sublist, nested } = Astro.props;
 		color: --sl-color-gray-2;
 	}
 
+	.top-level a {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		border-radius: 0.25rem;
+		text-decoration: none;
+		color: var(--sl-color-gray-2);
+		padding: 0.1em var(--sl-sidebar-item-padding-inline);
+		line-height: 2;
+		font-size: 1.08rem !important;
+		margin-left: 0.6rem;
+
+		span {
+			flex-shrink: 0;
+		}
+
+		&:hover,
+		&:focus {
+			color: var(--sl-color-white);
+		}
+
+		&[aria-current='page'] {
+			opacity: 0.5;
+			pointer-events: none;
+		}
+	}
+
 	summary {
 		display: flex;
 		align-items: center;
@@ -130,11 +145,14 @@ const { sublist, nested } = Astro.props;
 		padding: 0.2em var(--sl-sidebar-item-padding-inline);
 		cursor: pointer;
 		user-select: none;
-		margin-top: 1.7rem;
+		margin-top: 0.7rem;
 	}
 	summary::marker,
 	summary::-webkit-details-marker {
 		display: none;
+	}
+	details[open] {
+		margin-bottom: 1rem;
 	}
 
 	.caret {
@@ -148,39 +166,6 @@ const { sublist, nested } = Astro.props;
 	}
 	[open] > summary .caret {
 		transform: rotateZ(90deg);
-	}
-
-	a {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		border-radius: 0.25rem;
-		text-decoration: none;
-		color: var(--sl-color-gray-2);
-		padding: 0.1em var(--sl-sidebar-item-padding-inline);
-		line-height: 1.4;
-
-		span {
-			flex-shrink: 0;
-		}
-	}
-
-	a {
-		font-size: 1.08rem !important;
-		margin-left: 0.1rem;
-	}
-
-	a:hover,
-	a:focus {
-		color: var(--sl-color-white);
-	}
-
-	[aria-current='page'],
-	[aria-current='page']:hover,
-	[aria-current='page']:focus {
-		font-weight: 600;
-		color: var(--sl-color-text-invert);
-		background-color: var(--sl-color-text-accent);
 	}
 
 	.group-label {

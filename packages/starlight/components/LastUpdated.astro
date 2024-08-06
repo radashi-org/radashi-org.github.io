@@ -1,4 +1,5 @@
 ---
+import { Icon } from '../components';
 import type { Props } from '../props';
 
 const { labels, lang, lastUpdated, lastUpdatedLink } = Astro.props;
@@ -8,6 +9,7 @@ const { labels, lang, lastUpdated, lastUpdatedLink } = Astro.props;
 	lastUpdated && (
 		<p>
 			<a href={lastUpdatedLink} style={{ pointerEvents: lastUpdatedLink ? '' : 'none' }}>
+				<Icon name="history" class="icon" />
 				{labels['page.lastUpdated']}
 				<time datetime={lastUpdated.toISOString()}>
 					{lastUpdated.toLocaleDateString(lang, { dateStyle: 'medium', timeZone: 'UTC' })}
@@ -16,3 +18,26 @@ const { labels, lang, lastUpdated, lastUpdatedLink } = Astro.props;
 		</p>
 	)
 }
+
+<style>
+	a {
+		text-decoration: none;
+		color: inherit;
+		transition: color 0.2s ease-in-out;
+
+		&:hover {
+			color: var(--sl-color-accent);
+			cursor: pointer !important;
+		}
+	}
+	.icon {
+		vertical-align: baseline;
+		display: inline-block;
+		height: 1em;
+		transform: translateY(0.15em);
+		margin-right: 0.3em;
+	}
+	time {
+		margin-left: 0.2em;
+	}
+</style>
