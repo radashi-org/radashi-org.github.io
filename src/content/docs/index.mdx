@@ -1,155 +1,306 @@
 ---
-title: Radashi – Emerging best TypeScript utility library
-description: Are you a TypeScript enthusiast who appreciates utility libraries but doesn't want to go full Functional Programming™? Meet **Radashi**, the utility library that's set to become your new best friend.
-template: splash
+title: Introducing Radashi
+description: A new frontier in TypeScript utility libraries.
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components'
-import './index.css'
+Welcome to Radashi! We're here to make your development life easier with a collection of super handy functions designed for modern JavaScript and TypeScript developers. Think of Radashi as a friendly toolbelt that’s all about simplicity, customization, and community.
 
-<div class="flex flex-row items-center justify-space-between w-screen max-w-full h-78vh">
-  <img
-    src="/public/Ditch the Lodash blo@3x.webp"
-    class="w-40vw flex-shrink-0"
-  />
-  <img src="/public/headline2@3x.webp" class="w-40vw flex-shrink-0" />
-</div>
-<div class="flex flex-row items-center justify-center">
-  <div class="flex flex-wrap w-70vw">
-    <div class="flex-[0_0_50%] p-1">
-      <div class="bg-[#24211F] m-1 p-6 rounded-7 border-.5 border-[#342F2D] border-solid h-55 shadow-xl">
-        <img
-          src="/public/landing icons/unique@3x.webp"
-          class="max-w-15 max-h-15 pt-2"
-        />
-        <div class="text-5.8 !font-800 pt-4.6">Unique</div>
-        <p class="text-sm pt-2">One-of-a-kind functionality</p>
-      </div>
-    </div>
-    <div class="flex-[0_0_50%] p-1">
-      <div class="bg-[#24211F] m-1 p-6 rounded-7 border-.5 border-[#342F2D] border-solid h-55 shadow-xl">
-        <img
-          src="/public/landing icons/treeshakeable@3x.webp"
-          class="max-w-15 max-h-15 pt-2"
-        />
-        <div class="text-5.8 !font-800 pt-4.6">Treeshakeable</div>
-        <p class="text-sm pt-2">Optimized for minimal bundle size</p>
-      </div>
-    </div>
-    <div class="flex-[0_0_40%] p-1">
-      <div class="bg-[#24211F] m-1 p-6 rounded-7 border-.5 border-[#342F2D] border-solid h-55 shadow-xl">
-        <img
-          src="/public/landing icons/dependency-free@3x.webp"
-          class="max-w-15 max-h-15 pt-2"
-        />
-        <div class="text-5.8 !font-800 pt-4.6">Dependency-free</div>
-        <p class="text-sm pt-2">No external dependencies</p>
-      </div>
-    </div>
-    <div class="flex-[0_0_60%] p-1">
-      <div class="bg-[#24211F] m-1 p-6 rounded-7 border-.5 border-[#342F2D] border-solid h-55 shadow-xl">
-        <img
-          src="/public/landing icons/community-first@3x.webp"
-          class="max-w-15 max-h-15 pt-2"
-        />
-        <div class="text-5.8 !font-800 pt-4.6">Community-first</div>
-        <p class="text-sm pt-2">Built with community feedback</p>
-      </div>
-    </div>
-    <div class="flex-[0_0_60%] p-1">
-      <div class="bg-[#24211F] m-1 p-6 rounded-7 border-.5 border-[#342F2D] border-solid h-55 shadow-xl">
-        <img
-          src="/public/landing icons/future-proof@3x.webp"
-          class="max-w-15 max-h-15 pt-2"
-        />
-        <div class="text-5.8 !font-800 pt-4.6">Future-proof</div>
-        <p class="text-sm pt-2">Designed for long-term stability</p>
-      </div>
-    </div>
-    <div class="flex-[0_0_40%] p-1">
-      <div class="bg-[#24211F] m-1 p-6 rounded-7 border-.5 border-[#342F2D] border-solid h-55 shadow-xl">
-        <img
-          src="/public/landing icons/maintained@3x.webp"
-          class="max-w-15 max-h-15 pt-2"
-        />
-        <div class="text-5.8 !font-800 pt-4.6">Maintained</div>
-        <p class="text-sm pt-2">Regularly updated and supported</p>
-      </div>
-    </div>
-    <div class="flex-[0_0_50%] p-1">
-      <div class="bg-[#24211F] m-1 p-6 rounded-7 border-.5 border-[#342F2D] border-solid h-55 shadow-xl">
-        <img
-          src="/public/landing icons/typescript@3x.webp"
-          class="max-w-15 max-h-15 pt-2"
-        />
-        <div class="text-5.8 !font-800 pt-4.6">TypeScript</div>
-        <p class="text-sm pt-2">Full TypeScript support</p>
-      </div>
-    </div>
-    <div class="flex-[0_0_50%] p-1">
-      <div class="bg-[#24211F] m-1 p-6 rounded-7 border-.5 border-[#342F2D] border-solid h-55 shadow-xl">
-        <img
-          src="/public/landing icons/test-coverage@3x.webp"
-          class="max-w-15 max-h-15 pt-2"
-        />
-        <div class="text-5.8 !font-800 pt-4.6">Test Coverage</div>
-        <p class="text-sm pt-2">Thoroughly tested codebase</p>
-      </div>
-    </div>
-    <div class="flex-[0_0_50%] p-1">
-      <div class="bg-[#24211F] m-1 p-6 rounded-7 border-.5 border-[#342F2D] border-solid h-55 shadow-xl">
-        <img
-          src="/public/landing icons/performance@3x.webp"
-          class="max-w-15 max-h-15 pt-2"
-        />
-        <div class="text-5.8 !font-800 pt-4.6">Performance</div>
-        <p class="text-sm pt-2">Optimized for speed</p>
-      </div>
-    </div>
-    <div class="flex-[0_0_50%] p-1">
-      <div class="bg-[#24211F] m-1 p-6 rounded-7 border-.5 border-[#342F2D] border-solid h-55 shadow-xl">
-        <img
-          src="/public/landing icons/docs@3x.webp"
-          class="max-w-15 max-h-15 pt-2"
-        />
-        <div class="text-5.8 !font-800 pt-4.6">Documentation</div>
-        <p class="text-sm pt-2">Comprehensive guides available</p>
-      </div>
-    </div>
-    <div class="flex-[0_0_40%] p-1">
-      <div class="bg-[#24211F] m-1 p-6 rounded-7 border-.5 border-[#342F2D] border-solid h-55 shadow-xl">
-        <img
-          src="/public/landing icons/nightly-builds@3x.webp"
-          class="max-w-15 max-h-15 pt-2"
-        />
-        <div class="text-5.8 !font-800 pt-4.6">Nightly Builds</div>
-        <p class="text-sm pt-2">Latest features available daily</p>
-      </div>
-    </div>
-    <div class="flex-[0_0_60%] p-1">
-      <div class="bg-[#24211F] m-1 p-6 rounded-7 border-.5 border-[#342F2D] border-solid h-55 shadow-xl">
-        <img
-          src="/public/landing icons/changelog@3x.webp"
-          class="max-w-15 max-h-15 pt-2"
-        />
-        <div class="text-5.8 !font-800 pt-4.6">Changelog</div>
-        <p class="text-sm pt-2">Helps keep you in the know</p>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="fixed bottom-0 right-0 flex flex-row items-center justify-end w-screen max-w-full h-20 bottom-3 right-6">
-  <div class="flex items-center">
-    <a
-      href="https://github.com/radashi-org/radashi"
-      class="rounded-[9999px] w-14 h-14 flex items-center justify-center mr-4"
-      style="background-color: var(--sl-color-bg);">
-      <img src="/public/github-large.svg" class="m-24" />
-    </a>
-    <a
-      href="https://imgur.com"
-      class="flex flex-col items-center justify-center w-72 h-14 bg-[#E99B51] rounded-[9999px] decoration-none">
-      <span class="text-black text-6.8 font-weight font-500">Install</span>
-    </a>
-  </div>
-</div>
+## Key Features
+
+#### ✨ Built for TypeScript
+
+Radashi is made with TypeScript at its core. This means our functions not only help you write better code but also catch errors early, making your development smoother and more reliable.
+
+import { TabbedCodeBlock } from '../../components/tabbed-code-block'
+
+<TabbedCodeBlock names={['castArray', 'chain']} client:load>
+
+Below is our `castArray` implementation. If you can read our `CastArray<T>` type, you're officially a TypeScript nerd. But good news, we wrote it so you don't have to!
+
+```ts
+export function castArray<T>(value: T): CastArray<T>
+export function castArray(value: unknown): unknown {
+  return Array.isArray(value) ? value.slice() : [value]
+}
+
+export type CastArray<T> = [T] extends [never]
+  ? never[]
+  : [unknown] extends [T]
+    ? unknown[]
+    :
+        | (T extends any
+            ? T extends readonly (infer U)[]
+              ? U[]
+              : never
+            : never)
+        | (Exclude<T, readonly any[]> extends never
+            ? never
+            : Exclude<T, readonly any[]>[])
+```
+
+Our `chain` function also has a gnarly type definition. As you can see, there's a lot we can do to make your life with TypeScript easier.
+
+```ts
+export function chain<T1 extends any[], T2, T3>(
+  f1: (...arg: T1) => T2,
+  f2: (arg: T2) => T3
+): (...arg: T1) => T3
+export function chain<T1 extends any[], T2, T3, T4>(
+  f1: (...arg: T1) => T2,
+  f2: (arg: T2) => T3,
+  f3: (arg: T3) => T4
+): (...arg: T1) => T4
+export function chain<T1 extends any[], T2, T3, T4, T5>(
+  f1: (...arg: T1) => T2,
+  f2: (arg: T2) => T3,
+  f3: (arg: T3) => T4,
+  f4: (arg: T3) => T5
+): (...arg: T1) => T5
+export function chain<T1 extends any[], T2, T3, T4, T5, T6>(
+  f1: (...arg: T1) => T2,
+  f2: (arg: T2) => T3,
+  f3: (arg: T3) => T4,
+  f4: (arg: T3) => T5,
+  f5: (arg: T3) => T6
+): (...arg: T1) => T6
+export function chain<T1 extends any[], T2, T3, T4, T5, T6, T7>(
+  f1: (...arg: T1) => T2,
+  f2: (arg: T2) => T3,
+  f3: (arg: T3) => T4,
+  f4: (arg: T3) => T5,
+  f5: (arg: T3) => T6,
+  f6: (arg: T3) => T7
+): (...arg: T1) => T7
+export function chain<T1 extends any[], T2, T3, T4, T5, T6, T7, T8>(
+  f1: (...arg: T1) => T2,
+  f2: (arg: T2) => T3,
+  f3: (arg: T3) => T4,
+  f4: (arg: T3) => T5,
+  f5: (arg: T3) => T6,
+  f6: (arg: T3) => T7,
+  f7: (arg: T3) => T8
+): (...arg: T1) => T8
+export function chain<T1 extends any[], T2, T3, T4, T5, T6, T7, T8, T9>(
+  f1: (...arg: T1) => T2,
+  f2: (arg: T2) => T3,
+  f3: (arg: T3) => T4,
+  f4: (arg: T3) => T5,
+  f5: (arg: T3) => T6,
+  f6: (arg: T3) => T7,
+  f7: (arg: T3) => T8,
+  f8: (arg: T3) => T9
+): (...arg: T1) => T9
+export function chain<T1 extends any[], T2, T3, T4, T5, T6, T7, T8, T9, T10>(
+  f1: (...arg: T1) => T2,
+  f2: (arg: T2) => T3,
+  f3: (arg: T3) => T4,
+  f4: (arg: T3) => T5,
+  f5: (arg: T3) => T6,
+  f6: (arg: T3) => T7,
+  f7: (arg: T3) => T8,
+  f8: (arg: T3) => T9,
+  f9: (arg: T3) => T10
+): (...arg: T1) => T10
+export function chain<
+  T1 extends any[],
+  T2,
+  T3,
+  T4,
+  T5,
+  T6,
+  T7,
+  T8,
+  T9,
+  T10,
+  T11,
+>(
+  f1: (...arg: T1) => T2,
+  f2: (arg: T2) => T3,
+  f3: (arg: T3) => T4,
+  f4: (arg: T3) => T5,
+  f5: (arg: T3) => T6,
+  f6: (arg: T3) => T7,
+  f7: (arg: T3) => T8,
+  f8: (arg: T3) => T9,
+  f9: (arg: T3) => T10,
+  f10: (arg: T3) => T11
+): (...arg: T1) => T11
+export function chain(...funcs: ((...args: any[]) => any)[]) {
+  return (...args: any[]) => {
+    return funcs.slice(1).reduce((acc, fn) => fn(acc), funcs[0](...args))
+  }
+}
+```
+
+</TabbedCodeBlock>
+
+#### 🎯 Smart Function Choices
+
+We pick our functions based on real needs and popular use cases. Our goal is to give you just what you need without the extra fluff, keeping everything straightforward and understandable.
+
+<TabbedCodeBlock names={['select', 'objectify', 'defer']} client:load>
+
+Use `select` to create an array by filtering and mapping another array's items.
+
+```ts
+import { select } from 'radashi'
+
+// Example: Filtering and transforming a list of products
+const products = [
+  { id: 1, name: 'Laptop', price: 1000, inStock: true },
+  { id: 2, name: 'Phone', price: 800, inStock: false },
+  { id: 3, name: 'Tablet', price: 500, inStock: true },
+  { id: 4, name: 'Headphones', price: 100, inStock: true },
+]
+
+// Map to a new object with the name and price.
+// Filter out products that are not in stock or are too expensive.
+const affordableInStockProducts = select(
+  products,
+  product => ({ name: product.name, price: product.price }),
+  product => product.inStock && product.price < 600
+)
+// => [{ name: 'Tablet', price: 500 }, { name: 'Headphones', price: 100 }]
+```
+
+Use `objectify` to create an object from an array.
+
+```ts
+import { objectify } from 'radashi'
+
+// A list of employees with their IDs and salaries
+const employees = [
+  { id: 101, name: 'Alice', salary: 75000 },
+  { id: 102, name: 'Bob', salary: 82000 },
+  { id: 103, name: 'Charlie', salary: 68000 },
+]
+
+// Create a dictionary of employee salaries by their ID
+const salariesById = objectify(
+  employees,
+  employee => employee.id,
+  employee => employee.salary
+)
+// => { 101: 75000, 102: 82000, 103: 68000 }
+
+// Quickly look up an employee's salary
+console.log(`Bob's salary: $${salariesById[102]}`)
+// Logs "Bob's salary: $82000"
+```
+
+Use `defer` for co-location of cleanup logic with resource creation.
+
+```ts
+import { defer } from 'radashi'
+
+async function runDatabaseMigration() {
+  await defer(async cleanup => {
+    const tempTable = await createTempTable()
+    cleanup(async () => dropTable(tempTable))
+
+    const backupFile = await backupExistingData()
+    cleanup(async () => deleteFile(backupFile))
+
+    try {
+      await migrateData(tempTable)
+      await swapTables(tempTable, 'production_table')
+    } catch (error) {
+      console.error('Migration failed:', error)
+      throw error
+    }
+
+    console.log('Migration completed successfully')
+  })
+}
+
+runDatabaseMigration().catch(console.error)
+```
+
+</TabbedCodeBlock>
+
+#### 🪶 Lightweight and Efficient
+
+We keep things simple to ensure your projects stay light and fast. Radashi is fully tree-shakeable, so you only include the functions you use. This means no unnecessary bulk in your code.
+
+<TabbedCodeBlock names={['radashi', 'lodash-es']} client:load>
+
+For fun, let's compare the size of Radashi's `mapValues` function to that of Lodash's. I can assure you, this massive difference is not uncommon.
+
+```ts
+export function mapValues(obj, mapFunc) {
+  const keys2 = Object.keys(obj)
+  return keys2.reduce((acc, key) => {
+    acc[key] = mapFunc(obj[key], key)
+    return acc
+  }, {})
+}
+```
+
+This is the `mapValues` function from Lodash. The bundle size clocks in at 16.6 kB minified. Obviously, we all want to avoid this!
+
+```ts
+// http-url:https://unpkg.com/lodash-es@4.17.21/_freeGlobal.js
+var freeGlobal =
+  typeof global == 'object' && global && global.Object === Object && global
+var freeGlobal_default = freeGlobal
+
+// http-url:https://unpkg.com/lodash-es@4.17.21/_root.js
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self
+var root = freeGlobal_default || freeSelf || Function('return this')()
+var root_default = root
+
+/* ~1300 Lines Later... */
+
+// http-url:https://unpkg.com/lodash-es@4.17.21/mapValues.js
+function mapValues(object, iteratee) {
+  var result = {}
+  iteratee = baseIteratee_default(iteratee, 3)
+  baseForOwn_default(object, function (value, key, object2) {
+    baseAssignValue_default(result, key, iteratee(value, key, object2))
+  })
+  return result
+}
+var mapValues_default = mapValues
+export { mapValues_default as mapValues }
+```
+
+</TabbedCodeBlock>
+
+#### 🛠️ Easy to Customize
+
+Want to add your own touch? You can easily extend Radashi with your own functions using our template repository. Make it yours and easily contribute your functions back to the community.
+
+{/* TODO: Add an Asciinema demo of how to extend Radashi */}
+
+#### 🤝 Community-Powered
+
+Radashi thrives on contributions and new ideas. We welcome everyone to join in, share their knowledge, and help the library evolve. Our open process and regular updates keep us in tune with what developers need.
+
+{/* TODO: Add our contributors here */}
+
+### Tackling Common Problems
+
+Radashi is here to solve some big issues in utility libraries:
+
+1. **Central Control**: We support a decentralized, community-driven approach.
+2. **Customization**: Easily extend Radashi with our [template repository](https://github.com/radashi-org/radashi-template).
+3. **Fragmentation**: We offer a unified platform for sharing and adopting TypeScript utility functions.
+
+### Our Core Values
+
+- **Purposeful Design**: Guided by our evolving ["Our Ethos"](/our-ethos) document
+- **Simplicity**: Keeping code light and efficient
+- **Pragmatism**: Focusing on what’s most useful
+- **Innovation**: Staying ahead of emerging needs
+
+&nbsp;
+
+---
+
+Radashi helps you write cleaner, more efficient code by offering a curated set of TypeScript utility functions. Customize it to fit your needs, contribute your own functions, and collaborate with a community of developers to build a better JavaScript ecosystem.
+
+**Ready to dive in?** Choose your next step with Radashi:
+
+- [Installation](/installation): Try out Radashi in your project.
+- [Functions Overview](/reference): Explore the functions of Radashi.
+- [Contributing](/contributing): Help us improve Radashi.

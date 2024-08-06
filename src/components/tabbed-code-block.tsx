@@ -30,29 +30,61 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
     // The first child is always an <astro-slot> element.
     const codeContainerSlot = codeContainer.firstElementChild!
 
+    const afterSiblingLoop: (() => void)[] = []
+
     let child: Element | null = codeContainerSlot.firstElementChild
     while (child) {
-      console.log(child)
       if (child instanceof HTMLElement && child.matches('.expressive-code')) {
-        codeBlocks.push(child)
+        const preludeSiblings: HTMLElement[] = []
 
-        child.style.visibility = 'hidden'
-        if (codeBlocks.length > 1) {
-          child.style.position = 'absolute'
+        // Collect all siblings before this child until an .expressive-code
+        // is encountered
+        let sibling = child.previousElementSibling
+        while (sibling && !sibling.matches('.expressive-code')) {
+          if (sibling instanceof HTMLElement) {
+            preludeSiblings.unshift(sibling)
+          }
+          sibling = sibling.previousElementSibling
         }
 
-        child.addEventListener('mouseenter', () => {
-          setMousedOver(true)
-        })
-        child.addEventListener('mouseleave', () => {
-          setMousedOver(false)
-        })
-        // Let mobile devices click to pause/play
-        child.addEventListener('click', () => {
-          setPaused(paused => !paused)
+        let codeBlock = child
+        afterSiblingLoop.push(() => {
+          // If there are prelude elements, clone and append them before the code block
+          if (preludeSiblings.length > 0) {
+            const codeBlockWrapper = document.createElement('div')
+            preludeSiblings.forEach(child => {
+              codeBlockWrapper.appendChild(child)
+            })
+            codeBlock.replaceWith(codeBlockWrapper)
+            codeBlockWrapper.append(codeBlock)
+            codeBlock = codeBlockWrapper
+          }
+
+          codeBlocks.push(codeBlock)
+
+          codeBlock.style.visibility = 'hidden'
+          if (codeBlocks.length > 1) {
+            codeBlock.style.position = 'absolute'
+          }
+
+          codeBlock.addEventListener('mouseenter', () => {
+            setMousedOver(true)
+          })
+          codeBlock.addEventListener('mouseleave', () => {
+            setMousedOver(false)
+          })
+          // Let mobile devices click to pause/play
+          codeBlock.addEventListener('click', () => {
+            setPaused(paused => !paused)
+          })
         })
       }
+
       child = child.nextElementSibling
+    }
+
+    for (const callback of afterSiblingLoop) {
+      callback()
     }
 
     console.log({ names: props.names, codeBlocks })

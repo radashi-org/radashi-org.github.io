@@ -66,9 +66,16 @@ export default defineConfig({
     }),
     unocss(),
     preact(),
+    // minify(),
   ],
+  build: {
+    assets: 'assets',
+  },
   vite: {
     plugins: [radashi()],
+    build: {
+      minify: 'terser',
+    },
   },
 })
 
@@ -105,7 +112,9 @@ function generateSidebar(): SidebarItem[] {
     {
       label: 'Getting Started',
       items: [
-        h3('Introduction'), //
+        h3('Introduction', {
+          link: '/',
+        }), //
         h3('Installation'),
         h3('Contributing'),
       ],
@@ -123,22 +132,27 @@ function generateSidebar(): SidebarItem[] {
     h3('Community', {
       icon: '/Community-dark.svg',
       link: 'https://github.com/orgs/radashi-org/discussions',
+      class: 'top-level-link',
     }),
     h3('Github', {
       icon: '/Github-dark.svg',
       link: 'https://github.com/radashi-org/radashi',
+      class: 'top-level-link',
     }),
     h3('NPM', {
       icon: '/Npm-dark.svg',
       link: 'https://www.npmjs.com/package/radashi',
+      class: 'top-level-link',
     }),
     h3('JSR.io', {
       icon: '/JSR-dark.svg',
       link: 'https://jsr.io/@radashi-org/radashi',
+      class: 'top-level-link',
     }),
     separatorItem,
     h3('All Functions', {
       link: 'reference/',
+      class: 'top-level-link',
     }),
     {
       items: Object.entries(
@@ -166,13 +180,13 @@ function generateSidebar(): SidebarItem[] {
 
 function h3(
   label: string,
-  opts: { icon?: string; link?: string } = {}
+  opts: { icon?: string; link?: string; class?: string } = {}
 ): SidebarItem {
   return {
     label,
     link: opts.link ?? label.toLowerCase().replace(/\s+/g, '-'),
     attrs: {
-      class: 'h3',
+      class: 'h3' + (opts.class ? ` ${opts.class}` : ''),
       target: opts.link && /^https?:/.test(opts.link) ? '_blank' : undefined,
     },
     icon: opts.icon

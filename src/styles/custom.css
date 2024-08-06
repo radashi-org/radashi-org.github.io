@@ -23,12 +23,19 @@
   }
 }
 
-#starlight__sidebar .h3 {
+.sidebar-pane .h3 {
   font-size: var(--sl-text-sm);
   font-weight: 300;
-  color: var(--sl-color-text);
+
+  img + span {
+    margin-left: 0.3rem;
+  }
+
+  &.top-level-link {
+    margin-left: 0;
+  }
+
+  &:not(:hover, :focus) {
+    color: var(--sl-color-text);
+  }
 }
-/* 
-.sl-markdown-content h2:not(:where(.not-content *))h2 {
-  font-size: 1rem;
-} */

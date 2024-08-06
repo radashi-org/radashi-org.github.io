@@ -35,9 +35,6 @@
   .header {
     border: none;
   }
-  #starlight__sidebar ul li a {
-    line-height: 2.25;
-  }
   .expressive-code {
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
@@ -59,14 +56,6 @@
   }
   .sidebar-pane {
     padding-left: 0.8rem;
-  }
-  [aria-current='page'],
-  [aria-current='page']:hover,
-  [aria-current='page']:focus {
-    font-weight: 300;
-    opacity: 0.5;
-    color: white;
-    background-color: #0000;
   }
   --ec-codePadBlk: 2rem;
   /* a {
