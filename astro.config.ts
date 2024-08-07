@@ -52,9 +52,6 @@ export default defineConfig({
         dark: './src/assets/radashi-logo-dark@3x.webp',
         replacesTitle: true,
       },
-      social: {
-        github: 'https://github.com/withastro/starlight',
-      },
       editLink: {
         baseUrl: 'https://github.com/radashi-org/radashi/edit/main/docs/',
       },

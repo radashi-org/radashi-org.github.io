@@ -228,8 +228,8 @@ For fun, let's compare the size of Radashi's `mapValues` function to that of Lod
 
 ```ts
 export function mapValues(obj, mapFunc) {
-  const keys2 = Object.keys(obj)
-  return keys2.reduce((acc, key) => {
+  const keys = Object.keys(obj)
+  return keys.reduce((acc, key) => {
     acc[key] = mapFunc(obj[key], key)
     return acc
   }, {})
