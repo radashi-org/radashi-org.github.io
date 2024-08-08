@@ -28,9 +28,11 @@
   #starlight__sidebar summary {
     color: #ff6464;
   }
-  .content-panel {
-    margin-right: 14vw;
-    margin-left: 4vw;
+  @media (min-width: 72rem) {
+    .content-panel {
+      margin-right: 14vw;
+      margin-left: 4vw;
+    }
   }
   .header {
     border: none;

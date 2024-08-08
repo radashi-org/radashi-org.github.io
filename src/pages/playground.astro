@@ -49,36 +49,6 @@ mdxFiles.sort().forEach(mdxFileName => {
   }
 })
 
-// Wrap lines to fit a given width. Do not truncate. Do not break words.
-function wrapLines(str: string, max: number) {
-  const words = str.split(' ')
-  const lines: string[] = []
-  let currentLine = ''
-
-  for (const word of words) {
-    if (currentLine.length + word.length + 1 <= max) {
-      currentLine += (currentLine ? ' ' : '') + word
-    } else {
-      if (currentLine) {
-        lines.push(currentLine)
-      }
-      currentLine = word
-    }
-  }
-
-  if (currentLine) {
-    lines.push(currentLine)
-  }
-
-  return lines.join('\n')
-}
-
-const welcomeMessage = dedent`
-  Welcome! This page is re-generated whenever the documentation site is updated.
-  
-  All of the examples in the Radashi documentation are available to run and edit here. We suggest using \`console\` methods to inspect the results of each example.
-`
-
 const importStmts = Object.keys(files).map(
   fileName => `// import('./${fileName}').then(run)`
 )
@@ -86,11 +56,15 @@ const importStmts = Object.keys(files).map(
 files['index.ts'] = dedent`
   import * as _ from 'radashi'
 
-  /**
-   * ${wrapLines('Uncomment any of the following imports to see the results of each example. Once an import is uncommented, use command+click on its file path to see the source code of an example. Alternatively, you can use the left sidebar of this editor.', 80).replace(/\n/g, '\n* ')}
-   */
-
   ${importStmts.join('\n')}
+
+
+
+
+
+  /*****************************************/
+  /* The rest of this file can be ignored. */
+  /*****************************************/
 
   function run(module: any) {
     module.run()
@@ -106,10 +80,29 @@ files['index.ts'] = dedent`
         console.log('> ' + key + \` called with \${args.length} \${args.length === 1 ? 'argument' : 'arguments'}\`)
         args.forEach((arg) => console.log(' ', typeof arg === 'string' ? JSON.stringify(arg) : arg))
 
-        const result = fn(...args)
-        
-        console.log('< ' + key + ' returned:')
-        console.log(' ', result)
+        let result
+        try {
+          result = fn(...args)
+
+          console.log('< ' + key + ' returned:')
+          console.log(' ', result)
+
+          if (result instanceof Promise) {
+            const start = Date.now()
+            result.then(
+              result => {
+                console.log('< ' + key + ' resolved with: (' + (Date.now() - start) + 'ms later)')
+                console.log(' ', result)
+              },
+              error => {
+                console.error('< ' + key + ' rejected with:', error)
+              }
+            )
+          }
+        } catch (error) {
+          console.error('< ' + key + ' threw:', error)
+          throw error
+        }
         
         return result
       }
@@ -117,10 +110,20 @@ files['index.ts'] = dedent`
   }
 `
 
+const warningIcon = dedent`
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512" style="transform: translateY(0.25rem);"><path fill="#ecbc68" d="M449.07 399.08L278.64 82.58c-12.08-22.44-44.26-22.44-56.35 0L51.87 399.08A32 32 0 0 0 80 446.25h340.89a32 32 0 0 0 28.18-47.17m-198.6-1.83a20 20 0 1 1 20-20a20 20 0 0 1-20 20m21.72-201.15l-5.74 122a16 16 0 0 1-32 0l-5.74-121.95a21.73 21.73 0 0 1 21.5-22.69h.21a21.74 21.74 0 0 1 21.73 22.7Z"/></svg>
+`
+
 files['index.html'] = dedent`
   <h2>Radashi Playground</h2>
+  <p style="font-size: 0.8rem; opacity: 0.7;">
+    Welcome! This playground is re-generated whenever the documentation site is updated. It contains most of the examples from our documentation.
+  </p>
   <p>
-    ${welcomeMessage.replace(/\n/g, '<br/>')}
+    Try uncommenting any of the imports in <code>index.ts</code> to run an example. Once uncommented, try using command+click on the imported file path to see the example's source code, or you can navigate via the file tree in the left sidebar. Try editing the example to see how it changes.
+  </p>
+  <p style="color: #ecbc68;">
+    ${warningIcon} Uncaught errors appear in the devtools console (cmd+option+i), but not the in-browser console.
   </p>
   <style>
     body {
@@ -168,6 +171,7 @@ const project: Project = {
     terminalHeight: 0,
     devToolsHeight: 50,
     hideNavigation: true,
+    showSidebar: true,
   })
 
   requestAnimationFrame(() => {
