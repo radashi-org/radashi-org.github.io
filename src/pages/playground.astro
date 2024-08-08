@@ -1,0 +1,182 @@
+---
+import type { Project } from '@stackblitz/sdk'
+import glob from 'fast-glob'
+import MarkdownIt from 'markdown-it'
+import markdownItFrontMatter from 'markdown-it-front-matter'
+import fs from 'node:fs'
+import path from 'node:path'
+import { noop } from 'radashi'
+import { dedent } from '../util/dedent'
+import { parse } from '@babel/parser'
+
+const md = new MarkdownIt()
+md.use(markdownItFrontMatter, noop)
+
+// Files added to the StackBlitz project.
+const files: Record<string, string> = {}
+
+const cwd = new URL('../../radashi', import.meta.url).pathname
+const mdxFiles = await glob('docs/**/*.mdx', { cwd })
+console.log(mdxFiles)
+
+mdxFiles.sort().forEach(mdxFileName => {
+  const env: Record<string, any> = {}
+  const tokens = md.parse(
+    fs.readFileSync(path.join(cwd, mdxFileName), 'utf8'),
+    env
+  )
+  for (const token of tokens) {
+    if (token.tag === 'code' && token.block) {
+      try {
+        parse(token.content, {
+          sourceType: 'module',
+          plugins: ['typescript'],
+        })
+      } catch (error) {
+        console.error(`Invalid TypeScript in ${mdxFileName}:`, error)
+        continue // Skip this token if it's not valid TypeScript
+      }
+
+      const fileName = mdxFileName.replace(/\.mdx$/, '.ts').replace('docs/', '')
+      files[fileName] = dedent`
+        import * as _ from 'radashi'
+
+        export async function run() {
+          ${token.content.replace(/(^|\n)import .*? from 'radashi';?/g, '').trim()}
+        }
+      `
+    }
+  }
+})
+
+// Wrap lines to fit a given width. Do not truncate. Do not break words.
+function wrapLines(str: string, max: number) {
+  const words = str.split(' ')
+  const lines: string[] = []
+  let currentLine = ''
+
+  for (const word of words) {
+    if (currentLine.length + word.length + 1 <= max) {
+      currentLine += (currentLine ? ' ' : '') + word
+    } else {
+      if (currentLine) {
+        lines.push(currentLine)
+      }
+      currentLine = word
+    }
+  }
+
+  if (currentLine) {
+    lines.push(currentLine)
+  }
+
+  return lines.join('\n')
+}
+
+const welcomeMessage = dedent`
+  Welcome! This page is re-generated whenever the documentation site is updated.
+  
+  All of the examples in the Radashi documentation are available to run and edit here. We suggest using \`console\` methods to inspect the results of each example.
+`
+
+const importStmts = Object.keys(files).map(
+  fileName => `// import('./${fileName}').then(run)`
+)
+
+files['index.ts'] = dedent`
+  import * as _ from 'radashi'
+
+  /**
+   * ${wrapLines('Uncomment any of the following imports to see the results of each example. Once an import is uncommented, use command+click on its file path to see the source code of an example. Alternatively, you can use the left sidebar of this editor.', 80).replace(/\n/g, '\n* ')}
+   */
+
+  ${importStmts.join('\n')}
+
+  function run(module: any) {
+    module.run()
+  }
+
+  if (!globalThis.__loaded) {
+    globalThis.__loaded = true
+
+    for (const key in _) {
+      const fn = _[key]
+
+      _[key] = function(...args) {
+        console.log('> ' + key + \` called with \${args.length} \${args.length === 1 ? 'argument' : 'arguments'}\`)
+        args.forEach((arg) => console.log(' ', typeof arg === 'string' ? JSON.stringify(arg) : arg))
+
+        const result = fn(...args)
+        
+        console.log('< ' + key + ' returned:')
+        console.log(' ', result)
+        
+        return result
+      }
+    }
+  }
+`
+
+files['index.html'] = dedent`
+  <h2>Radashi Playground</h2>
+  <p>
+    ${welcomeMessage.replace(/\n/g, '<br/>')}
+  </p>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #15181e;
+      color: #fff;
+    }
+    p {
+      line-height: 1.4;
+    }
+  </style>
+`
+
+const project: Project = {
+  title: 'Radashi Playground',
+  description:
+    'Explore the functions of Radashi by running and editing their documentation examples.',
+  template: 'typescript',
+  files,
+  dependencies: {
+    radashi: 'beta',
+  },
+}
+---
+
+<iframe id="embed" style="visibility: hidden;"></iframe>
+
+<script
+  id="stackblitz-project"
+  type="application/json"
+  set:html={JSON.stringify(project)}
+/>
+
+<script>
+  import sdk from '@stackblitz/sdk'
+
+  const embed = document.getElementById('embed')!
+  const project = JSON.parse(
+    document.getElementById('stackblitz-project')!.textContent!
+  )
+
+  sdk.embedProject(embed, project, {
+    height: window.innerHeight + 'px',
+    openFile: 'index.ts',
+    terminalHeight: 0,
+    devToolsHeight: 50,
+    hideNavigation: true,
+  })
+
+  requestAnimationFrame(() => {
+    embed.style.visibility = 'visible'
+  })
+</script>
+
+<style>
+  body {
+    margin: 0;
+  }
+</style>
