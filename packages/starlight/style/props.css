@@ -98,7 +98,7 @@
 	--sl-sidebar-width: 16rem;
 	--sl-sidebar-pad-x: 1rem;
 	--sl-content-width: 45rem;
-	--sl-content-pad-x: 1rem;
+	--sl-content-pad-x: 24px;
 	--sl-menu-button-size: 2rem;
 	--sl-nav-gap: var(--sl-content-pad-x);
 	/* Offset required to show outline inside an element instead of round the outside */
@@ -113,6 +113,7 @@
 
 @media (min-width: 50em) {
 	:root {
+		--sl-content-pad-x: 1rem;
 		--sl-nav-height: 4rem;
 		--sl-nav-pad-x: 1.5rem;
 		--sl-text-h1: var(--sl-text-5xl);

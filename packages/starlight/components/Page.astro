@@ -105,8 +105,12 @@ if (lastUpdated == null) {
 			}
 			main {
 				padding-bottom: 3vh;
+				font-size: 1.125rem;
 			}
 			@media (min-width: 50em) {
+				main {
+					font-size: inherit;
+				}
 				[data-has-sidebar] {
 					--sl-content-inline-start: var(--sl-sidebar-width);
 				}

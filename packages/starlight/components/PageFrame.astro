@@ -49,8 +49,8 @@ const { hasSidebar, labels } = Astro.props;
 	}
 
 	.header {
-		z-index: var(--sl-z-index-navbar);
-		position: fixed;
+			position: fixed;
+			z-index: var(--sl-z-index-navbar);
 		inset-inline-start: 0;
 		inset-block-start: 0;
 		width: 100%;
@@ -58,7 +58,7 @@ const { hasSidebar, labels } = Astro.props;
 		border-bottom: 1px solid var(--sl-color-hairline-shade);
 		padding: var(--sl-nav-pad-y) var(--sl-nav-pad-x);
 		padding-inline-end: var(--sl-nav-pad-x);
-		background-color: #00000000;
+		background-color: var(--sl-color-black);
 	}
 
 	:global([data-has-sidebar]) .header {
@@ -89,6 +89,9 @@ const { hasSidebar, labels } = Astro.props;
 	}
 
 	@media (min-width: 50rem) {
+		.header {
+			background: none;
+		}
 		.sidebar-content::after {
 			content: '';
 			padding-bottom: 1px;

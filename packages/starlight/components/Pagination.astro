@@ -45,6 +45,13 @@ const isRtl = dir === 'rtl';
 		gap: 1rem;
 	}
 
+	@media (min-width: 50rem) {
+		.pagination-links {
+			margin-left: -1rem;
+			margin-right: -1rem;
+		}
+	}
+
 	.pagination-links > * {
 		display: flex;
 		align-items: center;

@@ -22,6 +22,20 @@ const StarlightFrontmatterSchema = (context: SchemaContext) =>
 		description: z.string().optional(),
 
 		/**
+		 * For blog posts, the date of the post.
+		 * 
+		 * Can be any string that can be parsed as a date.
+		 */
+		date: z.date().or(z.string()).optional(),
+
+		/**
+		 * For blog posts, the author of the post.
+		 * 
+		 * Must be a string in the format of `Author Name (@GitHubHandle)`.
+		 */
+		author: z.string().optional(),
+
+		/**
 		 * Custom URL where a reader can edit this page.
 		 * Overrides the `editLink.baseUrl` global config if set.
 		 *

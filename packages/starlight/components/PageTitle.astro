@@ -2,11 +2,38 @@
 import { PAGE_TITLE_ID } from '../constants';
 import type { Props } from '../props';
 
-const { title, description } = Astro.props.entry.data;
+const { title, description, author, date } = Astro.props.entry.data as {
+	title: string;
+	description: string;
+	author?: string;
+	date?: Date | string;
+};
+
+const [, authorName, authorHandle] = author ? /^(.+?)\s\(@(.+?)\)$/.exec(author) ?? [] : [];
 ---
 
 <h1 id={PAGE_TITLE_ID}>{title}</h1>
 {description && <p>{description}</p>}
+
+{
+	author && (
+		<div class="author">
+			<img src={`https://unavatar.io/github/${authorHandle}`} />
+			<div>
+				<a href={`https://github.com/${authorHandle}`}>{authorName}</a>
+				{date && (
+					<span class="date flex">
+						{new Date(date).toLocaleDateString('en-US', {
+							year: 'numeric',
+							month: 'short',
+							day: 'numeric',
+						})}
+					</span>
+				)}
+			</div>
+		</div>
+	)
+}
 
 <style>
 	h1 {
@@ -22,5 +49,29 @@ const { title, description } = Astro.props.entry.data;
 		margin-top: 0.6rem;
 		color: #bddef2;
 		font-style: italic;
+	}
+
+	.author {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		img {
+			border-radius: 9999px;
+			width: 54px;
+			margin-right: 0.8rem;
+		}
+
+		a {
+			font-weight: 670;
+			text-decoration: none;
+			color: inherit;
+		}
+
+		.date {
+			margin-top: -0.3rem;
+			font-size: 0.8rem;
+			color: #b1a6ab;
+		}
 	}
 </style>

@@ -21,7 +21,7 @@ const pagefindTranslations = {
 	data-strip-trailing-slash={project.trailingSlash === 'never'}
 >
 	<button role="search" data-open-modal disabled>
-		<img src="/search-dark.svg" />
+		<div class="search-icon"></div>
 	</button>
 
 	<dialog style="padding:0" aria-label={labels['search.label']}>
@@ -151,6 +151,7 @@ const pagefindTranslations = {
 	}
 	button[data-open-modal] {
 		display: flex;
+		align-items: center;
 		border: 0;
 		background-color: transparent;
 		color: var(--sl-color-gray-1);
@@ -209,7 +210,21 @@ const pagefindTranslations = {
 		--sl-search-cancel-space: 5rem;
 	}
 
+	.search-icon {
+		--search-icon-height: 1.5rem;
+		--search-icon-ratio: 1;
+		width: calc(var(--search-icon-ratio) * var(--search-icon-height));
+		height: var(--search-icon-height);
+		background-image: url('/search-mobile-dark.svg');
+	}
+
 	@media (min-width: 50rem) {
+		.search-icon {
+			--search-icon-height: 2.6875rem;
+			--search-icon-ratio: calc(126 / 43);
+			background-image: url('/search-desktop-dark.svg');
+		}
+
 		#starlight__search {
 			--sl-search-cancel-space: 0px;
 		}
