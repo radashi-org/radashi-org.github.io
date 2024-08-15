@@ -1,0 +1,172 @@
+---
+title: Comparing Radashi to Radash
+description: How we improve on our predecessor
+author: Alec Larson (@aleclarson)
+date: 'August 14, 2024'
+---
+
+If you've already used Radash, you'll naturally wonder what makes Radashi better. First and foremost, Radashi is **actively maintained**. In my opinion, that alone makes Radashi the better choice.
+
+That said, let me give you an overview of how the two projects compare, given the current state of both, as well as a glimpse into my vision for the future. I will try to be comprehensive in listing the differences that I believe make Radashi the obvious choice:
+
+- **Explicit design philosophy**
+
+  - To help guide our decision-making, I've tried to articulate “the ethos of Radashi” as a set of design principles.
+  - This is a _living document_, and so I expect it to evolve over time according to the community's feedback.
+  - I believe that having such a document will make it easier for contributors to understand the project's goals and direction, and therefore make it easier for them to contribute features aligned with the project's vision.
+  - It can also assist in resolving any disagreements that may arise between contributors.
+  - The ethos will have its own page in the docs, but you can check out [the first draft](https://github.com/orgs/radashi-org/discussions/20) to get an idea of what it's about.
+
+- **Higher code quality**
+
+  - This is the trickiest-to-prove benefit of Radashi (other than the fact that it has less bugs, because we fixed them).
+  - While our predecessor Radash's code is of _mostly good_ quality (no shade intended), I and the other contributors have been able to make many improvements.
+  - I believe this gap in quality will only widen over time. It's my hope that Radashi's quality will become more apparent as you use it. Although, we're not done improving the code we inherited from Radash.
+
+- **More functions**
+
+  - We are actively looking to introduce new functions that cover popular use cases.
+  - The community has the final say. If there's demand for a function, and that function adheres to Radashi's ethos, then that function will certainly be added.
+
+- **Benchmarks**
+
+  - Every pull request is compared with the main branch using our benchmarking suite.
+  - This ensures that the PR doesn't introduce any regressions.
+  - It also ensures that perf-related PRs are statistically significant.
+  - There are [plans](https://github.com/radashi-org/radashi/issues/130) to add comparative benchmarks with Lodash as well, wherever we support the same use case.
+
+- **Bundle impact**
+
+  - When a PR adds or modifies a function, the minified byte size of the function's new and old implementations are compared and subsequently reported in the PR.
+  - This helps us avoid introducing any unnecessary bloat.
+
+- **Welcoming new maintainers**
+
+  - The last thing I want is to be the project's sole maintainer.
+  - I've made the barrier to joining the core team lower than most projects, because I want as many passionate contributors as possible to help steer development.
+  - This is my attempt to avoid issues of unresponsiveness as much as possible. Radash was a one-man show, and the project suffered from burnout as a result.
+  - To alleviate security concerns that may arise from having a large team of maintainers, I'm currently the only person with the ability to publish to NPM. It's my hope that this will change in the near future, so I can stop being a bottleneck in the release process.
+
+- **Nightly beta releases**
+
+  - Every night at 5:00AM UTC, a `radashi@beta` release is published to NPM if any PRs were merged that day.
+  - This means you'll be able to use your contributions or others' the next day.
+  - This allows for a swift development cycle and being able to use the latest and greatest features or fixes without waiting for a stable release.
+  - I plan to do the same for breaking changes, publishing a nightly `radashi@next` release based on the `next` branch.
+
+- **Bigger vision**
+
+  - Shortly after the project's first true release, I plan to turn my focus to a bigger vision for Radashi.
+  - I'm not ready to share what that is yet, but I will say that it's focused on making Radashi as easy as possible to customize.
+  - This vision also includes making Radashi less dependent on the core team, allowing the community to collaborate without gate-keeping, while still using Radashi's codebase and ethos as a common ground for collaboration.
+  - There will be a blog post on this when the time comes.
+
+- **Translated docs**
+
+  - We plan to support multiple languages so we can appeal to a wider audience and attract non-English speakers to contribute to the project.
+  - To kickstart this, I'm going to use an LLM for the initial translation. This will run in a GitHub action every time the docs are updated.
+
+- **“Browser support” page**
+
+  - The docs will be explicit about which browsers are supported by Radashi without the need for legacy transforms.
+  - This page will be updated every time the docs are updated, so it's always relatively up-to-date.
+  - As part of our automatic linting process, we verify that this browser support is not broken.
+  - You can find the page [here](https://radashi-org.github.io/browser-support/).
+
+- **“Lodash parity” page**
+
+  - The docs will have a page dedicated to comparing Radashi and Lodash where overlap exists.
+  - This should help Lodash users make the switch to Radashi.
+  - When the page is ready, you'll be able to find it [here](https://radashi-org.github.io/lodash-parity/). (I'm almost done writing this page. It's generated from a Supabase table where I keep track of which Lodash functions have been implemented in Radashi.)
+
+- **Other small things**
+  <details>
+    <summary>Such as... (click to expand)</summary>
+    <ul>
+      <li>
+        <p>
+          <strong>Protected main branch</strong>: PRs must pass automated checks
+          before they can be merged. I will never push fixes or features
+          directly to main, even though I have that privilege.
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Conventional commits</strong>: I've added a commit message
+          linter to ensure that all commits follow the{' '}
+          <a href="https://www.conventionalcommits.org/en/v1.0.0/#summary">
+            conventional commits
+          </a>{' '}
+          specification.
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>RFC process</strong>: New features and breaking changes are
+          often{' '}
+          <a href="https://github.com/orgs/radashi-org/discussions/categories/rfcs">
+            submitted as an RFC
+          </a>{' '}
+          to encourage community involvement in the decision-making process
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Preview releases</strong>: If you can't wait for a PR to be
+          merged, the PR author can comment <code>/publish</code> to publish a
+          preview release of the PR to NPM for immediate use
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Generated changelog</strong>: Essentially a filtered commit
+          history that excludes non-code changes to make it easy to see what's
+          new
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>High-level release notes</strong>: These will include
+          high-level explanations and code examples for the changes in each
+          release
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Contribution scripts</strong>: Scripts like{' '}
+          <code>pnpm add-function</code> have been added to streamline the
+          contribution process
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>JSR.io package</strong>: If you use Deno or you just resonate
+          with the JSR.io philosophy, you can use{' '}
+          <a href="https://jsr.io/@radashi-org/radashi">the JSR.io package</a>{' '}
+          instead of the NPM package
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Better tooling</strong>: I've switched the project to use{' '}
+          <a href="https://vitest.dev/guide/comparisons">Vitest</a> for testing
+          (instead of Jest), <a href="https://biomejs.dev/">Biome</a> for
+          linting/formatting source code (instead of TSLint/Prettier), and{' '}
+          <a href="https://refine.dev/blog/pnpm-vs-npm-and-yarn/">PNPM</a> for
+          package management (instead of Yarn).
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Easier to copy-paste</strong>: If one of Radashi's functions
+          isn't meeting your needs, you can easily copy-paste it into your
+          project and change it as you see fit, because our functions always
+          import from <code>radashi</code> just like your project does.
+        </p>
+      </li>
+    </ul>
+  </details>
+
+In the end, I hope that Ray Epps (the creator of Radash) will be proud of where we've taken Radashi. Maybe he'll even join the core team at some point. Who knows?
+
+If you have any questions or comments, hop on over to [the issue that sparked this post](https://github.com/radashi-org/radashi/issues/168) and leave a comment.
