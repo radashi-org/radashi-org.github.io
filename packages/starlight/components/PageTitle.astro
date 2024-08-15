@@ -18,7 +18,7 @@ const [, authorName, authorHandle] = author ? /^(.+?)\s\(@(.+?)\)$/.exec(author)
 {
 	author && (
 		<div class="author">
-			<img src={`https://unavatar.io/github/${authorHandle}`} />
+			<img src={`/authors/${authorHandle}.png`} />
 			<div>
 				<a href={`https://github.com/${authorHandle}`}>{authorName}</a>
 				{date && (
