@@ -111,7 +111,7 @@ function generateSidebar(): SidebarItem[] {
       items: [
         h3('Introduction', {
           link: '/',
-        }), //
+        }),
         h3('Installation'),
         h3('Contributing'),
       ],
@@ -123,6 +123,11 @@ function generateSidebar(): SidebarItem[] {
         h3('Our Ethos'), //
         h3('Browser Support'),
         h3('Changelog'),
+        h3('Playground', {
+          attrs: {
+            'data-no-swup': '',
+          },
+        }),
       ],
     },
     separatorItem,
@@ -177,12 +182,18 @@ function generateSidebar(): SidebarItem[] {
 
 function h3(
   label: string,
-  opts: { icon?: string; link?: string; class?: string } = {}
+  opts: {
+    icon?: string
+    link?: string
+    class?: string
+    attrs?: Record<string, string>
+  } = {}
 ): SidebarItem {
   return {
     label,
     link: opts.link ?? label.toLowerCase().replace(/\s+/g, '-'),
     attrs: {
+      ...opts.attrs,
       class: 'h3' + (opts.class ? ` ${opts.class}` : ''),
       target: opts.link && /^https?:/.test(opts.link) ? '_blank' : undefined,
     },
