@@ -20,7 +20,6 @@ pnpm-debug.log*
 
 # forks
 /radashi
-/starlight
 
 # generated files
 src/content/docs/reference/index.mdx
