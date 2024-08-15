@@ -17,7 +17,6 @@ const files: Record<string, string> = {}
 
 const cwd = new URL('../../radashi', import.meta.url).pathname
 const mdxFiles = await glob('docs/**/*.mdx', { cwd })
-console.log(mdxFiles)
 
 mdxFiles.sort().forEach(mdxFileName => {
   const env: Record<string, any> = {}
@@ -28,13 +27,13 @@ mdxFiles.sort().forEach(mdxFileName => {
   for (const token of tokens) {
     if (token.tag === 'code' && token.block) {
       try {
+        // Ensure the code is valid TypeScript.
         parse(token.content, {
           sourceType: 'module',
           plugins: ['typescript'],
         })
       } catch (error) {
-        console.error(`Invalid TypeScript in ${mdxFileName}:`, error)
-        continue // Skip this token if it's not valid TypeScript
+        continue
       }
 
       const fileName = mdxFileName.replace(/\.mdx$/, '.ts').replace('docs/', '')
@@ -45,6 +44,7 @@ mdxFiles.sort().forEach(mdxFileName => {
           ${token.content.replace(/(^|\n)import .*? from 'radashi';?/g, '').trim()}
         }
       `
+      break
     }
   }
 })
@@ -148,6 +148,11 @@ const project: Project = {
   },
 }
 ---
+
+<head>
+  <title>Radashi Playground</title>
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+</head>
 
 <iframe id="embed" style="visibility: hidden;"></iframe>
 
