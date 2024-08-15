@@ -132,22 +132,22 @@ function generateSidebar(): SidebarItem[] {
     },
     separatorItem,
     h3('Community', {
-      icon: '/Community-dark.svg',
+      icon: '/sidebar/community.svg',
       link: 'https://github.com/orgs/radashi-org/discussions',
       class: 'top-level-link',
     }),
     h3('Github', {
-      icon: '/Github-dark.svg',
+      icon: '/sidebar/github.svg',
       link: 'https://github.com/radashi-org/radashi',
       class: 'top-level-link',
     }),
     h3('NPM', {
-      icon: '/Npm-dark.svg',
+      icon: '/sidebar/npm.svg',
       link: 'https://www.npmjs.com/package/radashi',
       class: 'top-level-link',
     }),
     h3('JSR.io', {
-      icon: '/JSR-dark.svg',
+      icon: '/sidebar/jsr.svg',
       link: 'https://jsr.io/@radashi-org/radashi',
       class: 'top-level-link',
     }),
