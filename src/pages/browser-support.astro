@@ -102,6 +102,8 @@ const markdown = `Browser support is a crucial factor to consider when choosing 
 like Radashi. It determines which browsers and versions your application will be compatible with,
 potentially affecting your user base and the features you can utilize.
 
+To ensure that Radashi keeps its promise of broad compatibility, our TypeScript config is set to only allow ES2017 APIs and below. As browsers continue to improve, we'll update our support to keep up with the latest standards.
+
 ##### Legacy Transformations
 
 While Radashi aims to strike a balance between modern functionality and broad compatibility, it's
@@ -111,22 +113,6 @@ important to note that you may need to compile your application bundle using too
 - or something similar 
 
 …to ensure compatibility with browsers older than we officially support (like IE 11).
-
-### The Query
-
-Radashi currently uses the following [Browserslist](https://github.com/browserslist/browserslist) query:
-
-\`\`\`
-${packageJson.browserslist.join('\n')}
-\`\`\`
-
-If you'd like to understand Browserslist better, check out [this exceptional article](https://www.alexander-morse.com/blog/passably-explained-browserslist/) by Alexander Morse.
-
-### Quality Assurance
-
-To ensure that Radashi keeps its promise of broad compatibility, we use ESLint with only the [\`eslint-plugin-compat\`](https://github.com/amilajack/eslint-plugin-compat) plugin by Amila Welihinda.
-
-When you run \`pnpm lint\` in the Radashi repository, ESLint will check that all the functions in Radashi are compatible with the browsers specified in the \`browserlist\` query in our \`package.json\` file.
 
 ### Coverage
 
@@ -148,6 +134,16 @@ China's lower coverage is mainly due to a lack of support for IE 11 on Radashi's
 | Browser | Version | Coverage |
 | --- | --- | ---: |
 ${toMarkdownColumns(rowData)}
+
+### The Query
+
+Radashi currently uses the following [Browserslist](https://github.com/browserslist/browserslist) query:
+
+\`\`\`
+${packageJson.browserslist.join('\n')}
+\`\`\`
+
+If you'd like to understand Browserslist better, check out [this exceptional article](https://www.alexander-morse.com/blog/passably-explained-browserslist/) by Alexander Morse.
 `
 ---
 
