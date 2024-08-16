@@ -77,13 +77,17 @@ export default defineConfig({
 })
 
 async function radashi() {
-  console.log('Pulling radashi...')
-  if (existsSync('radashi')) {
-    await exec('git pull', { cwd: 'radashi', stdio: 'inherit' })
-  } else {
-    await exec('git clone https://github.com/radashi-org/radashi --depth 1', {
-      stdio: 'inherit',
-    })
+  // During development, we want to pull the latest version of Radashi from
+  // GitHub so that we can test unpublished changes to the docs.
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('Pulling radashi...')
+    if (existsSync('radashi')) {
+      await exec('git pull', { cwd: 'radashi', stdio: 'inherit' })
+    } else {
+      await exec('git clone https://github.com/radashi-org/radashi --depth 1', {
+        stdio: 'inherit',
+      })
+    }
   }
 
   const heft = await renderHeftJson()
