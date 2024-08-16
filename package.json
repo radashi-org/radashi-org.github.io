@@ -42,10 +42,5 @@
       "limit": "14.5 kB",
       "gzip": true
     }
-  ],
-  "pnpm": {
-    "patchedDependencies": {
-      "vite-plugin-bundled-entry@0.5.1": "patches/vite-plugin-bundled-entry@0.5.1.patch"
-    }
-  }
+  ]
 }
