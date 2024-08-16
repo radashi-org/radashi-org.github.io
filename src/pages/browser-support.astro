@@ -143,6 +143,8 @@ Radashi currently uses the following [Browserslist](https://github.com/browsersl
 ${packageJson.browserslist.join('\n')}
 \`\`\`
 
+This query is generated with the \`pnpm update-browserslist\` command, which uses [browserslist-generator](https://github.com/wessberg/browserslist-generator) to ensure all browsers that support ES2017 are included.
+
 If you'd like to understand Browserslist better, check out [this exceptional article](https://www.alexander-morse.com/blog/passably-explained-browserslist/) by Alexander Morse.
 `
 ---
