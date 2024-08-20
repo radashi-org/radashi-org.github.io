@@ -17,7 +17,7 @@ type SidebarItem = (StarlightUserConfig['sidebar'] & object)[number]
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://radashi-org.github.io',
+  site: 'https://radashi.js.org',
   integrations: [
     mdAstro(),
     starlight({
