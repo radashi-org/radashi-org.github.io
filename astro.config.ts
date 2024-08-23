@@ -135,6 +135,11 @@ function generateSidebar(): SidebarItem[] {
       ],
     },
     separatorItem,
+    h3('VS Code', {
+      icon: '/sidebar/vscode.svg',
+      link: 'https://marketplace.visualstudio.com/items?itemName=aleclarson.radashi',
+      class: 'top-level-link',
+    }),
     h3('Community', {
       icon: '/sidebar/community.svg',
       link: 'https://github.com/orgs/radashi-org/discussions',
