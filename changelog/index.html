@@ -1,0 +1,357 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-has-sidebar="true" data-theme="dark" class="astro-rwlsmwlq"> <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Changelog | Radashi</title><link rel="canonical" href="https://radashi.js.org/changelog/"/><link rel="sitemap" href="/sitemap-index.xml"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"/><link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v4.11.5"/><meta name="generator" content="Starlight v0.24.5"/><meta property="og:title" content="Changelog"/><meta property="og:type" content="article"/><meta property="og:url" content="https://radashi.js.org/changelog/"/><meta property="og:locale" content="en"/><meta property="og:description"/><meta property="og:site_name" content="Radashi"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Changelog"/><meta name="twitter:description"/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg> <svg aria-hidden="true" class="dark astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg> <svg aria-hidden="true" class="auto astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg> </template><script type="application/json" data-tooltips-options>{"interactive":false,"class":"astro-rwlsmwlq"}</script><link rel="stylesheet" href="/assets/browser-support.Bcx1rOFJ.css">
+<link rel="stylesheet" href="/assets/browser-support.CdD5e2eB.css"><script type="module" src="/assets/hoisted.Cd3pzg-G.js"></script>
+<script type="module" src="/assets/page.LpqHvsRr.js"></script></head> <body class="astro-rwlsmwlq"> <a href="#_top" class="astro-z2miczde">Skip to content</a>  <div class="swup page-frame sl-flex astro-wu4nwam6"> <header class="header astro-wu4nwam6" data-swup-persist="starlight__header"> <div class="header sl-flex astro-wagtsxap"> <div class="title-wrapper sl-flex astro-wagtsxap"> <a href="/" class="site-title sl-flex astro-z73cwxac">  <img class="light:sl-hidden astro-z73cwxac" alt="" src="/assets/radashi-logo-dark@3x.BWiB2XXX.webp" width="4578" height="1143"> <img class="dark:sl-hidden astro-z73cwxac" alt="" src="/assets/radashi-logo-dark@3x.BWiB2XXX.webp" width="4578" height="1143"> <span class="sr-only astro-z73cwxac"> Radashi </span> </a>  </div> <div class="search-root sl-flex astro-wagtsxap"> <site-search data-translations="{&#34;placeholder&#34;:&#34;Search&#34;}" class="astro-n63ahxst"> <button role="search" data-open-modal disabled class="astro-n63ahxst"> <div class="search-icon astro-n63ahxst"></div> </button> <dialog style="padding:0" aria-label="Search" class="astro-n63ahxst"> <div class="dialog-frame sl-flex astro-n63ahxst">  <button data-close-modal class="sl-flex md:sl-hidden astro-n63ahxst"> Cancel </button> <div class="search-container astro-n63ahxst"> <div id="starlight__search" class="astro-n63ahxst"></div> </div> </div> </dialog> </site-search>    </div> <div class="sl-hidden md:sl-flex right-group astro-wagtsxap"> <!-- <div class="sl-flex social-icons">
+			<SocialIcons {...Astro.props} />
+		</div> --> <!-- <ThemeSelect {...Astro.props} /> -->  </div> </div>  </header> <nav class="sidebar astro-wu4nwam6" aria-label="Main"> <starlight-menu-button class="astro-dwzdllxx"> <button aria-expanded="false" aria-label="Menu" aria-controls="starlight__sidebar" class="sl-flex md:sl-hidden astro-dwzdllxx"> <svg aria-hidden="true" class="astro-dwzdllxx astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg>  </button> </starlight-menu-button>    <div id="starlight__sidebar" class="sidebar-pane astro-wu4nwam6" data-swup-persist="starlight__sidebar"> <div class="sidebar-content sl-flex astro-wu4nwam6"> <ul class="top-level astro-bgd6mkzw"> <li class="astro-bgd6mkzw"> <details open class="astro-bgd6mkzw"> <summary class="astro-bgd6mkzw"> <div class="group-label astro-bgd6mkzw"> <span class="large astro-bgd6mkzw">Getting Started</span>  </div> <svg aria-hidden="true" class="caret astro-bgd6mkzw astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-bgd6mkzw"> <li class="astro-bgd6mkzw"> <a href="/" class="h3 astro-bgd6mkzw" class="h3">  <span class="astro-bgd6mkzw">Introduction</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/installation" class="h3 astro-bgd6mkzw" class="h3">  <span class="astro-bgd6mkzw">Installation</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/contributing" class="h3 astro-bgd6mkzw" class="h3">  <span class="astro-bgd6mkzw">Contributing</span>  </a> </li> </ul>  </details> </li><hr style="border:0.6px solid rgba(240, 240, 240, 0.1)" class="astro-bgd6mkzw"><li class="astro-bgd6mkzw"> <details open class="astro-bgd6mkzw"> <summary class="astro-bgd6mkzw"> <div class="group-label astro-bgd6mkzw"> <span class="large astro-bgd6mkzw">Quick Links</span>  </div> <svg aria-hidden="true" class="caret astro-bgd6mkzw astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-bgd6mkzw"> <li class="astro-bgd6mkzw"> <a href="/our-ethos" class="h3 astro-bgd6mkzw" class="h3">  <span class="astro-bgd6mkzw">Our Ethos</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/browser-support" class="h3 astro-bgd6mkzw" class="h3">  <span class="astro-bgd6mkzw">Browser Support</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/changelog" aria-current="page" class="h3 astro-bgd6mkzw" class="h3">  <span class="astro-bgd6mkzw">Changelog</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/playground" class="h3 astro-bgd6mkzw" data-no-swup="" class="h3">  <span class="astro-bgd6mkzw">Playground</span>  </a> </li> </ul>  </details> </li><hr style="border:0.6px solid rgba(240, 240, 240, 0.1)" class="astro-bgd6mkzw"><li class="astro-bgd6mkzw"> <a href="https://marketplace.visualstudio.com/items?itemName=aleclarson.radashi" class="large h3 top-level-link astro-bgd6mkzw" class="h3 top-level-link" target="_blank"> <img fill="currentColor" src="/sidebar/vscode.svg" class="sidebar-icon astro-bgd6mkzw"> <span class="astro-bgd6mkzw">VS Code</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="https://github.com/orgs/radashi-org/discussions" class="large h3 top-level-link astro-bgd6mkzw" class="h3 top-level-link" target="_blank"> <img fill="currentColor" src="/sidebar/community.svg" class="sidebar-icon astro-bgd6mkzw"> <span class="astro-bgd6mkzw">Community</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="https://github.com/radashi-org/radashi" class="large h3 top-level-link astro-bgd6mkzw" class="h3 top-level-link" target="_blank"> <img fill="currentColor" src="/sidebar/github.svg" class="sidebar-icon astro-bgd6mkzw"> <span class="astro-bgd6mkzw">Github</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="https://www.npmjs.com/package/radashi" class="large h3 top-level-link astro-bgd6mkzw" class="h3 top-level-link" target="_blank"> <img fill="currentColor" src="/sidebar/npm.svg" class="sidebar-icon astro-bgd6mkzw"> <span class="astro-bgd6mkzw">NPM</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="https://jsr.io/@radashi-org/radashi" class="large h3 top-level-link astro-bgd6mkzw" class="h3 top-level-link" target="_blank"> <img fill="currentColor" src="/sidebar/jsr.svg" class="sidebar-icon astro-bgd6mkzw"> <span class="astro-bgd6mkzw">JSR.io</span>  </a> </li><hr style="border:0.6px solid rgba(240, 240, 240, 0.1)" class="astro-bgd6mkzw"><li class="astro-bgd6mkzw"> <a href="/reference/" class="large h3 top-level-link astro-bgd6mkzw" class="h3 top-level-link"> <img fill="currentColor" src="/sidebar/functions.svg" class="sidebar-icon astro-bgd6mkzw"> <span class="astro-bgd6mkzw">All Functions</span>  </a> </li><li class="astro-bgd6mkzw"> <ul class="astro-bgd6mkzw"> <li class="astro-bgd6mkzw"> <details open class="astro-bgd6mkzw"> <summary class="astro-bgd6mkzw"> <div class="group-label astro-bgd6mkzw"> <span class="large astro-bgd6mkzw">Array</span>  </div> <svg aria-hidden="true" class="caret astro-bgd6mkzw astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-bgd6mkzw"> <li class="astro-bgd6mkzw"> <a href="/reference/array/alphabetical" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">alphabetical</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/boil" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">boil</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/castArray" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">castArray</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/castArrayIfExists" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">castArrayIfExists</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/cluster" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">cluster</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/counting" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">counting</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/diff" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">diff</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/first" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">first</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/flat" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">flat</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/fork" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">fork</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/group" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">group</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/intersects" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">intersects</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/iterate" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">iterate</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/last" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">last</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/list" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">list</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/mapify" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">mapify</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/merge" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">merge</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/objectify" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">objectify</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/replace" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">replace</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/replaceOrAppend" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">replaceOrAppend</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/select" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">select</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/selectFirst" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">selectFirst</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/shift" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">shift</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/sift" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">sift</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/sort" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">sort</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/toggle" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">toggle</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/unique" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">unique</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/unzip" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">unzip</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/zip" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">zip</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/array/zipToObject" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">zipToObject</span>  </a> </li> </ul>  </details> </li><li class="astro-bgd6mkzw"> <details open class="astro-bgd6mkzw"> <summary class="astro-bgd6mkzw"> <div class="group-label astro-bgd6mkzw"> <span class="large astro-bgd6mkzw">Async</span>  </div> <svg aria-hidden="true" class="caret astro-bgd6mkzw astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-bgd6mkzw"> <li class="astro-bgd6mkzw"> <a href="/reference/async/all" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">all</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/async/defer" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">defer</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/async/guard" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">guard</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/async/map" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">map</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/async/parallel" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">parallel</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/async/reduce" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">reduce</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/async/retry" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">retry</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/async/sleep" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">sleep</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/async/tryit" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">tryit</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/async/withResolvers" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">withResolvers</span>  </a> </li> </ul>  </details> </li><li class="astro-bgd6mkzw"> <details open class="astro-bgd6mkzw"> <summary class="astro-bgd6mkzw"> <div class="group-label astro-bgd6mkzw"> <span class="large astro-bgd6mkzw">Curry</span>  </div> <svg aria-hidden="true" class="caret astro-bgd6mkzw astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-bgd6mkzw"> <li class="astro-bgd6mkzw"> <a href="/reference/curry/chain" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">chain</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/curry/compose" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">compose</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/curry/debounce" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">debounce</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/curry/flip" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">flip</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/curry/memo" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">memo</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/curry/once" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">once</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/curry/partial" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">partial</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/curry/partob" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">partob</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/curry/proxied" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">proxied</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/curry/throttle" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">throttle</span>  </a> </li> </ul>  </details> </li><li class="astro-bgd6mkzw"> <details open class="astro-bgd6mkzw"> <summary class="astro-bgd6mkzw"> <div class="group-label astro-bgd6mkzw"> <span class="large astro-bgd6mkzw">Function</span>  </div> <svg aria-hidden="true" class="caret astro-bgd6mkzw astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-bgd6mkzw"> <li class="astro-bgd6mkzw"> <a href="/reference/function/always" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">always</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/function/castComparator" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">castComparator</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/function/castMapping" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">castMapping</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/function/noop" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">noop</span>  </a> </li> </ul>  </details> </li><li class="astro-bgd6mkzw"> <details open class="astro-bgd6mkzw"> <summary class="astro-bgd6mkzw"> <div class="group-label astro-bgd6mkzw"> <span class="large astro-bgd6mkzw">Number</span>  </div> <svg aria-hidden="true" class="caret astro-bgd6mkzw astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-bgd6mkzw"> <li class="astro-bgd6mkzw"> <a href="/reference/number/clamp" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">clamp</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/number/inRange" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">inRange</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/number/lerp" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">lerp</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/number/max" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">max</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/number/min" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">min</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/number/range" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">range</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/number/round" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">round</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/number/sum" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">sum</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/number/toFloat" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">toFloat</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/number/toInt" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">toInt</span>  </a> </li> </ul>  </details> </li><li class="astro-bgd6mkzw"> <details open class="astro-bgd6mkzw"> <summary class="astro-bgd6mkzw"> <div class="group-label astro-bgd6mkzw"> <span class="large astro-bgd6mkzw">Object</span>  </div> <svg aria-hidden="true" class="caret astro-bgd6mkzw astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-bgd6mkzw"> <li class="astro-bgd6mkzw"> <a href="/reference/object/assign" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">assign</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/clone" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">clone</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/cloneDeep" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">cloneDeep</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/construct" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">construct</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/crush" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">crush</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/filterKey" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">filterKey</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/get" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">get</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/invert" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">invert</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/keys" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">keys</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/listify" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">listify</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/lowerize" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">lowerize</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/mapEntries" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">mapEntries</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/mapKeys" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">mapKeys</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/mapValues" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">mapValues</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/omit" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">omit</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/pick" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">pick</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/set" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">set</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/shake" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">shake</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/traverse" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">traverse</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/object/upperize" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">upperize</span>  </a> </li> </ul>  </details> </li><li class="astro-bgd6mkzw"> <details open class="astro-bgd6mkzw"> <summary class="astro-bgd6mkzw"> <div class="group-label astro-bgd6mkzw"> <span class="large astro-bgd6mkzw">Random</span>  </div> <svg aria-hidden="true" class="caret astro-bgd6mkzw astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-bgd6mkzw"> <li class="astro-bgd6mkzw"> <a href="/reference/random/draw" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">draw</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/random/random" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">random</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/random/shuffle" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">shuffle</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/random/uid" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">uid</span>  </a> </li> </ul>  </details> </li><li class="astro-bgd6mkzw"> <details open class="astro-bgd6mkzw"> <summary class="astro-bgd6mkzw"> <div class="group-label astro-bgd6mkzw"> <span class="large astro-bgd6mkzw">Series</span>  </div> <svg aria-hidden="true" class="caret astro-bgd6mkzw astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-bgd6mkzw"> <li class="astro-bgd6mkzw"> <a href="/reference/series/series" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">series</span>  </a> </li> </ul>  </details> </li><li class="astro-bgd6mkzw"> <details open class="astro-bgd6mkzw"> <summary class="astro-bgd6mkzw"> <div class="group-label astro-bgd6mkzw"> <span class="large astro-bgd6mkzw">String</span>  </div> <svg aria-hidden="true" class="caret astro-bgd6mkzw astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-bgd6mkzw"> <li class="astro-bgd6mkzw"> <a href="/reference/string/camel" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">camel</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/string/capitalize" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">capitalize</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/string/dash" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">dash</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/string/pascal" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">pascal</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/string/similarity" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">similarity</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/string/snake" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">snake</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/string/template" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">template</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/string/title" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">title</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/string/trim" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">trim</span>  </a> </li> </ul>  </details> </li><li class="astro-bgd6mkzw"> <details open class="astro-bgd6mkzw"> <summary class="astro-bgd6mkzw"> <div class="group-label astro-bgd6mkzw"> <span class="large astro-bgd6mkzw">Typed</span>  </div> <svg aria-hidden="true" class="caret astro-bgd6mkzw astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-bgd6mkzw"> <li class="astro-bgd6mkzw"> <a href="/reference/typed/isArray" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isArray</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isBoolean" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isBoolean</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isDate" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isDate</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isEmpty" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isEmpty</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isEqual" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isEqual</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isError" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isError</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isFloat" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isFloat</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isFunction" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isFunction</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isInt" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isInt</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isIntString" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isIntString</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isMap" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isMap</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isNumber" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isNumber</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isObject" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isObject</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isPlainObject" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isPlainObject</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isPrimitive" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isPrimitive</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isPromise" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isPromise</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isRegExp" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isRegExp</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isResult" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isResult</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isResultErr" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isResultErr</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isResultOk" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isResultOk</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isSet" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isSet</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isString" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isString</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isSymbol" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isSymbol</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isWeakMap" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isWeakMap</span>  </a> </li><li class="astro-bgd6mkzw"> <a href="/reference/typed/isWeakSet" class="astro-bgd6mkzw">  <span class="astro-bgd6mkzw">isWeakSet</span>  </a> </li> </ul>  </details> </li> </ul>  </li> </ul>  <div class="md:sl-hidden"> <div class="mobile-preferences sl-flex astro-ym3r2ldi"> <div class="sl-flex social-icons astro-ym3r2ldi">  </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-xsfkp6md"> <span class="sr-only astro-xsfkp6md">Select theme</span> <svg aria-hidden="true" class="icon label-icon astro-xsfkp6md astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg>  <select value="auto" class="astro-xsfkp6md"> <option value="dark" class="astro-xsfkp6md">Dark</option><option value="light" class="astro-xsfkp6md">Light</option><option value="auto" selected="true" class="astro-xsfkp6md">Auto</option> </select> <svg aria-hidden="true" class="icon caret astro-xsfkp6md astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </label>  </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script>   </div>  </div> </div> </div> </nav> <script>
+		(function () {
+			const sidebarPane = document.querySelector('.sidebar-pane');
+			if (sidebarPane) {
+				const scrollPosition = sidebarPane.getAttribute('data-scroll-top');
+				if (scrollPosition) {
+					sidebarPane.scrollTop = +scrollPosition;
+				}
+				sidebarPane.addEventListener(
+					'scroll',
+					() => {
+						sidebarPane.setAttribute('data-scroll-top', '' + sidebarPane.scrollTop);
+					},
+					{ passive: true }
+				);
+			}
+		})();
+	</script> <div class="main-frame transition-fade astro-wu4nwam6">   <div class="lg:sl-flex astro-qzsemow5">  <div class="main-pane astro-qzsemow5">  <main data-pagefind-body lang="en" dir="ltr" class="astro-rwlsmwlq"> <div class="page transition-fade astro-rwlsmwlq" data-has-sidebar="true"> <script>
+							// This script updates the <html> element's data-* attributes
+							// and sets the display style of the sidebar. It will rerun on
+							// each page navigation.
+							(function () {
+								const parentElement = document.currentScript?.parentElement;
+
+								const { hasSidebar, hasToc, hasHero } = parentElement?.dataset || {};
+
+								/**
+								 * @param {HTMLElement} element
+								 * @param {string} key
+								 * @param {any} value
+								 */
+								function setData(element, key, value) {
+									if (value == null) {
+										delete element.dataset[key];
+									} else {
+										element.dataset[key] = value;
+									}
+								}
+
+								const htmlElement = document.documentElement;
+								setData(htmlElement, 'hasSidebar', hasSidebar);
+								setData(htmlElement, 'hasToc', hasToc);
+								setData(htmlElement, 'hasHero', hasHero);
+
+								const sidebar = document.getElementById('starlight__sidebar');
+								if (sidebar) {
+									sidebar.style.display = hasSidebar ? 'block' : 'none';
+								}
+							})();
+						</script>   <div class="content-panel astro-dmxftcma"> <div class="sl-container astro-dmxftcma"> <h1 id="_top" class="astro-3dzsydmp">Changelog</h1>    </div> </div> <div class="content-panel astro-dmxftcma"> <div class="sl-container astro-dmxftcma"> <div class="sl-markdown-content">   <h1 id="changelog">Changelog</h1>
+<p>All notable changes to this project will be documented in this file.</p>
+<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
+and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<h2 id="radashibeta"><a href="https://github.com/radashi-org/radashi/compare/v12.1.0..HEAD">radashi@beta</a></h2>
+<h3 id="details">Details</h3>
+<h4 id="added"><!-- 03 -->Added</h4>
+<ul>
+<li>
+<p>Add <code dir="auto">isIntString</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/fa500d329d7e06062e7a42cbf4ff9ad9dcb89191">fa500d3</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">isPlainObject</code> type guard by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/16">#16</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">round</code> function by <a href="https://github.com/shan-shaji">@shan-shaji</a> in <a href="https://github.com/radashi-org/radashi/pull/53">#53</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">mapify</code> function by <a href="https://github.com/cimbraien">@cimbraien</a> in <a href="https://github.com/radashi-org/radashi/pull/58">#58</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">unzip</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/64">#64</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">flip</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/35">#35</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">once</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/80">#80</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">lerp</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/86">#86</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">isMap</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/4f2e48c24e7e10162cf0040f8c9b7b91bc9a37c0">4f2e48c</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">isRegExp</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/58e7d96baed7ea73e09dff3884aeebb6150f9485">58e7d96</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">isSet</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/73e70c1011fffa21d1d38bb04d5616073c8e8739">73e70c1</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">isWeakSet</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/aacd5be35e38e4ba7a6ecabb7942eafb26111486">aacd5be</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">isWeakMap</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/f32cfd5c2160724d5d12d3e9f9a43c328daf0f4d">f32cfd5</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">traverse</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/59">#59</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">cloneDeep</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/81">#81</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">castMapping</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/43">#43</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">clamp</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/106">#106</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">castArray</code> and <code dir="auto">castArrayIfExists</code> by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/97">#97</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">castComparator</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/34">#34</a></p>
+</li>
+<li>
+<p>Add reverse argument to <code dir="auto">castComparator</code> by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/1d7937ef006139883aedac782ad032c1d6269c7a">1d7937e</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">isBoolean</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/adc419d5bbb1786d75619ed3d7f41a45f68c9857">adc419d</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">noop</code> and <code dir="auto">always</code> functions by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/eb77c8f004a35f1499968f6e40d01b3595384848">eb77c8f</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">similarity</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/122">#122</a></p>
+</li>
+<li>
+<p><strong>(throttle)</strong> Add <code dir="auto">trailing</code> option by <a href="https://github.com/crishoj">@crishoj</a> in <a href="https://github.com/radashi-org/radashi/pull/127">#127</a></p>
+</li>
+<li>
+<p><strong>(throttle)</strong> Add <code dir="auto">trigger</code> method to ThrottleFunction by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/135">#135</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">withResolvers</code> ponyfill by <a href="https://github.com/Minhir">@Minhir</a> in <a href="https://github.com/radashi-org/radashi/pull/148">#148</a></p>
+</li>
+<li>
+<p><strong>(debounce)</strong> Add <code dir="auto">leading</code> option by <a href="https://github.com/crishoj">@crishoj</a> in <a href="https://github.com/radashi-org/radashi/pull/128">#128</a></p>
+</li>
+<li>
+<p>Add isResult, isResultOk, and isResultErr functions by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/172">#172</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">isError</code> function by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/173">#173</a></p>
+</li>
+</ul>
+<h4 id="changed"><!-- 05 -->Changed</h4>
+<ul>
+<li>
+<p><strong>(intersects)</strong> Let <code dir="auto">identity</code> callback return any value by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/11">#11</a></p>
+</li>
+<li>
+<p><strong>(unique)</strong> Let <code dir="auto">toKey</code> return any kind of value by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/10">#10</a></p>
+</li>
+<li>
+<p><strong>(select)</strong> Let <code dir="auto">condition</code> be undefined by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/9">#9</a></p>
+</li>
+<li>
+<p>Replace <code dir="auto">matchKeys</code> with <code dir="auto">filterKey</code> by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/28">#28</a></p>
+</li>
+<li>
+<p><strong>(filterKey)</strong> Accept null/undefined filter by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/b10ad105bada331494c232b7a28f9d76ff77dded">b10ad10</a></p>
+</li>
+<li>
+<p>Add selectFirst by <a href="https://github.com/adamhamlin">@adamhamlin</a> in <a href="https://github.com/radashi-org/radashi/pull/52">#52</a></p>
+</li>
+<li>
+<p><strong>(pick)</strong> Accept a callback for advanced picking by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/30">#30</a></p>
+</li>
+<li>
+<p><strong>(mapify)</strong> Provide an index argument to the callbacks by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/100">#100</a></p>
+</li>
+<li>
+<p>Use native AggregateError if available by <a href="https://github.com/MarlonPassos-git">@MarlonPassos-git</a> in <a href="https://github.com/radashi-org/radashi/pull/116">#116</a></p>
+</li>
+</ul>
+<h4 id="fixed"><!-- 06 -->Fixed</h4>
+<ul>
+<li>
+<p><strong>(retry)</strong> Stop using <code dir="auto">range()</code> by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/5d60893471240516a49c6ddf48839165b5961a47">5d60893</a></p>
+</li>
+<li>
+<p><strong>(assign)</strong> Remove inefficiencies in loop by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/13">#13</a></p>
+</li>
+<li>
+<p><strong>(set)</strong> Avoid false positive of array index in path by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/15">#15</a></p>
+</li>
+<li>
+<p><strong>(shake)</strong> Stop using <code dir="auto">Omit</code> on return type and give <code dir="auto">filter</code> parameter a safer type by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/12">#12</a></p>
+</li>
+<li>
+<p><strong>(series)</strong> Allow <code dir="auto">items</code> param to be a readonly array by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/14">#14</a></p>
+</li>
+<li>
+<p>Copy <code dir="auto">is-plain-obj</code> implementation by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/08a18e218d83bf094354d4af1b5c9dcf92c18d1f">08a18e2</a></p>
+</li>
+<li>
+<p>Avoid <code dir="auto">isObject</code> for internal use by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/3b6a67ca7298cdcfde329a4ef28440205602b0e3">3b6a67c</a></p>
+</li>
+<li>
+<p><strong>(isArray)</strong> Work with <code dir="auto">readonly T[]</code> types by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/88c12b6e3941b1fa6072b9ec9bf214c508e7bb70">88c12b6</a></p>
+</li>
+<li>
+<p><strong>(keys)</strong> Improve perf by avoiding excessive array allocations by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/25">#25</a></p>
+</li>
+<li>
+<p>Ensure <code dir="auto">mapValues</code> and <code dir="auto">group</code> work together by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/24">#24</a></p>
+</li>
+<li>
+<p>Use typeof in <code dir="auto">isFunction</code> by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/6ad96f44f17949ee33acda9a073307b19dca7796">6ad96f4</a></p>
+</li>
+<li>
+<p><code dir="auto">toInt</code> and <code dir="auto">toFloat</code> should not throw on symbols by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/cafc7fc4833447d6e5ed6bdc88957201aae6372a">cafc7fc</a></p>
+</li>
+<li>
+<p><strong>(toggle)</strong> Handle falsy input as expected by <a href="https://github.com/Minhir">@Minhir</a> in <a href="https://github.com/radashi-org/radashi/pull/82">#82</a></p>
+</li>
+<li>
+<p><strong>(assign)</strong> Fix overriding a nested object with null by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/112">#112</a></p>
+</li>
+<li>
+<p><strong>(crush)</strong> Fix handling of period-containing property names by <a href="https://github.com/stefaanv">@stefaanv</a> in <a href="https://github.com/radashi-org/radashi/pull/95">#95</a></p>
+</li>
+<li>
+<p><strong>(toggle)</strong> Use -1 as index for <code dir="auto">toKey()</code> with toggled <code dir="auto">item</code> by <a href="https://github.com/Minhir">@Minhir</a> in <a href="https://github.com/radashi-org/radashi/pull/167">#167</a></p>
+</li>
+<li>
+<p><strong>(pascal)</strong> Handle camel-cased strings correctly by <a href="https://github.com/MarlonPassos-git">@MarlonPassos-git</a> in <a href="https://github.com/radashi-org/radashi/pull/178">#178</a></p>
+</li>
+</ul>
+<h4 id="performance"><!-- 07 -->Performance</h4>
+<ul>
+<li>
+<p>Avoid excessive array allocation in <code dir="auto">fork</code> by <a href="https://github.com/localusercamp">@localusercamp</a> in <a href="https://github.com/radashi-org/radashi/pull/33">#33</a></p>
+</li>
+<li>
+<p>Make <code dir="auto">template</code> faster by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/32">#32</a></p>
+</li>
+<li>
+<p><strong>(series)</strong> Avoid object spread in loop by <a href="https://github.com/cdreeves">@cdreeves</a> in <a href="https://github.com/radashi-org/radashi/pull/37">#37</a></p>
+</li>
+<li>
+<p><strong>(cluster)</strong> Avoid an array allocation by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/63">#63</a></p>
+</li>
+<li>
+<p><strong>(replace)</strong> Avoid creating 2 intermediate arrays by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/61">#61</a></p>
+</li>
+<li>
+<p><strong>(merge)</strong> Avoid arrow function in loop and avoid calling user-provided key generator more than once per item by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/60">#60</a></p>
+</li>
+<li>
+<p><strong>(replaceOrAppend)</strong> Avoid creating 2 intermediate arrays by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/62">#62</a></p>
+</li>
+<li>
+<p><strong>(shuffle)</strong> Use the Fisher-Yates algorithm by <a href="https://github.com/eumkz">@eumkz</a> in <a href="https://github.com/radashi-org/radashi/pull/76">#76</a></p>
+</li>
+</ul>
+<h4 id="types"><!-- 08 -->Types</h4>
+<ul>
+<li>
+<p>Let <code dir="auto">filterKey</code> accept <code dir="auto">key: keyof any</code> by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/73ac8bba9e2a2a39eb3c117cc940cc2b18199834">73ac8bb</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">TryitResult&#x3C;T></code> type by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/f0443644bace43ad3092751e0ba4193ead336ef6">f044364</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">MemoOptions&#x3C;T></code> type by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/877a1e4e4d6fba76eea04731e69f7490d3f3191a">877a1e4</a></p>
+</li>
+<li>
+<p>Export <code dir="auto">UppercaseKeys</code> and <code dir="auto">LowercaseKeys</code> types by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/96b28b9b037bd03277511d0174e4896729bcee93">96b28b9</a></p>
+</li>
+<li>
+<p>Let <code dir="auto">zip</code> accept readonly arrays by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/f7d93cc9c9909e081a2584175154eb4a141d88a3">f7d93cc</a></p>
+</li>
+<li>
+<p>Improve the <code dir="auto">isArray</code> return type for <code dir="auto">unknown</code> input type by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/72">#72</a></p>
+</li>
+<li>
+<p><code dir="auto">select</code> return type when no condition is defined by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/ab76d6502e479b378ad824c89974f389ec597a9e">ab76d65</a></p>
+</li>
+<li>
+<p>Add <code dir="auto">FilteredKeys</code> type by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/6a6f899316229efc6706d8c40998df5fa99e004b">6a6f899</a></p>
+</li>
+<li>
+<p>Improve the return type of <code dir="auto">filterKey</code> by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/bc298c6cfcaaf74726e1f2b901e210dea1fed641">bc298c6</a></p>
+</li>
+<li>
+<p>Handle tuples in <code dir="auto">isArray</code> return type by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/925753578761bda277838bf8fbbcc24b3813f2b9">9257535</a></p>
+</li>
+<li>
+<p>Make <code dir="auto">select</code> more option-friendly by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/c9cfcd0a7eb1af98682f5d9b56555162c92b7085">c9cfcd0</a></p>
+</li>
+<li>
+<p>Let <code dir="auto">shift</code> accept a readonly array type by <a href="https://github.com/nnmrts">@nnmrts</a> in <a href="https://github.com/radashi-org/radashi/pull/126">#126</a></p>
+</li>
+<li>
+<p>Remove type constraint for mapped array passed to <code dir="auto">sum</code> by <a href="https://github.com/MarlonPassos-git">@MarlonPassos-git</a> in <a href="https://github.com/radashi-org/radashi/commit/dea0f504f417b23aaf2b91495943501c894a172a">dea0f50</a></p>
+</li>
+<li>
+<p>Make <code dir="auto">assign</code> return type more accurate + add <code dir="auto">Assign</code> type by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/142">#142</a></p>
+</li>
+<li>
+<p>Add Ok/Err/Result/ResultPromise types by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/132">#132</a></p>
+</li>
+<li>
+<p>Align <code dir="auto">isPromise</code> return type with its logic by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/pull/175">#175</a></p>
+</li>
+<li>
+<p>Publicize the <code dir="auto">Falsy</code> type by <a href="https://github.com/aleclarson">@aleclarson</a> in <a href="https://github.com/radashi-org/radashi/commit/736d3342f86cf16199d6d50cacd0cec3f51db078">736d334</a></p>
+</li>
+</ul>
+<h3 id="new-contributors">New Contributors</h3>
+<ul>
+<li><a href="https://github.com/crishoj">@crishoj</a> made their first contribution in <a href="https://github.com/radashi-org/radashi/pull/128">#128</a></li>
+<li><a href="https://github.com/nnmrts">@nnmrts</a> made their first contribution in <a href="https://github.com/radashi-org/radashi/pull/126">#126</a></li>
+<li><a href="https://github.com/stefaanv">@stefaanv</a> made their first contribution in <a href="https://github.com/radashi-org/radashi/pull/95">#95</a></li>
+<li><a href="https://github.com/eumkz">@eumkz</a> made their first contribution in <a href="https://github.com/radashi-org/radashi/pull/76">#76</a></li>
+<li><a href="https://github.com/cimbraien">@cimbraien</a> made their first contribution in <a href="https://github.com/radashi-org/radashi/pull/58">#58</a></li>
+<li><a href="https://github.com/shan-shaji">@shan-shaji</a> made their first contribution in <a href="https://github.com/radashi-org/radashi/pull/53">#53</a></li>
+<li><a href="https://github.com/cdreeves">@cdreeves</a> made their first contribution in <a href="https://github.com/radashi-org/radashi/pull/37">#37</a></li>
+<li><a href="https://github.com/localusercamp">@localusercamp</a> made their first contribution in <a href="https://github.com/radashi-org/radashi/pull/33">#33</a></li>
+</ul>
+<!-- generated by git-cliff --> <script>
+    const parent = document.currentScript.parentElement
+    parent.querySelector('h1').remove()
+  </script>   </div> <footer class="sl-flex astro-ws7dwejz">  <div class="meta sl-flex astro-ws7dwejz">   </div> <div class="pagination-links astro-sh3f5jzw" dir="ltr"> <a href="/browser-support" rel="prev" class="astro-sh3f5jzw"> <svg aria-hidden="true" class="astro-sh3f5jzw astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.8rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg>  <span class="astro-sh3f5jzw"> <span class="next-link-tag astro-sh3f5jzw">Previous</span> <br class="astro-sh3f5jzw"> <span class="link-title astro-sh3f5jzw">Browser Support</span> </span> </a> <a href="/playground" rel="next" class="astro-sh3f5jzw"> <svg aria-hidden="true" class="astro-sh3f5jzw astro-bkchasgr" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.8rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg>  <span class="astro-sh3f5jzw"> <span class="next-link-tag astro-sh3f5jzw">Next</span> <br class="astro-sh3f5jzw"> <span class="link-title astro-sh3f5jzw">Playground</span> </span> </a> </div>   </footer>  </div> </div>   </div> </main> </div> </div>  </div> </div>  </body></html>
