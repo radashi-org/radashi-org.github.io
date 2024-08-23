@@ -48,16 +48,21 @@ const {
 ---
 
 <StarlightPage frontmatter={frontmatter}>
-  <div
+  <a
     id="heft"
-    class="inline-block px-0.8rem py-0.4rem bg-#bddef2 color-[hsl(224,_10%,_10%)] rounded-full text-0.8rem font-500 translate-y--20% translate-x-1rem"
+    href={`https://github.com/radashi-org/radashi/blob/main/src/${Astro.url.pathname.replace(/\/reference\//, '')}.ts`}
+    target="_blank"
+    class="inline-block translate-y--20% translate-x-1rem no-underline"
   >
-    <strong class="font-700">{heft[frontmatter.title]}</strong> bytes
-  </div>
+    <div
+      class="px-0.8rem py-0.4rem bg-#bddef2 color-[hsl(224,_10%,_10%)] rounded-full text-0.8rem font-500"
+    >
+      <strong class="font-700">{heft[frontmatter.title]}</strong> bytes
+    </div>
+  </a>
   <Content />
 
   <script is:inline define:vars={{ title: frontmatter.title }}>
-    console.log('[FunctionPage] mount %s', title)
     const h1 = document.querySelector(':not(.is-previous-container) h1')
     h1.append(document.getElementById('heft'))
   </script>
