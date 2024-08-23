@@ -9,6 +9,11 @@
   },
   "rewrap.wrappingColumn": 75,
   "search.exclude": {
-    "**/dist": true
+    "**/dist/**": true,
+    "**/node_modules/**": true,
+    "**/pnpm-lock.yaml": true,
+    "**/starlight/docs/**": true,
+    "**/starlight/examples/**": true,
+    "**/fixtures/**": true
   }
 }
