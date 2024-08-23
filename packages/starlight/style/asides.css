@@ -4,24 +4,24 @@
 	color: var(--sl-color-white);
 }
 .starlight-aside--note {
-	--sl-color-asides-text-accent: var(--sl-color-blue-high);
-	--sl-color-asides-border: var(--sl-color-blue);
-	background-color: var(--sl-color-blue-low);
+	--sl-color-asides-text-accent: #8dd9dc;
+	--sl-color-asides-border: #8dd9dc;
+	background-color: #4b6c6d;
 }
 .starlight-aside--tip {
-	--sl-color-asides-text-accent: var(--sl-color-purple-high);
-	--sl-color-asides-border: var(--sl-color-purple);
-	background-color: var(--sl-color-purple-low);
+	--sl-color-asides-text-accent: #73cf9a;
+	--sl-color-asides-border: #73cf9a;
+	background-color: #266942;
 }
 .starlight-aside--caution {
-	--sl-color-asides-text-accent: var(--sl-color-orange-high);
-	--sl-color-asides-border: var(--sl-color-orange);
-	background-color: var(--sl-color-orange-low);
+	--sl-color-asides-text-accent: #ffc56e;
+	--sl-color-asides-border: #ffc56e;
+	background-color: #715224;
 }
 .starlight-aside--danger {
-	--sl-color-asides-text-accent: var(--sl-color-red-high);
-	--sl-color-asides-border: var(--sl-color-red);
-	background-color: var(--sl-color-red-low);
+	--sl-color-asides-text-accent: #fb9494;
+	--sl-color-asides-border: #f97373;
+	background-color: #804b4b;
 }
 
 .starlight-aside__title {

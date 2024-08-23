@@ -5,7 +5,12 @@ import { useTranslations } from '../utils/translations';
 import Icon from './Icon.astro';
 
 const asideVariants = ['note', 'tip', 'caution', 'danger'] as const;
-const icons = { note: 'information', tip: 'rocket', caution: 'warning', danger: 'error' } as const;
+const icons = {
+	note: 'information',
+	tip: 'gift',
+	caution: 'warning',
+	danger: 'error',
+} as const;
 
 interface Props {
 	type?: (typeof asideVariants)[number];
