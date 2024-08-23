@@ -162,6 +162,7 @@ function generateSidebar(): SidebarItem[] {
     }),
     separatorItem,
     h3('All Functions', {
+      icon: '/sidebar/functions.svg',
       link: 'reference/',
       class: 'top-level-link',
     }),
