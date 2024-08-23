@@ -124,7 +124,7 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
     if (!isPaused) {
       const loop = setTimeout(() => {
         setCodeBlock((currentIndex + 1) % props.names.length)
-      }, 2500)
+      }, 5000)
 
       return () => clearTimeout(loop)
     }
