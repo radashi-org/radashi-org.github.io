@@ -50,7 +50,7 @@ const {
 <StarlightPage frontmatter={frontmatter}>
   <a
     id="heft"
-    href={`https://github.com/radashi-org/radashi/blob/main/src/${Astro.url.pathname.replace(/\/reference\//, '')}.ts`}
+    href={`https://github.com/radashi-org/radashi/blob/main/src/${Astro.url.pathname.replace(/\/reference\//, '').replace(/\/$/, '')}.ts`}
     target="_blank"
     class="inline-block translate-y--20% translate-x-1rem no-underline"
   >
