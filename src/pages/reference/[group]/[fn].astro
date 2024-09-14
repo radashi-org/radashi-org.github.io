@@ -13,6 +13,7 @@ interface StaticParams {
 interface Frontmatter {
   title: string
   description: string
+  since: string
 }
 
 interface Props {
@@ -52,7 +53,8 @@ const {
     id="heft"
     href={`https://github.com/radashi-org/radashi/blob/main/src/${Astro.url.pathname.replace(/\/reference\//, '').replace(/\/$/, '')}.ts`}
     target="_blank"
-    class="inline-block translate-y--20% translate-x-1rem no-underline"
+    class="inline-block translate-y--20% translate-x-1rem no-underline mr-0.4rem"
+    title={`access the source code of ${frontmatter.title}`}
   >
     <div
       class="px-0.8rem py-0.4rem bg-#bddef2 color-[hsl(224,_10%,_10%)] rounded-full text-0.8rem font-500"
@@ -60,10 +62,24 @@ const {
       <strong class="font-700">{heft[frontmatter.title]}</strong> bytes
     </div>
   </a>
+  <a
+    id="since"
+    href={`https://github.com/radashi-org/radashi/tree/v${frontmatter.since}`}
+    target="_blank"
+    class="inline-block translate-y--20% translate-x-1rem no-underline"
+    title={`view the repository at v${frontmatter.since}`}
+  >
+    <div
+      class="px-0.8rem py-0.4rem bg-#F69D50 color-[hsl(224,_10%,_10%)] rounded-full text-0.8rem font-500"
+    >
+      since <strong class="font-700">v{frontmatter.since}</strong>
+    </div>
+  </a>
   <Content />
 
   <script is:inline define:vars={{ title: frontmatter.title }}>
     const h1 = document.querySelector(':not(.is-previous-container) h1')
     h1.append(document.getElementById('heft'))
+    h1.append(document.getElementById('since'))
   </script>
 </StarlightPage>
