@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../starlight"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/node_modules": true,
+			"**/.astro": true,
+			"starlight": true
+		}
+	}
+}
