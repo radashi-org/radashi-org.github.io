@@ -97,8 +97,8 @@ importers:
         specifier: ^0.32.5
         version: 0.32.6
       subrepo-install:
-        specifier: ^0.1.2
-        version: 0.1.2
+        specifier: ^0.2.0
+        version: 0.2.0
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -2544,8 +2544,8 @@ packages:
     resolution: {integrity: sha512-4gB8na07fecVVkOI6Rs4e7T6NOTki5EmL7TUduTs6bu3EdnSycntVJ4re8kgZA+wx9IueI2Y11bfbgwtzuE0KQ==}
     engines: {node: '>=0.10.0'}
 
-  subrepo-install@0.1.2:
-    resolution: {integrity: sha512-ansttbEjuIMiol+A0jXkFANWHPeMKIquiaOhiHJOYBBKK2KAjSSoN2bSgPfcfpd8TUzErxL/KrBYITiQn6VoAQ==}
+  subrepo-install@0.2.0:
+    resolution: {integrity: sha512-y+Td9bt2O9D2KSiYYESjV66dcDlRqrh9K/2M0e0u1NZPAPNhOGEJ5mQs1wbb9DbEauyyhPMYUI+1qgfImBQBIg==}
 
   supports-color@5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
@@ -5786,7 +5786,7 @@ snapshots:
 
   strip-json-comments@2.0.1: {}
 
-  subrepo-install@0.1.2:
+  subrepo-install@0.2.0:
     dependencies:
       debug: 4.4.0
       picocolors: 1.1.1
