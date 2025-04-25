@@ -5,6 +5,7 @@ subrepoInstall([
     dir: 'starlight',
     remote: 'https://github.com/radashi-org/radashi-org.github.io',
     ref: 'starlight',
+    unshallow: true,
     rootPackageStrategy: 'install-only',
     packages: ['packages/starlight'],
   },
