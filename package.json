@@ -9,7 +9,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "postinstall": "node scripts/postinstall.mts"
+    "postinstall": "node scripts/postinstall.ts"
   },
   "prettier": "@alloc/prettier-config",
   "dependencies": {
