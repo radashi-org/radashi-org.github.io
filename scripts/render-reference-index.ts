@@ -45,8 +45,8 @@ type FunctionInfo = {
 function renderFunction(slug: string, data: FunctionInfo) {
   return dedent`
     <a href="/reference/${slug}" class="big-page-link">
-      <h3>${data.title}</h3>
-      <p>${data.description}</p>
+      <h3>${escapeHTML(data.title)}</h3>
+      <p>${escapeHTML(data.description)}</p>
     </a>
   `
 }
@@ -68,4 +68,16 @@ function renderIndex(sections: Record<string, Section>) {
     .join('\n\n')
 
   return metadata + '\n\n' + content
+}
+
+function escapeHTML(input: string): string {
+  const htmlCharacters = /[&<>"']/g
+  const replacements: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  }
+  return input.replace(htmlCharacters, char => replacements[char])
 }
