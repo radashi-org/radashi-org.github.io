@@ -44,7 +44,7 @@ type FunctionInfo = {
 
 function renderFunction(slug: string, data: FunctionInfo) {
   return dedent`
-    <a href="/reference/${slug}" class="big-page-link">
+    <a href="/reference/${slug}/" class="big-page-link">
       <h3>${escapeHTML(data.title)}</h3>
       <p>${escapeHTML(data.description)}</p>
     </a>
