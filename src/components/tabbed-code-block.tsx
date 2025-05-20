@@ -1,18 +1,12 @@
 import clsx from 'clsx'
-import { useEffect, useLayoutEffect, useRef, useState } from 'preact/hooks'
+import { useLayoutEffect, useRef, useState } from 'preact/hooks'
 
 export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
   const rootRef = useRef<HTMLDivElement>(null)
   const codeContainerRef = useRef<HTMLDivElement>(null)
   const [codeBlocks] = useState(() => [] as HTMLElement[])
   const [currentIndex, setCurrentIndex] = useState(-1)
-  const [offScreen, setOffScreen] = useState(false)
   const [mousedOver, setMousedOver] = useState(false)
-
-  let [isPaused, setPaused] = useState(true)
-  if (offScreen || mousedOver) {
-    isPaused = true
-  }
 
   function setCodeBlock(index: number) {
     const previousIndex = currentIndex
@@ -73,10 +67,6 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
           codeBlock.addEventListener('mouseleave', () => {
             setMousedOver(false)
           })
-          // Let mobile devices click to pause/play
-          codeBlock.addEventListener('click', () => {
-            setPaused(paused => !paused)
-          })
         })
       }
 
@@ -116,32 +106,7 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
         codeBlock.style.removeProperty('visibility')
       })
       setCodeBlock(0)
-      setPaused(false)
     })
-  }, [])
-
-  useEffect(() => {
-    if (!isPaused) {
-      const loop = setTimeout(() => {
-        setCodeBlock((currentIndex + 1) % props.names.length)
-      }, 5000)
-
-      return () => clearTimeout(loop)
-    }
-  }, [currentIndex, isPaused])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setOffScreen(!entry.isIntersecting)
-      },
-      {
-        rootMargin: '-50% 0px -37% 0px', // 70% of the screen vertically
-      }
-    )
-
-    observer.observe(rootRef.current!)
-    return () => observer.disconnect()
   }, [])
 
   return (
