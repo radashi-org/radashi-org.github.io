@@ -13,11 +13,8 @@ export async function renderReferenceIndex() {
       .slice(2) // Remove "radashi/docs/"
       .join('/')
 
-    const { data, content } = matter(
-      await readFile(file)
-    ) as GrayMatterFile<any> & {
+    const { data } = matter(await readFile(file)) as GrayMatterFile<any> & {
       data: FunctionInfo
-      content: string
     }
 
     const sectionId = slug.split('/')[0]
@@ -43,6 +40,10 @@ type FunctionInfo = {
 }
 
 function renderFunction(slug: string, data: FunctionInfo) {
+  if (!data.title || !data.description) {
+    throw new Error(`Missing title or description for ${slug}`)
+  }
+
   return dedent`
     <a href="/reference/${slug}/" class="big-page-link">
       <h3>${escapeHTML(data.title)}</h3>
