@@ -6,7 +6,6 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
   const codeContainerRef = useRef<HTMLDivElement>(null)
   const [codeBlocks] = useState(() => [] as HTMLElement[])
   const [currentIndex, setCurrentIndex] = useState(-1)
-  const [mousedOver, setMousedOver] = useState(false)
 
   function setCodeBlock(index: number) {
     const previousIndex = currentIndex
@@ -60,13 +59,6 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
           if (codeBlocks.length > 1) {
             codeBlock.style.position = 'absolute'
           }
-
-          codeBlock.addEventListener('mouseenter', () => {
-            setMousedOver(true)
-          })
-          codeBlock.addEventListener('mouseleave', () => {
-            setMousedOver(false)
-          })
         })
       }
 
@@ -111,10 +103,7 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
 
   return (
     <div ref={rootRef}>
-      <div
-        class="not-content flex flex-row items-center mt-3"
-        onMouseEnter={() => setMousedOver(true)}
-        onMouseLeave={() => setMousedOver(false)}>
+      <div class="not-content flex flex-row items-center mt-3">
         {props.names.map((name, index) => (
           <div
             role="button"
@@ -127,9 +116,7 @@ export function TabbedCodeBlock(props: { names: string[]; children?: any }) {
                 class={clsx([
                   'h-2.6px w-full rounded-full transition-650',
                   currentIndex === index
-                    ? mousedOver
-                      ? 'bg-#fffa85'
-                      : 'bg-$sl-color-accent'
+                    ? 'bg-$sl-color-accent'
                     : 'bg-#8a6e6f opacity-50',
                 ])}></div>
             </div>
