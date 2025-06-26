@@ -3,6 +3,10 @@ import { readFile } from 'node:fs/promises'
 import { dedent, escapeHTML } from 'radashi'
 import { globSync } from 'tinyglobby'
 
+const nameOverrides: Record<string, string> = {
+  oop: 'OOP',
+}
+
 export async function renderReferenceIndex() {
   const sections: Record<string, Section> = {}
 
@@ -19,7 +23,9 @@ export async function renderReferenceIndex() {
 
     const sectionId = slug.split('/')[0]
     const section = (sections[sectionId] ||= {
-      name: sectionId[0].toUpperCase() + sectionId.slice(1),
+      name:
+        nameOverrides[sectionId] ??
+        sectionId[0].toUpperCase() + sectionId.slice(1),
       functions: [],
     })
 

@@ -7,7 +7,7 @@ import unocss from '@unocss/astro'
 import { defineConfig } from 'astro/config'
 import { existsSync, mkdirSync, writeFileSync } from 'fs'
 import path from 'node:path'
-import { camel, group, title } from 'radashi'
+import { group, title } from 'radashi'
 import { globSync } from 'tinyglobby'
 import virtual from 'vite-plugin-virtual'
 import { renderHeftJson } from './scripts/render-heft-json'
@@ -172,7 +172,7 @@ function generateSidebar(): SidebarItem[] {
           globSync('radashi/docs/**/*.mdx').map(file => {
             const name = path.basename(file, '.mdx')
             return {
-              label: camel(name),
+              label: name,
               link: ['reference', path.basename(path.dirname(file)), name].join(
                 '/'
               ),
@@ -182,7 +182,7 @@ function generateSidebar(): SidebarItem[] {
         )
       ).map(
         ([label, items]): SidebarItem => ({
-          label: title(label),
+          label: label === 'oop' ? 'OOP' : title(label),
           items: items!,
         })
       ),
