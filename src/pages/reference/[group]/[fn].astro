@@ -54,7 +54,7 @@ const {
     href={`https://github.com/radashi-org/radashi/blob/main/src/${Astro.url.pathname.replace(/\/reference\//, '').replace(/\/$/, '')}.ts`}
     target="_blank"
     class="inline-block translate-y--20% translate-x-1rem no-underline mr-0.4rem"
-    title={`access the source code of ${frontmatter.title}`}
+    title={`View the source code of ${frontmatter.title}`}
   >
     <div
       class="px-0.8rem py-0.4rem bg-#bddef2 color-[hsl(224,_10%,_10%)] rounded-full text-0.8rem font-500"
@@ -64,15 +64,27 @@ const {
   </a>
   <a
     id="since"
-    href={`https://github.com/radashi-org/radashi/tree/v${frontmatter.since}`}
+    href={frontmatter.since
+      ? `https://github.com/radashi-org/radashi/tree/v${frontmatter.since}`
+      : `https://github.com/radashi-org/radashi/tree/beta`}
     target="_blank"
     class="inline-block translate-y--20% translate-x-1rem no-underline"
-    title={`view the repository at v${frontmatter.since}`}
+    title={frontmatter.since
+      ? `Browse the repository at v${frontmatter.since}`
+      : `Browse the repository's beta branch`}
   >
     <div
       class="px-0.8rem py-0.4rem bg-#F69D50 color-[hsl(224,_10%,_10%)] rounded-full text-0.8rem font-500"
     >
-      since <strong class="font-700">v{frontmatter.since}</strong>
+      {
+        frontmatter.since ? (
+          <>
+            since <strong class="font-700">v{frontmatter.since}</strong>
+          </>
+        ) : (
+          'currently in beta'
+        )
+      }
     </div>
   </a>
   <Content />
