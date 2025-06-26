@@ -173,9 +173,10 @@ function generateSidebar(): SidebarItem[] {
             const name = path.basename(file, '.mdx')
             return {
               label: name,
-              link: ['reference', path.basename(path.dirname(file)), name].join(
-                '/'
-              ),
+              link:
+                ['reference', path.basename(path.dirname(file)), name].join(
+                  '/'
+                ) + '/',
             }
           }),
           item => item.link.split('/')[1]
