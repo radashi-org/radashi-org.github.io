@@ -1,12 +1,11 @@
 ---
 import type { Project } from '@stackblitz/sdk'
-import glob from 'fast-glob'
+import { glob } from 'tinyglobby'
 import MarkdownIt from 'markdown-it'
 import markdownItFrontMatter from 'markdown-it-front-matter'
 import fs from 'node:fs'
 import path from 'node:path'
-import { noop } from 'radashi'
-import { dedent } from '../util/dedent'
+import { dedent, noop } from 'radashi'
 import { parse } from '@babel/parser'
 
 const md = new MarkdownIt()
@@ -103,7 +102,7 @@ files['index.ts'] = dedent`
           console.error('< ' + key + ' threw:', error)
           throw error
         }
-        
+
         return result
       }
     }

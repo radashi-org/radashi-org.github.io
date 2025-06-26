@@ -1,12 +1,12 @@
-import dedent from 'dedent'
-import glob from 'fast-glob'
 import matter, { GrayMatterFile } from 'gray-matter'
 import { readFile } from 'node:fs/promises'
+import { dedent, escapeHTML } from 'radashi'
+import { globSync } from 'tinyglobby'
 
 export async function renderReferenceIndex() {
   const sections: Record<string, Section> = {}
 
-  for (const file of glob.sync('radashi/docs/**/*.mdx').sort()) {
+  for (const file of globSync('radashi/docs/**/*.mdx').sort()) {
     const slug = file
       .replace(/\.mdx$/, '')
       .split('/')
@@ -68,16 +68,4 @@ function renderIndex(sections: Record<string, Section>) {
     .join('\n\n')
 
   return metadata + '\n\n' + content
-}
-
-function escapeHTML(input: string): string {
-  const htmlCharacters = /[&<>"']/g
-  const replacements: Record<string, string> = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;',
-  }
-  return input.replace(htmlCharacters, char => replacements[char])
 }

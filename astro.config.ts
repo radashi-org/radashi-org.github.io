@@ -5,10 +5,10 @@ import mdAstro from '@astropub/md'
 import exec from '@cush/exec'
 import unocss from '@unocss/astro'
 import { defineConfig } from 'astro/config'
-import glob from 'fast-glob'
 import { existsSync, mkdirSync, writeFileSync } from 'fs'
 import path from 'node:path'
 import { camel, group, title } from 'radashi'
+import { globSync } from 'tinyglobby'
 import virtual from 'vite-plugin-virtual'
 import { renderHeftJson } from './scripts/render-heft-json'
 import { renderReferenceIndex } from './scripts/render-reference-index'
@@ -169,7 +169,7 @@ function generateSidebar(): SidebarItem[] {
     {
       items: Object.entries(
         group(
-          glob.sync('radashi/docs/**/*.mdx').map(file => {
+          globSync('radashi/docs/**/*.mdx').map(file => {
             const name = path.basename(file, '.mdx')
             return {
               label: camel(name),
