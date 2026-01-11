@@ -26,6 +26,8 @@ pnpm-debug.log*
 
 # generated files
 src/content/docs/reference/index.mdx
+public/llms.txt
+public/llms-full.txt
 
 # build output
 dist/
