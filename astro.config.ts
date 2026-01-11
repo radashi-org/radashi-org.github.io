@@ -11,6 +11,7 @@ import { group, title } from 'radashi'
 import { globSync } from 'tinyglobby'
 import virtual from 'vite-plugin-virtual'
 import { renderHeftJson } from './scripts/render-heft-json'
+import { renderLlmsTxt } from './scripts/render-llms-txt'
 import { renderReferenceIndex } from './scripts/render-reference-index'
 
 type SidebarItem = (StarlightUserConfig['sidebar'] & object)[number]
@@ -96,6 +97,11 @@ async function radashi() {
   const content = await renderReferenceIndex()
   mkdirSync('src/content/docs/reference', { recursive: true })
   writeFileSync('src/content/docs/reference/index.mdx', content)
+
+  console.log('Generating llms.txt files...')
+  const llmsTxt = await renderLlmsTxt()
+  writeFileSync('public/llms.txt', llmsTxt.index)
+  writeFileSync('public/llms-full.txt', llmsTxt.full)
 
   return [
     virtual({
