@@ -23,7 +23,7 @@ import { TabbedCodeBlock } from '../../components/tabbed-code-block'
 
 Below is our `castArray` implementation. If you can read our `CastArray<T>` type, you're officially a TypeScript nerd. But good news, we wrote it so you don't have to!
 
-```ts
+```ts twoslash
 export function castArray<T>(value: T): CastArray<T>
 export function castArray(value: unknown): unknown {
   return Array.isArray(value) ? value.slice() : [value]
@@ -46,7 +46,7 @@ export type CastArray<T> = [T] extends [never]
 
 Our `chain` function also has a gnarly type definition. As you can see, there's a lot we can do to make your life with TypeScript easier.
 
-```ts
+```ts twoslash
 export function chain<T1 extends any[], T2, T3>(
   f1: (...arg: T1) => T2,
   f2: (arg: T2) => T3
@@ -148,7 +148,7 @@ We pick our functions based on real needs and popular use cases. Our goal is to 
 
 Use `select` to create an array by filtering and mapping another array's items.
 
-```ts
+```ts twoslash
 import { select } from 'radashi'
 
 // Example: Filtering and transforming a list of products
@@ -171,7 +171,7 @@ const affordableInStockProducts = select(
 
 Use `objectify` to create an object from an array.
 
-```ts
+```ts twoslash
 import { objectify } from 'radashi'
 
 // A list of employees with their IDs and salaries
@@ -196,7 +196,16 @@ console.log(`Bob's salary: $${salariesById[102]}`)
 
 Use `defer` for co-location of cleanup logic with resource creation.
 
-```ts
+```ts twoslash
+const createTempTable = () => 'temp_table'
+const dropTable = (table: string) => `DROP TABLE ${table}`
+const backupExistingData = () => 'backup.json'
+const deleteFile = (file: string) => `rm ${file}`
+const migrateData = (table: string) =>
+  `ALTER TABLE ${table} ADD COLUMN IF NOT EXISTS new_column INTEGER`
+const swapTables = (table1: string, table2: string) =>
+  `ALTER TABLE ${table1} RENAME TO ${table2}`
+// ---cut-before---
 import { defer } from 'radashi'
 
 async function runDatabaseMigration() {
@@ -232,7 +241,8 @@ We keep things simple to ensure your projects stay light and fast. Radashi is fu
 
 For fun, let's compare the size of Radashi's `mapValues` function to that of Lodash's. I can assure you, this massive difference is not uncommon.
 
-```ts
+```ts twoslash
+// @noImplicitAny: false
 export function mapValues(obj, mapFunc) {
   const keys = Object.keys(obj)
   return keys.reduce((acc, key) => {

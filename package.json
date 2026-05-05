@@ -23,6 +23,7 @@
     "algoliasearch": "^4.24.0",
     "clsx": "^2.1.1",
     "culori": "^4.0.1",
+    "expressive-code-twoslash": "^0.3.1",
     "js-circle-progress": "1.0.0-beta.0",
     "markdown-it": "^14.1.0",
     "markdown-it-front-matter": "^0.2.4",

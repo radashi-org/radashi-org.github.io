@@ -5,6 +5,7 @@ import mdAstro from '@astropub/md'
 import exec from '@cush/exec'
 import unocss from '@unocss/astro'
 import { defineConfig } from 'astro/config'
+import ecTwoSlash from 'expressive-code-twoslash'
 import { existsSync, mkdirSync, writeFileSync } from 'fs'
 import path from 'node:path'
 import { group, title } from 'radashi'
@@ -58,6 +59,19 @@ export default defineConfig({
       },
       expressiveCode: {
         themes: ['github-dark-dimmed'],
+        plugins: [
+          ecTwoSlash({
+            twoslashOptions: {
+              compilerOptions: {
+                lib: [
+                  'lib.es2022.d.ts',
+                  'lib.dom.d.ts',
+                  'lib.dom.iterable.d.ts',
+                ],
+              },
+            },
+          }),
+        ],
       },
       sidebar: generateSidebar(),
       customCss: ['./src/styles/custom.css', './src/styles/dark-theme.css'],
