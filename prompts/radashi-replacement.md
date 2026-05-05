@@ -16,7 +16,7 @@ Final report:
 - noteworthy skipped candidates with reasons
 - verification commands and results
 
-Radashi export data (153 entries):
+Radashi export data (154 entries):
 
 ```json
 [
@@ -499,6 +499,15 @@ Radashi export data (153 entries):
     "name": "merge",
     "category": "array",
     "aliases": []
+  },
+  {
+    "name": "mergeOptions",
+    "category": "object",
+    "aliases": [
+      "mergeConfig",
+      "mergeSettings",
+      "mergeDefaults"
+    ]
   },
   {
     "name": "min",

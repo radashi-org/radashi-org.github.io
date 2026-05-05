@@ -32,6 +32,8 @@ the property to use for sorting, return a new array with the objects
 sorted alphabetically. A third, and optional, argument allows you to
 sort in descending order instead of the default ascending order.
 
+The function preserves the original order of items with equal values.
+
 For numerical sorting, see the [sort](./sort) function.
 
 ```ts twoslash
@@ -664,7 +666,6 @@ Returns a new dictionary object where keys and values are derived from the input
 
 #### Example
 
-
 ```ts twoslash
 import * as _ from 'radashi'
 
@@ -971,6 +972,8 @@ Sort a list of items by a numerical property or value
 ### Usage
 
 Given an array, return a new array sorted either by the numerical property specified in the get function or the numerical value of its items if no get function is passed. A third, and optional, argument allows you to sort in descending order instead of the default ascending order.
+
+The function preserves the original order of items with equal values.
 
 This function only supports numerical sorting. For alphabetic sorting, see the [alphabetical](./alphabetical) function.
 
@@ -2377,7 +2380,7 @@ users.sort(compareById)
 // [Alice, Drew, Charlie]
 
 const compareByFullName = _.castComparator(
-  (user: typeof users[number]) => `${user.firstName} ${user.lastName}`,
+  (user: (typeof users)[number]) => `${user.firstName} ${user.lastName}`,
   (a, b) => b.localeCompare(a),
 )
 users.sort(compareByFullName)
@@ -2401,7 +2404,7 @@ const users = [
 ]
 
 const compareByFullName = _.castComparator(
-  (user: typeof users[number]) => `${user.firstName} ${user.lastName}`,
+  (user: (typeof users)[number]) => `${user.firstName} ${user.lastName}`,
   (a, b) => b.localeCompare(a),
 )
 
@@ -2836,7 +2839,10 @@ export type DistanceShortUnit = keyof typeof DistanceParser.shortUnits
 
 export type DistanceString = QuantityString<DistanceUnit, DistanceShortUnit>
 
-export class DistanceParser extends QuantityParser<DistanceUnit, DistanceShortUnit> {
+export class DistanceParser extends QuantityParser<
+  DistanceUnit,
+  DistanceShortUnit
+> {
   constructor() {
     super({
       units: DistanceParser.units,
@@ -3586,6 +3592,130 @@ const ra = {
 
 _.mapValues(ra, value => value.toUpperCase()) // => { mode: 'GOD', power: 'SUN' }
 _.mapValues(ra, (value, key) => key) // => { mode: 'mode', power: 'power' }
+```
+
+### mergeOptions
+
+Merge two optional objects with type-safe undefined handling
+
+### Usage
+
+Merges two option objects into a new object with superior type inference compared to `Object.assign`. The key advantage is proper handling of `undefined` values and optional properties.
+
+```ts
+import * as _ from 'radashi'
+
+const defaults = { port: 3000, host: 'localhost' }
+const userConfig = { port: 8080, ssl: true }
+
+_.mergeOptions(defaults, userConfig)
+// => { port: 8080, host: 'localhost', ssl: true }
+```
+
+### Handling Undefined Arguments
+
+When either argument is `undefined`, the function returns the other argument with proper typing. When both are `undefined`, the result is correctly typed as `undefined`.
+
+```ts
+import * as _ from 'radashi'
+
+// First argument undefined → returns second
+_.mergeOptions(undefined, { b: 2 })
+// => { b: 2 }
+
+// Second argument undefined → returns first
+_.mergeOptions({ a: 1 }, undefined)
+// => { a: 1 }
+
+// Both undefined → returns undefined
+_.mergeOptions(undefined, undefined)
+// => undefined
+```
+
+### Type Safety with Undefined
+
+The main advantage of `mergeOptions` over `Object.assign` is how it handles optional objects (`T | undefined`).
+With `Object.assign`, you often have to use workarounds that result in complex intersection types.
+
+```ts
+import * as _ from 'radashi'
+
+type Config = { x: number; y?: string } | undefined
+type Override = { y: string; z: boolean } | undefined
+
+declare const config: Config
+declare const override: Override
+
+// ❌ Using Object.assign with a type assertion forces `config` to be non-nullable,
+//    but `Config` originally allows `undefined`. This assertion changes the intent,
+//    and results in a complex intersection type
+const bad1 = Object.assign(config as NonNullable<Config>, override)
+//    ^? { x: number; y?: string } & { y: string; z: boolean }
+// Potential runtime error if `config` is undefined.
+
+// ❌ Using Object.assign with an empty object as a workaround is hacky
+const bad2 = Object.assign({}, config, override)
+//    ^? { x: number; y?: string } & { y: string; z: boolean }
+// Still produces a complex intersection type
+
+// ✅ mergeOptions models every runtime branch
+const good = _.mergeOptions(config, override)
+//    ^?
+//    | undefined
+//    | { x: number; y?: string }
+//    | { y: string; z: boolean }
+//    | { x: number; y: string; z: boolean }
+// No runtime error if `config` is undefined.
+```
+
+The type of `good` clearly shows all possible runtime states, making it easier to understand and work with.
+
+### Real-World Example
+
+This pattern is common when merging user configuration with defaults:
+
+```ts
+import * as _ from 'radashi'
+import type { MergeOptions } from 'radashi'
+
+type UserConfig = { theme?: 'light' | 'dark'; lang?: string } | undefined
+type AppDefaults = { theme: 'light'; lang: 'en' }
+
+function getConfig(
+  userPreferences: UserConfig,
+  defaults: AppDefaults,
+): MergeOptions<AppDefaults, UserConfig> {
+  return _.mergeOptions(defaults, userPreferences)
+  // The return type covers both defaults-only and merged config branches.
+}
+
+// Runtime results:
+getConfig(undefined, { theme: 'light', lang: 'en' })
+// => { theme: 'light', lang: 'en' }
+
+getConfig({ theme: 'dark' }, { theme: 'light', lang: 'en' })
+// => { theme: 'dark', lang: 'en' }
+```
+
+### With Class Instances
+
+Works seamlessly with class instances, merging their properties into a plain object.
+
+```ts
+import * as _ from 'radashi'
+
+class Character {
+  constructor(
+    public name: string,
+    public age: number,
+  ) {}
+}
+
+const anderson = new Character('Thomas A. Anderson', 30)
+const neo = { name: 'Neo', alias: 'The One' }
+
+_.mergeOptions(anderson, neo)
+// => { name: 'Neo', age: 30, alias: 'The One' }
 ```
 
 ### omit
@@ -4560,8 +4690,8 @@ Here are 3 possible solutions for this issue. Pick your favorite:
 
    // ---cut-before---
    story += _.dedent`
-
-
+   
+   
      He was so confused
      that he couldn't even
      tell what was going on.

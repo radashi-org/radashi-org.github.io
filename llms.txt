@@ -130,6 +130,7 @@ Object manipulation and transformation
 - [mapEntries](https://radashi.js.org/reference/object/mapEntries): Map the keys and values of an object
 - [mapKeys](https://radashi.js.org/reference/object/mapKeys): Map over the keys of an object
 - [mapValues](https://radashi.js.org/reference/object/mapValues): Map over the keys of an object
+- [mergeOptions](https://radashi.js.org/reference/object/mergeOptions): Merge two optional objects with type-safe undefined handling
 - [omit](https://radashi.js.org/reference/object/omit): Omit unwanted attributes from an object
 - [pick](https://radashi.js.org/reference/object/pick): Pick only the desired properties from an object
 - [set](https://radashi.js.org/reference/object/set): Set a value on an object using a path key
