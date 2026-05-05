@@ -28,8 +28,11 @@ interface StaticPage {
 }
 
 export async function getStaticPaths(): Promise<StaticPage[]> {
-  const pages: MDXInstance<Frontmatter>[] = await Astro.glob(
-    '../../../../radashi/docs/**/*.mdx'
+  const pages = Object.values(
+    import.meta.glob<MDXInstance<Frontmatter>>(
+      '../../../../radashi/docs/**/*.mdx',
+      { eager: true }
+    )
   )
 
   return pages.map(page => {

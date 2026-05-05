@@ -1,7 +1,13 @@
 ---
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+import type { MarkdownInstance } from 'astro'
 
-const [changelog] = await Astro.glob('../../radashi/CHANGELOG.md')
+const [changelog] = Object.values(
+  import.meta.glob<MarkdownInstance<Record<string, any>>>(
+    '../../radashi/CHANGELOG.md',
+    { eager: true }
+  )
+)
 ---
 
 <StarlightPage frontmatter={{ title: 'Changelog' }}>

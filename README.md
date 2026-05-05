@@ -51,4 +51,4 @@ These paths are created locally and ignored by Git:
 
 ## Current Build Status
 
-`pnpm dev` works for local development. `pnpm build` currently reaches static page generation, then fails in Starlight's sitemap integration with `Cannot read properties of undefined (reading 'reduce')`. Fix that before relying on the production build for release verification.
+`pnpm dev` works for local development. `pnpm build` is expected to complete the Astro check, static build, Pagefind indexing, and sitemap generation.
