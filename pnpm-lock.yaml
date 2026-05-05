@@ -84,6 +84,9 @@ importers:
       '@types/markdown-it':
         specifier: ^14.1.2
         version: 14.1.2
+      '@types/node':
+        specifier: ^24.0.4
+        version: 24.0.4
       '@unocss/astro':
         specifier: ^0.61.0
         version: 0.61.9(rollup@2.79.2)(vite@5.3.3(@types/node@24.0.4)(terser@5.43.1))

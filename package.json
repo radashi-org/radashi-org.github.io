@@ -40,6 +40,7 @@
     "@swup/astro": "^1.6.0",
     "@types/culori": "^2.1.1",
     "@types/markdown-it": "^14.1.2",
+    "@types/node": "^24.0.4",
     "@unocss/astro": "^0.61.0",
     "@unocss/preset-mini": "^0.61.0",
     "astro": "4.11.5",

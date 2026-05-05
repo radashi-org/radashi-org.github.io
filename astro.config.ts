@@ -63,11 +63,20 @@ export default defineConfig({
           ecTwoSlash({
             twoslashOptions: {
               compilerOptions: {
+                allowImportingTsExtensions: true,
                 lib: [
                   'lib.es2022.d.ts',
                   'lib.dom.d.ts',
                   'lib.dom.iterable.d.ts',
                 ],
+                paths: {
+                  // Resolve examples against the checked-out Radashi source.
+                  radashi: [
+                    path.resolve('radashi/src/mod.ts'),
+                    path.resolve('../src/mod.ts'),
+                  ],
+                },
+                types: ['node'],
               },
             },
           }),
