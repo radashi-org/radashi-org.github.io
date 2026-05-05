@@ -12,22 +12,7 @@ const regions = [
   { name: 'China', code: 'CN' },
 ]
 
-const iconMap: Record<string, string> = {
-  and_chr: 'https://browsersl.ist/chrome-FUOAzAXq.svg',
-  and_ff: 'https://browsersl.ist/and_ff-B8qQgkEL.svg',
-  and_qq: 'https://browsersl.ist/and_qq-CyCymH51.svg',
-  and_uc: 'https://browsersl.ist/and_uc-BvWD04mY.svg',
-  android: 'https://browsersl.ist/android-G_KcbQhm.svg',
-  chrome: 'https://browsersl.ist/chrome-FUOAzAXq.svg',
-  edge: 'https://browsersl.ist/edge-DCBetAoj.svg',
-  firefox: 'https://browsersl.ist/and_ff-B8qQgkEL.svg',
-  ios_saf: 'https://browsersl.ist/safari-D6h9xXw0.svg',
-  node: 'https://browsersl.ist/node-BuvO4gDH.svg',
-  op_mob: 'https://browsersl.ist/opera-BVJoyTbY.svg',
-  opera: 'https://browsersl.ist/opera-BVJoyTbY.svg',
-  safari: 'https://browsersl.ist/safari-D6h9xXw0.svg',
-  samsung: 'https://browsersl.ist/samsung-Dn4OZBtI.svg',
-}
+const getBrowserIcon = (browserId: string) => `/logos/${browserId}.svg`
 
 const supportQuery = encodeURIComponent(
   packageJson.browserslist.join(',')
@@ -70,7 +55,7 @@ const rowData: {
 
 for (const browser of supportResponse[0].browsers) {
   rowData.push({
-    browser: `<img src="${iconMap[browser.id]}" style="float: left; margin-right: 8px; margin-top: 2px;" width="24" height="24" /> ${browser.name}`,
+    browser: `<img src="${getBrowserIcon(browser.id)}" alt="" style="float: left; margin-right: 8px; margin-top: 2px;" width="24" height="24" /> ${browser.name}`,
     version:
       '≥ ' +
       Object.keys(browser.versions)
