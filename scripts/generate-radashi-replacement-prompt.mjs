@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 
-import { existsSync, readFileSync, readdirSync } from 'node:fs'
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+} from 'node:fs'
 import { basename, dirname, relative, resolve } from 'node:path'
 
 const PROMPT_TEMPLATE = `Refactor this JavaScript/TypeScript repository by replacing hand-written local helpers with Radashi imports where behavior is compatible.
@@ -29,7 +35,7 @@ Radashi export data ({{RADASHI_FUNCTION_COUNT}} entries):
 `
 
 function usage() {
-  return `Usage: node scripts/generate-radashi-replacement-prompt.mjs [--root <repo-root>] [--radashi-docs <path>]
+  return `Usage: node scripts/generate-radashi-replacement-prompt.mjs [--root <repo-root>] [--radashi-docs <path>] [--output <path>]
 
 Generates an AI refactoring prompt by combining a static prompt with the Radashi
 function list discovered from <repo-root>/radashi/docs/**/*.mdx.
@@ -37,6 +43,7 @@ function list discovered from <repo-root>/radashi/docs/**/*.mdx.
 Options:
   --root <path>          Repository root to scan. Defaults to the current directory.
   --radashi-docs <path>  Radashi MDX docs directory. Defaults to <root>/radashi/docs.
+  --output <path>        Write the generated prompt to a file instead of stdout.
   -h, --help             Print this help text.
 `
 }
@@ -70,6 +77,16 @@ function parseArgs(argv) {
         throw new Error('--radashi-docs requires a path')
       }
       args.radashiDocs = value
+      i += 1
+      continue
+    }
+
+    if (arg === '--output') {
+      const value = argv[i + 1]
+      if (!value || value.startsWith('-')) {
+        throw new Error('--output requires a path')
+      }
+      args.output = value
       i += 1
       continue
     }
@@ -176,10 +193,18 @@ try {
     process.exit(0)
   }
 
-  process.stdout.write(
-    generatePrompt(discoverRadashiFunctions(args.root, args.radashiDocs))
+  const prompt = generatePrompt(
+    discoverRadashiFunctions(args.root, args.radashiDocs)
   )
-  process.stdout.write('\n')
+
+  if (args.output) {
+    const outputFile = resolve(args.root, args.output)
+    mkdirSync(dirname(outputFile), { recursive: true })
+    writeFileSync(outputFile, prompt + '\n')
+  } else {
+    process.stdout.write(prompt)
+    process.stdout.write('\n')
+  }
 } catch (error) {
   process.stderr.write(`${error.message}\n\n${usage()}`)
   process.exit(1)

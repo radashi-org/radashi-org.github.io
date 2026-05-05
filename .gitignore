@@ -28,6 +28,7 @@ pnpm-debug.log*
 src/content/docs/reference/index.mdx
 public/llms.txt
 public/llms-full.txt
+public/prompts/radashi-replacement.md
 
 # build output
 dist/

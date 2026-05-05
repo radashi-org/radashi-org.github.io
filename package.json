@@ -9,6 +9,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "generate:radashi-prompt": "node scripts/generate-radashi-replacement-prompt.mjs --output public/prompts/radashi-replacement.md",
     "postinstall": "tsx scripts/postinstall.ts"
   },
   "prettier": "@alloc/prettier-config",

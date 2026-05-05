@@ -6,6 +6,7 @@ import exec from '@cush/exec'
 import unocss from '@unocss/astro'
 import { defineConfig } from 'astro/config'
 import ecTwoSlash from 'expressive-code-twoslash'
+import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, writeFileSync } from 'fs'
 import path from 'node:path'
 import { group, title } from 'radashi'
@@ -101,17 +102,16 @@ export default defineConfig({
 })
 
 async function radashi() {
-  // During development, we want to pull the latest version of Radashi from
-  // GitHub so that we can test unpublished changes to the docs.
-  if (process.env.NODE_ENV !== 'production') {
+  if (!existsSync('radashi')) {
+    console.log('Cloning radashi...')
+    await exec('git clone https://github.com/radashi-org/radashi --depth 1', {
+      stdio: 'inherit',
+    })
+  } else if (process.env.NODE_ENV !== 'production') {
+    // During development, we want to pull the latest version of Radashi from
+    // GitHub so that we can test unpublished changes to the docs.
     console.log('Pulling radashi...')
-    if (existsSync('radashi')) {
-      await exec('git pull', { cwd: 'radashi', stdio: 'inherit' })
-    } else {
-      await exec('git clone https://github.com/radashi-org/radashi --depth 1', {
-        stdio: 'inherit',
-      })
-    }
+    await exec('git pull', { cwd: 'radashi', stdio: 'inherit' })
   }
 
   const heft = await renderHeftJson()
@@ -125,6 +125,19 @@ async function radashi() {
   const llmsTxt = await renderLlmsTxt()
   writeFileSync('public/llms.txt', llmsTxt.index)
   writeFileSync('public/llms-full.txt', llmsTxt.full)
+
+  console.log('Generating Radashi replacement prompt...')
+  execFileSync(
+    process.execPath,
+    [
+      path.resolve('scripts/generate-radashi-replacement-prompt.mjs'),
+      '--radashi-docs',
+      path.resolve('radashi/docs'),
+      '--output',
+      path.resolve('public/prompts/radashi-replacement.md'),
+    ],
+    { stdio: 'inherit' }
+  )
 
   return [
     virtual({
@@ -160,6 +173,9 @@ function generateSidebar(): SidebarItem[] {
           attrs: {
             'data-no-swup': '',
           },
+        }),
+        h3('AI Prompt', {
+          link: 'prompts/radashi-replacement',
         }),
       ],
     },
