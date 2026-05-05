@@ -14,6 +14,8 @@ interface Frontmatter {
   title: string
   description: string
   since: string
+  aliases?: string[]
+  searchAliases?: string[]
 }
 
 interface Props {
@@ -46,6 +48,13 @@ export async function getStaticPaths(): Promise<StaticPage[]> {
 const {
   page: { frontmatter, Content },
 } = Astro.props
+
+const searchAliases = Array.from(
+  new Set([
+    ...(frontmatter.aliases ?? []),
+    ...(frontmatter.searchAliases ?? []),
+  ])
+)
 ---
 
 <StarlightPage frontmatter={frontmatter}>
@@ -88,6 +97,13 @@ const {
     </div>
   </a>
   <Content />
+  {
+    searchAliases.length > 0 && (
+      <span class="sr-only" aria-hidden="true">
+        {searchAliases.join(' ')}
+      </span>
+    )
+  }
 
   <script is:inline define:vars={{ title: frontmatter.title }}>
     const h1 = document.querySelector(':not(.is-previous-container) h1')
