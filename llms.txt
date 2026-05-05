@@ -1,0 +1,217 @@
+# Radashi
+
+> A TypeScript utility toolkit with lightweight, readable, performant, and robust functions.
+>
+> - Tree-shakeable, dependency-free, type-safe
+> - Full test coverage, actively maintained
+> - https://radashi.js.org
+
+For complete documentation of each function, see [llms-full.txt](https://radashi.js.org/llms-full.txt).
+
+## Array
+
+Array manipulation and transformation
+
+- [alphabetical](https://radashi.js.org/reference/array/alphabetical): Sorts an array of objects alphabetically by a property
+- [boil](https://radashi.js.org/reference/array/boil): Reduce a list of items down to one item
+- [cartesianProduct](https://radashi.js.org/reference/array/cartesianProduct): Perform a Cartesian product of arrays
+- [castArray](https://radashi.js.org/reference/array/castArray): Cast a value into an array
+- [castArrayIfExists](https://radashi.js.org/reference/array/castArrayIfExists): Cast a non-nullish value into an array
+- [cluster](https://radashi.js.org/reference/array/cluster): Split a list into many lists of the given size
+- [concat](https://radashi.js.org/reference/array/concat): Flattens and filters nullish values from arguments
+- [counting](https://radashi.js.org/reference/array/counting): Creates an object with counts of occurrences of items
+- [diff](https://radashi.js.org/reference/array/diff): Create an array of differences between two arrays
+- [first](https://radashi.js.org/reference/array/first): Get the first item from a list
+- [flat](https://radashi.js.org/reference/array/flat): Flatten an array of arrays into a single dimension
+- [fork](https://radashi.js.org/reference/array/fork): Split an array into two arrays by a condition
+- [group](https://radashi.js.org/reference/array/group): Categorize elements from an array into distinct groups
+- [intersects](https://radashi.js.org/reference/array/intersects): Determine if two arrays have a common item
+- [isArrayEqual](https://radashi.js.org/reference/array/isArrayEqual): Checks if two arrays are equal in length and content
+- [iterate](https://radashi.js.org/reference/array/iterate): Iterate over a callback n times
+- [last](https://radashi.js.org/reference/array/last): Get the last item from a list
+- [list](https://radashi.js.org/reference/array/list): Create a list with specific items
+- [mapify](https://radashi.js.org/reference/array/mapify): Convert an array to a map
+- [merge](https://radashi.js.org/reference/array/merge): Combine two lists overriding items in the first
+- [objectify](https://radashi.js.org/reference/array/objectify): Convert a list to a dictionary object
+- [pluck](https://radashi.js.org/reference/array/pluck): Map an array of objects to an array of arrays
+- [remove](https://radashi.js.org/reference/array/remove): Filter an array by removing elements that satisfy a predicate function
+- [replace](https://radashi.js.org/reference/array/replace): Replace an item in an array
+- [replaceOrAppend](https://radashi.js.org/reference/array/replaceOrAppend): Replace item in array or append if no match
+- [select](https://radashi.js.org/reference/array/select): Filter and map an array
+- [selectFirst](https://radashi.js.org/reference/array/selectFirst): Find and map the first array element meeting a condition
+- [shift](https://radashi.js.org/reference/array/shift): Shift array items by n steps
+- [sift](https://radashi.js.org/reference/array/sift): Remove all falsy items from list
+- [sort](https://radashi.js.org/reference/array/sort): Sort a list of items by a numerical property or value
+- [toggle](https://radashi.js.org/reference/array/toggle): Toggles an item's existence in an array
+- [unique](https://radashi.js.org/reference/array/unique): Remove duplicates from an array
+- [unzip](https://radashi.js.org/reference/array/unzip): Group array elements by their index position across the input arrays
+- [zip](https://radashi.js.org/reference/array/zip): Combine multiple arrays in sets
+- [zipToObject](https://radashi.js.org/reference/array/zipToObject): Combine multiple arrays in sets
+
+## Async
+
+Async/await utilities and control flow
+
+- [all](https://radashi.js.org/reference/async/all): Await many promises
+- [defer](https://radashi.js.org/reference/async/defer): Defer work until an async function completes
+- [guard](https://radashi.js.org/reference/async/guard): Make an async function return undefined if it rejects
+- [map](https://radashi.js.org/reference/async/map): Map an array with an async function
+- [parallel](https://radashi.js.org/reference/async/parallel): Parallelize async operations while managing load
+- [queueByKey](https://radashi.js.org/reference/async/queueByKey): Queues async function calls by key to ensure sequential execution per key
+- [reduce](https://radashi.js.org/reference/async/reduce): Reduce an array with an async function
+- [retry](https://radashi.js.org/reference/async/retry): Retry an async function when it fails
+- [sleep](https://radashi.js.org/reference/async/sleep): Asynchronously wait for time to pass
+- [timeout](https://radashi.js.org/reference/async/timeout): Create a promise that rejects after some time
+- [toResult](https://radashi.js.org/reference/async/toResult): Converts a PromiseLike to a Promise<Result>
+- [tryit](https://radashi.js.org/reference/async/tryit): Convert a function to an error-first function
+- [withResolvers](https://radashi.js.org/reference/async/withResolvers): Ponyfill for Promise.withResolvers()
+
+## Curry
+
+Function composition and partial application
+
+- [chain](https://radashi.js.org/reference/curry/chain): Create a chain of function to run in order
+- [compose](https://radashi.js.org/reference/curry/compose): Create a composition of functions
+- [debounce](https://radashi.js.org/reference/curry/debounce): Delay a function until after a specified time has elapsed since the last call
+- [flip](https://radashi.js.org/reference/curry/flip): Swap the only two arguments of a function
+- [memo](https://radashi.js.org/reference/curry/memo): Memoize a function
+- [memoLastCall](https://radashi.js.org/reference/curry/memoLastCall): Creates a memoized version of a function that caches only its most recent call
+- [once](https://radashi.js.org/reference/curry/once): Create a function that runs at most once
+- [partial](https://radashi.js.org/reference/curry/partial): Create a partial a function
+- [partob](https://radashi.js.org/reference/curry/partob): Create a partob a function
+- [promiseChain](https://radashi.js.org/reference/curry/promiseChain): Chain async functions together
+- [proxied](https://radashi.js.org/reference/curry/proxied): Create a dynamic proxied a object
+- [throttle](https://radashi.js.org/reference/curry/throttle): Creates a throttled function that limits invocations to a specified interval
+
+## Function
+
+Function utilities and helpers
+
+- [always](https://radashi.js.org/reference/function/always): Create a function that always returns the same value
+- [castComparator](https://radashi.js.org/reference/function/castComparator): Cast a value into a comparator function
+- [castMapping](https://radashi.js.org/reference/function/castMapping): Cast a value into a mapping function
+- [identity](https://radashi.js.org/reference/function/identity): Returns the value passed to it
+- [noop](https://radashi.js.org/reference/function/noop): Does nothing and returns undefined
+
+## Number
+
+Numeric operations and parsing
+
+- [clamp](https://radashi.js.org/reference/number/clamp): Limit the range of a variable number
+- [inRange](https://radashi.js.org/reference/number/inRange): Verifies number within range, inclusive start, exclusive end, flexible order, defaulting to 0 if end unspecified
+- [lerp](https://radashi.js.org/reference/number/lerp): Smoothly transitions between two values based on a factor
+- [max](https://radashi.js.org/reference/number/max): Get the largest item from an array
+- [min](https://radashi.js.org/reference/number/min): Get the smallest item from an array
+- [parseDuration](https://radashi.js.org/reference/number/parseDuration): Parses a duration string into milliseconds
+- [parseQuantity](https://radashi.js.org/reference/number/parseQuantity): Parses a quantity string into its numeric value
+- [range](https://radashi.js.org/reference/number/range): Create a range used for iterating
+- [round](https://radashi.js.org/reference/number/round): Rounds a number to a specified precision.
+- [sum](https://radashi.js.org/reference/number/sum): Add up all items of an array
+- [toFloat](https://radashi.js.org/reference/number/toFloat): Convert a value to a float if possible
+- [toInt](https://radashi.js.org/reference/number/toInt): Convert a value to an int if possible
+
+## Object
+
+Object manipulation and transformation
+
+- [assign](https://radashi.js.org/reference/object/assign): Merges two objects together recursively
+- [clone](https://radashi.js.org/reference/object/clone): Creates a shallow copy of the given object/value.
+- [cloneDeep](https://radashi.js.org/reference/object/cloneDeep): Create a deep copy of an object or array
+- [construct](https://radashi.js.org/reference/object/construct): Builds an object from key paths and values
+- [crush](https://radashi.js.org/reference/object/crush): Flattens a deep object to a single dimension
+- [filterKey](https://radashi.js.org/reference/object/filterKey): Check if an object key passes a filter
+- [get](https://radashi.js.org/reference/object/get): Get any attribute or child attribute using a deep path
+- [getOrInsert](https://radashi.js.org/reference/object/getOrInsert): Returns a map entry or stores the provided value when missing
+- [getOrInsertComputed](https://radashi.js.org/reference/object/getOrInsertComputed): Returns a map entry or stores a computed value when missing
+- [invert](https://radashi.js.org/reference/object/invert): Invert the keys and values of an object
+- [keys](https://radashi.js.org/reference/object/keys): Get all keys from an object deeply
+- [listify](https://radashi.js.org/reference/object/listify): Convert an object to a list
+- [lowerize](https://radashi.js.org/reference/object/lowerize): Convert all object keys to lower case
+- [mapEntries](https://radashi.js.org/reference/object/mapEntries): Map the keys and values of an object
+- [mapKeys](https://radashi.js.org/reference/object/mapKeys): Map over the keys of an object
+- [mapValues](https://radashi.js.org/reference/object/mapValues): Map over the keys of an object
+- [omit](https://radashi.js.org/reference/object/omit): Omit unwanted attributes from an object
+- [pick](https://radashi.js.org/reference/object/pick): Pick only the desired properties from an object
+- [set](https://radashi.js.org/reference/object/set): Set a value on an object using a path key
+- [shake](https://radashi.js.org/reference/object/shake): Remove unwanted values from an object
+- [traverse](https://radashi.js.org/reference/object/traverse): Deeply enumerate an object and any nested objects
+- [upperize](https://radashi.js.org/reference/object/upperize): Convert all object keys to upper case
+
+## OOP
+
+Object-oriented patterns and classes
+
+- [Semaphore](https://radashi.js.org/reference/oop/Semaphore): A synchronization primitive for limiting concurrent usage
+
+## Random
+
+Random value generation
+
+- [absoluteJitter](https://radashi.js.org/reference/random/absoluteJitter): Returns a number randomly jittered by an absolute offset
+- [draw](https://radashi.js.org/reference/random/draw): Get a random item from a list
+- [proportionalJitter](https://radashi.js.org/reference/random/proportionalJitter): Returns a number randomly jittered by a proportion of a base value
+- [random](https://radashi.js.org/reference/random/random): Generate a random number
+- [shuffle](https://radashi.js.org/reference/random/shuffle): Randomly shuffle an array
+- [uid](https://radashi.js.org/reference/random/uid): Generate a unique identifier
+
+## Series
+
+Series and sequence operations
+
+- [series](https://radashi.js.org/reference/series/series): Create an ordered series object
+
+## String
+
+String transformation and formatting
+
+- [camel](https://radashi.js.org/reference/string/camel): Convert a string to camel case
+- [capitalize](https://radashi.js.org/reference/string/capitalize): Convert a string to a capitalized format
+- [dash](https://radashi.js.org/reference/string/dash): Convert a string to dash case
+- [deburr](https://radashi.js.org/reference/string/deburr): Removes diacritical marks from a string
+- [dedent](https://radashi.js.org/reference/string/dedent): Remove indentation from a string
+- [escapeHTML](https://radashi.js.org/reference/string/escapeHTML): Escape HTML characters in a string
+- [pascal](https://radashi.js.org/reference/string/pascal): Convert a string to pascal case
+- [similarity](https://radashi.js.org/reference/string/similarity): Calculate the similarity between two strings using the Levenshtein distance algorithm
+- [snake](https://radashi.js.org/reference/string/snake): Convert a string to snake case
+- [template](https://radashi.js.org/reference/string/template): Template a string with values from a data object using a search expression
+- [title](https://radashi.js.org/reference/string/title): Convert a string to title case
+- [trim](https://radashi.js.org/reference/string/trim): Trim values from a string
+
+## Typed
+
+Type guards and type checking
+
+- [assert](https://radashi.js.org/reference/typed/assert): Asserts a condition and narrows the type of the value
+- [getErrorMessage](https://radashi.js.org/reference/typed/getErrorMessage): Get a readable message from an unknown error value
+- [isArray](https://radashi.js.org/reference/typed/isArray): Determine if a value is an Array
+- [isAsyncIterable](https://radashi.js.org/reference/typed/isAsyncIterable): Determine if a value is an async iterable
+- [isBigInt](https://radashi.js.org/reference/typed/isBigInt): Determine if a value is a BigInt
+- [isBoolean](https://radashi.js.org/reference/typed/isBoolean): Check if a value is a boolean type
+- [isClass](https://radashi.js.org/reference/typed/isClass): Determine if a value was declared with `class` syntax
+- [isDate](https://radashi.js.org/reference/typed/isDate): Determine if a value is a Date
+- [isEmpty](https://radashi.js.org/reference/typed/isEmpty): Determine if a value is empty
+- [isEqual](https://radashi.js.org/reference/typed/isEqual): Determine if two values are equal
+- [isError](https://radashi.js.org/reference/typed/isError): Determine if a value is an Error
+- [isFloat](https://radashi.js.org/reference/typed/isFloat): Determine if a value is a float
+- [isFunction](https://radashi.js.org/reference/typed/isFunction): Determine if a value is a Function
+- [isInt](https://radashi.js.org/reference/typed/isInt): Determine if a value is an int
+- [isIntString](https://radashi.js.org/reference/typed/isIntString): Determine if a value is an int in string form
+- [isMap](https://radashi.js.org/reference/typed/isMap): Returns true for Map instances
+- [isMapEqual](https://radashi.js.org/reference/typed/isMapEqual): Compare two maps for deep equality
+- [isNullish](https://radashi.js.org/reference/typed/isNullish): Determine if a value is null or undefined
+- [isNumber](https://radashi.js.org/reference/typed/isNumber): Determine if a value is a number
+- [isObject](https://radashi.js.org/reference/typed/isObject): Determine if a value is an Object
+- [isPlainObject](https://radashi.js.org/reference/typed/isPlainObject): Determine if a value is a plain object
+- [isPrimitive](https://radashi.js.org/reference/typed/isPrimitive): Checks if the given value is primitive
+- [isPromise](https://radashi.js.org/reference/typed/isPromise): Determine if a value is a Promise or has a `then` method
+- [isRegExp](https://radashi.js.org/reference/typed/isRegExp): Returns true for RegExp instances
+- [isResult](https://radashi.js.org/reference/typed/isResult): Check if a value is a Result tuple
+- [isResultErr](https://radashi.js.org/reference/typed/isResultErr): Returns true for failed Result tuple
+- [isResultOk](https://radashi.js.org/reference/typed/isResultOk): Returns true for successful Result tuple
+- [isSet](https://radashi.js.org/reference/typed/isSet): Returns true for Set instances
+- [isSetEqual](https://radashi.js.org/reference/typed/isSetEqual): Compare two sets for shallow equality
+- [isString](https://radashi.js.org/reference/typed/isString): Determine if a value is a String
+- [isSymbol](https://radashi.js.org/reference/typed/isSymbol): Determine if a value is a Symbol
+- [isUndefined](https://radashi.js.org/reference/typed/isUndefined): Determine if a value is undefined
+- [isWeakMap](https://radashi.js.org/reference/typed/isWeakMap): Returns true for WeakMap instances
+- [isWeakSet](https://radashi.js.org/reference/typed/isWeakSet): Returns true for WeakSet instances
