@@ -82,8 +82,19 @@
 <p>All notable changes to this project will be documented in this file.</p>
 <p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
 and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
-<h2 id="radashi1290---2026-05-05"><a href="https://github.com/radashi-org/radashi/compare/v12.8.1..v12.9.0">radashi@12.9.0</a> - 2026-05-05</h2>
+<h2 id="radashi1291---2026-05-12"><a href="https://github.com/radashi-org/radashi/compare/v12.9.0..v12.9.1">radashi@12.9.1</a> - 2026-05-12</h2>
 <h3 id="details">Details</h3>
+<h4 id="fixed"><!-- 06 -->Fixed</h4>
+<ul>
+<li><strong>(ci)</strong> Disable cache in privileged workflows in <a href="https://github.com/radashi-org/radashi/commit/cc910be86e97b00ef4c1b679d33f47f671af14cc">cc910be</a></li>
+<li><strong>(ci)</strong> Scope publish oidc permission in <a href="https://github.com/radashi-org/radashi/commit/0b7c94b5cd655ec6d1804dc7a141e247ea45b53c">0b7c94b</a></li>
+<li><strong>(ci)</strong> Drop unused npm token from publish in <a href="https://github.com/radashi-org/radashi/commit/6a86290b5360b4a0d16b239a3f8783a371d7705f">6a86290</a></li>
+<li><strong>(ci)</strong> Run pr benchmarks without secrets in <a href="https://github.com/radashi-org/radashi/commit/d4020ff35f917df49570f8bb95ff91e8afb05077">d4020ff</a></li>
+<li><strong>(ci)</strong> Ensure git-cliff uses GITHUB_TOKEN if token is undefined in <a href="https://github.com/radashi-org/radashi/commit/6d0bda03c28aa0e0ff6d3a4c6c52899960a86b5e">6d0bda0</a></li>
+<li><strong>(ci)</strong> Restore benchmark bot comments safely in <a href="https://github.com/radashi-org/radashi/commit/74a9931faca9a5909bc22aad592e9baafaaf29fe">74a9931</a></li>
+</ul>
+<h2 id="radashi1290---2026-05-05"><a href="https://github.com/radashi-org/radashi/compare/v12.8.1..v12.9.0">radashi@12.9.0</a> - 2026-05-05</h2>
+<h3 id="details-1">Details</h3>
 <h4 id="added"><!-- 03 -->Added</h4>
 <ul>
 <li>Add <code dir="auto">mergeOptions</code> function in <a href="https://github.com/radashi-org/radashi/commit/d6c3548faeee618ae6f3b89641229c31c80f495f">d6c3548</a></li>
@@ -93,32 +104,32 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Improve <code dir="auto">sort</code> return type when sorting a tuple in <a href="https://github.com/radashi-org/radashi/commit/a29fe965535b106ab1cff02cff227e445cabf87e">a29fe96</a></li>
 </ul>
 <h2 id="radashi1281---2026-05-05"><a href="https://github.com/radashi-org/radashi/compare/v12.8.0..v12.8.1">radashi@12.8.1</a> - 2026-05-05</h2>
-<h3 id="details-1">Details</h3>
-<h4 id="fixed"><!-- 06 -->Fixed</h4>
+<h3 id="details-2">Details</h3>
+<h4 id="fixed-1"><!-- 06 -->Fixed</h4>
 <ul>
 <li>Mark dedent as side-effect free in <a href="https://github.com/radashi-org/radashi/commit/7ada48f5a35fceb1584068d8879566c9b81e5902">7ada48f</a></li>
 </ul>
 <h2 id="radashi1280---2026-05-05"><a href="https://github.com/radashi-org/radashi/compare/v12.7.2..v12.8.0">radashi@12.8.0</a> - 2026-05-05</h2>
-<h3 id="details-2">Details</h3>
+<h3 id="details-3">Details</h3>
 <h4 id="added-1"><!-- 03 -->Added</h4>
 <ul>
 <li>Add <code dir="auto">deburr</code> function in <a href="https://github.com/radashi-org/radashi/commit/c689529438a45d07ce2a3e5973d549503c1807a3">c689529</a></li>
 <li>Add <code dir="auto">getErrorMessage</code> function in <a href="https://github.com/radashi-org/radashi/commit/9fce57dbe9f462004a4757e516e6f4f4c0868706">9fce57d</a></li>
 </ul>
 <h2 id="radashi1272---2026-02-24"><a href="https://github.com/radashi-org/radashi/compare/v12.7.1..v12.7.2">radashi@12.7.2</a> - 2026-02-24</h2>
-<h3 id="details-3">Details</h3>
-<h4 id="fixed-1"><!-- 06 -->Fixed</h4>
+<h3 id="details-4">Details</h3>
+<h4 id="fixed-2"><!-- 06 -->Fixed</h4>
 <ul>
 <li>Chain type signatures after 3 arguments in <a href="https://github.com/radashi-org/radashi/commit/17aef87d12e989953c14fef3ebdceb22ef89b9f9">17aef87</a></li>
 </ul>
 <h2 id="radashi1271---2025-11-19"><a href="https://github.com/radashi-org/radashi/compare/v12.7.0..v12.7.1">radashi@12.7.1</a> - 2025-11-19</h2>
-<h3 id="details-4">Details</h3>
-<h4 id="fixed-2"><!-- 06 -->Fixed</h4>
+<h3 id="details-5">Details</h3>
+<h4 id="fixed-3"><!-- 06 -->Fixed</h4>
 <ul>
 <li>Ensure DurationParser static properties can be tree-shaked in <a href="https://github.com/radashi-org/radashi/commit/b9d7529ba9ed9f8c4fdf6192b1ae21cc67251e72">b9d7529</a></li>
 </ul>
 <h2 id="radashi1270---2025-10-17"><a href="https://github.com/radashi-org/radashi/compare/v12.6.2..v12.7.0">radashi@12.7.0</a> - 2025-10-17</h2>
-<h3 id="details-5">Details</h3>
+<h3 id="details-6">Details</h3>
 <h4 id="added-2"><!-- 03 -->Added</h4>
 <ul>
 <li>Add <code dir="auto">identity</code> function in <a href="https://github.com/radashi-org/radashi/commit/38e2f37e411eefaf383d9c363ed1a481d69dbf38">38e2f37</a></li>
@@ -134,19 +145,19 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Use <code dir="auto">identity</code> as default getter for <code dir="auto">sort</code> in <a href="https://github.com/radashi-org/radashi/commit/df55a6efacb129bf6bcbee00ff84f0886a604c23">df55a6e</a></li>
 </ul>
 <h2 id="radashi1262---2025-08-20"><a href="https://github.com/radashi-org/radashi/compare/v12.6.1..v12.6.2">radashi@12.6.2</a> - 2025-08-20</h2>
-<h3 id="details-6">Details</h3>
-<h4 id="fixed-3"><!-- 06 -->Fixed</h4>
+<h3 id="details-7">Details</h3>
+<h4 id="fixed-4"><!-- 06 -->Fixed</h4>
 <ul>
 <li><strong>(range)</strong> Ensure <code dir="auto">end</code> parameter works when 0 in <a href="https://github.com/radashi-org/radashi/commit/9c8ffa041088f1096740d1de744cd3f24ed76f1c">9c8ffa0</a></li>
 </ul>
 <h2 id="radashi1261---2025-08-09"><a href="https://github.com/radashi-org/radashi/compare/v12.6.0..v12.6.1">radashi@12.6.1</a> - 2025-08-09</h2>
-<h3 id="details-7">Details</h3>
-<h4 id="fixed-4"><!-- 06 -->Fixed</h4>
+<h3 id="details-8">Details</h3>
+<h4 id="fixed-5"><!-- 06 -->Fixed</h4>
 <ul>
 <li><strong>(group)</strong> Use <code dir="auto">Object.create(null)</code> for the returned object in <a href="https://github.com/radashi-org/radashi/commit/5db8c37f8e58379b63817144edcd422dbea5d989">5db8c37</a></li>
 </ul>
 <h2 id="radashi1260---2025-06-26"><a href="https://github.com/radashi-org/radashi/compare/v12.5.1..v12.6.0">radashi@12.6.0</a> - 2025-06-26</h2>
-<h3 id="details-8">Details</h3>
+<h3 id="details-9">Details</h3>
 <h4 id="added-3"><!-- 03 -->Added</h4>
 <ul>
 <li>Add <code dir="auto">assert</code> function in <a href="https://github.com/radashi-org/radashi/commit/c318129b7409d4184ab689939c93db0759717ff3">c318129</a></li>
@@ -160,20 +171,20 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <ul>
 <li><strong>(group)</strong> Pass array index to callback in <a href="https://github.com/radashi-org/radashi/commit/6d66395d3e36194e01d95684b1c7815b093e5c09">6d66395</a></li>
 </ul>
-<h4 id="fixed-5"><!-- 06 -->Fixed</h4>
+<h4 id="fixed-6"><!-- 06 -->Fixed</h4>
 <ul>
 <li><strong>(selectFirst)</strong> Filter out null from return type when no condition is given in <a href="https://github.com/radashi-org/radashi/commit/73cb9958cd795a3bb054450e4e247a7717a790ca">73cb995</a></li>
 <li><strong>(isIntString)</strong> Prevent incorrect type narrowing in <a href="https://github.com/radashi-org/radashi/commit/fafd68a0ec9b016ff3a2fc157df3e20091be49dc">fafd68a</a></li>
 </ul>
 <h2 id="radashi1251---2025-05-23"><a href="https://github.com/radashi-org/radashi/compare/v12.5.0..v12.5.1">radashi@12.5.1</a> - 2025-05-23</h2>
-<h3 id="details-9">Details</h3>
-<h4 id="fixed-6"><!-- 06 -->Fixed</h4>
+<h3 id="details-10">Details</h3>
+<h4 id="fixed-7"><!-- 06 -->Fixed</h4>
 <ul>
 <li><strong>(set)</strong> Avoid mutating nested objects without first cloning them in <a href="https://github.com/radashi-org/radashi/commit/fc3c7c91b6c864febad70528e0c39b2177b89adb">fc3c7c9</a></li>
 <li><strong>(set)</strong> Prevent prototype pollution in <a href="https://github.com/radashi-org/radashi/commit/8147abc8cfc3cfe9b9a17cd389076a5d97235a66">8147abc</a></li>
 </ul>
 <h2 id="radashi1250---2025-05-15"><a href="https://github.com/radashi-org/radashi/compare/v12.4.0..v12.5.0">radashi@12.5.0</a> - 2025-05-15</h2>
-<h3 id="details-10">Details</h3>
+<h3 id="details-11">Details</h3>
 <h4 id="added-4"><!-- 03 -->Added</h4>
 <ul>
 <li>Add <code dir="auto">pluck</code> function in <a href="https://github.com/radashi-org/radashi/commit/8d5c06c36056dc589d3ca7cfd13512cc54c46115">8d5c06c</a></li>
@@ -183,7 +194,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <ul>
 <li><strong>(cluster)</strong> Use tuple types for common size constants in <a href="https://github.com/radashi-org/radashi/commit/ca2abdd6fd996cf397501f8123be8de40c24c11e">ca2abdd</a></li>
 </ul>
-<h4 id="fixed-7"><!-- 06 -->Fixed</h4>
+<h4 id="fixed-8"><!-- 06 -->Fixed</h4>
 <ul>
 <li><strong>(mapify)</strong> Pass the actual array index to callbacks in <a href="https://github.com/radashi-org/radashi/commit/a83a72d30f134ff0eb9489da68dc24f569771bf2">a83a72d</a></li>
 <li><strong>(cluster)</strong> Avoid infinite loop when size is <code dir="auto">0</code> in <a href="https://github.com/radashi-org/radashi/commit/214ce5dccb3638b6b6770b1ffde5485735321c2b">214ce5d</a></li>
@@ -193,7 +204,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Handle object types in CompatibleProperty in <a href="https://github.com/radashi-org/radashi/commit/7f72da3933854623eef444a15a8289feb2f0583a">7f72da3</a></li>
 </ul>
 <h2 id="radashi1240---2025-03-16"><a href="https://github.com/radashi-org/radashi/compare/v12.3.4..v12.4.0">radashi@12.4.0</a> - 2025-03-16</h2>
-<h3 id="details-11">Details</h3>
+<h3 id="details-12">Details</h3>
 <h4 id="added-5"><!-- 03 -->Added</h4>
 <ul>
 <li>Add <code dir="auto">isBigInt</code> function in <a href="https://github.com/radashi-org/radashi/commit/05ae69ac97810ffa84f83745e8a358f1353c52e5">05ae69a</a></li>
@@ -207,31 +218,31 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li><code dir="auto">reduce</code> accumulator type when no initial value is given in <a href="https://github.com/radashi-org/radashi/commit/7a14bf6c069c07b7c4700cb7568acbb0aa699ca8">7a14bf6</a></li>
 </ul>
 <h2 id="radashi1234---2025-01-26"><a href="https://github.com/radashi-org/radashi/compare/v12.3.3..v12.3.4">radashi@12.3.4</a> - 2025-01-26</h2>
-<h3 id="details-12">Details</h3>
-<h4 id="fixed-8"><!-- 06 -->Fixed</h4>
+<h3 id="details-13">Details</h3>
+<h4 id="fixed-9"><!-- 06 -->Fixed</h4>
 <ul>
 <li><strong>(reduce)</strong> Align with native reduce behavior + perf improvements in <a href="https://github.com/radashi-org/radashi/commit/1bc47b74dc1b21178c7ee61a6d7a0762196bf746">1bc47b7</a></li>
 </ul>
 <h2 id="radashi1233---2025-01-11"><a href="https://github.com/radashi-org/radashi/compare/v12.3.2..v12.3.3">radashi@12.3.3</a> - 2025-01-11</h2>
-<h3 id="details-13">Details</h3>
+<h3 id="details-14">Details</h3>
 <h4 id="types-2"><!-- 08 -->Types</h4>
 <ul>
 <li>Let <code dir="auto">map</code> callback return a <code dir="auto">PromiseLike</code> object in <a href="https://github.com/radashi-org/radashi/commit/1c679b3fc51c26fe90af0651e2e9ebf169de9014">1c679b3</a></li>
 </ul>
 <h2 id="radashi1232---2025-01-10"><a href="https://github.com/radashi-org/radashi/compare/v12.3.1..v12.3.2">radashi@12.3.2</a> - 2025-01-10</h2>
-<h3 id="details-14">Details</h3>
-<h4 id="fixed-9"><!-- 06 -->Fixed</h4>
+<h3 id="details-15">Details</h3>
+<h4 id="fixed-10"><!-- 06 -->Fixed</h4>
 <ul>
 <li><strong>(shuffle)</strong> Correction to Fisher-Yates implementation in <a href="https://github.com/radashi-org/radashi/commit/5df2dc82ab850638ab3476497b32bec1f7f7877d">5df2dc8</a></li>
 </ul>
 <h2 id="radashi1231---2025-01-07"><a href="https://github.com/radashi-org/radashi/compare/v12.3.0..v12.3.1">radashi@12.3.1</a> - 2025-01-07</h2>
-<h3 id="details-15">Details</h3>
-<h4 id="fixed-10"><!-- 06 -->Fixed</h4>
+<h3 id="details-16">Details</h3>
+<h4 id="fixed-11"><!-- 06 -->Fixed</h4>
 <ul>
 <li><strong>(parallel)</strong> Avoid range error with empty array in <a href="https://github.com/radashi-org/radashi/commit/f16445d22b0374ad9fe86cf66f491bfe315b4650">f16445d</a></li>
 </ul>
 <h2 id="radashi1230---2024-12-01"><a href="https://github.com/radashi-org/radashi/compare/v12.2.3..v12.3.0">radashi@12.3.0</a> - 2024-12-01</h2>
-<h3 id="details-16">Details</h3>
+<h3 id="details-17">Details</h3>
 <h4 id="security"><!-- 00 -->Security</h4>
 <ul>
 <li>Pin cspell version in <a href="https://github.com/radashi-org/radashi/commit/a33e5a47cd30b4db65f0a7f86eb1174baf6f481a">a33e5a4</a></li>
@@ -251,13 +262,13 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li><strong>(parallel)</strong> Clamp the limit between 1 and array length in <a href="https://github.com/radashi-org/radashi/commit/b4854f60f1da4ca8cb33f68e1ad16656cabd7ac5">b4854f6</a></li>
 </ul>
 <h2 id="radashi1223---2024-11-12"><a href="https://github.com/radashi-org/radashi/compare/v12.2.2..v12.2.3">radashi@12.2.3</a> - 2024-11-12</h2>
-<h3 id="details-17">Details</h3>
-<h4 id="fixed-11"><!-- 06 -->Fixed</h4>
+<h3 id="details-18">Details</h3>
+<h4 id="fixed-12"><!-- 06 -->Fixed</h4>
 <ul>
 <li><strong>(all)</strong> Be more lenient, reduce memory usage in <a href="https://github.com/radashi-org/radashi/commit/e6accd870910f8df9487b6f54e1888bc5ae1ba92">e6accd8</a></li>
 </ul>
 <h2 id="radashi1222---2024-11-10"><a href="https://github.com/radashi-org/radashi/compare/v12.2.1..v12.2.2">radashi@12.2.2</a> - 2024-11-10</h2>
-<h3 id="details-18">Details</h3>
+<h3 id="details-19">Details</h3>
 <h4 id="types-3"><!-- 08 -->Types</h4>
 <ul>
 <li>Export <code dir="auto">PromiseWithResolvers</code> type in <a href="https://github.com/radashi-org/radashi/commit/a2a5da1d9e215fdf73da6860e7b62b24dec81559">a2a5da1</a></li>
@@ -266,7 +277,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Improve <code dir="auto">draw</code> signature for non-empty arrays in <a href="https://github.com/radashi-org/radashi/commit/fee290ad08f9fa5413ccde3f06fe5667dd5a5ec4">fee290a</a></li>
 </ul>
 <h2 id="radashi1221---2024-11-09"><a href="https://github.com/radashi-org/radashi/compare/v12.2.0..v12.2.1">radashi@12.2.1</a> - 2024-11-09</h2>
-<h3 id="details-19">Details</h3>
+<h3 id="details-20">Details</h3>
 <h4 id="types-4"><!-- 08 -->Types</h4>
 <ul>
 <li>Improve signature of <code dir="auto">shake</code> in <a href="https://github.com/radashi-org/radashi/commit/8fe71d82bdd67ec94c80d2d0c3318b1e62a58edb">8fe71d8</a></li>
@@ -274,7 +285,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Let <code dir="auto">zipToObject</code> receive readonly arrays in <a href="https://github.com/radashi-org/radashi/commit/2c685979897fab26eac2a66fa676b0e01ab6349b">2c68597</a></li>
 </ul>
 <h2 id="radashi1220---2024-11-01"><a href="https://github.com/radashi-org/radashi/compare/v12.1.0..v12.2.0">radashi@12.2.0</a> - 2024-11-01</h2>
-<h3 id="details-20">Details</h3>
+<h3 id="details-21">Details</h3>
 <h4 id="added-7"><!-- 03 -->Added</h4>
 <ul>
 <li>Add <code dir="auto">isIntString</code> function in <a href="https://github.com/radashi-org/radashi/commit/fa500d329d7e06062e7a42cbf4ff9ad9dcb89191">fa500d3</a></li>
@@ -319,7 +330,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li><strong>(mapify)</strong> Provide an index argument to the callbacks in <a href="https://github.com/radashi-org/radashi/commit/f010ad47d70d1612668350441d78c3e981ac6cff">f010ad4</a></li>
 <li>Use native AggregateError if available in <a href="https://github.com/radashi-org/radashi/commit/5668b85246219776bf9b98fb8734f528521b0ed9">5668b85</a></li>
 </ul>
-<h4 id="fixed-12"><!-- 06 -->Fixed</h4>
+<h4 id="fixed-13"><!-- 06 -->Fixed</h4>
 <ul>
 <li><strong>(retry)</strong> Stop using <code dir="auto">range()</code> in <a href="https://github.com/radashi-org/radashi/commit/5d60893471240516a49c6ddf48839165b5961a47">5d60893</a></li>
 <li><strong>(assign)</strong> Remove inefficiencies in loop in <a href="https://github.com/radashi-org/radashi/commit/99274cce29a375071779e522f0e95c3dee705d2d">99274cc</a></li>
