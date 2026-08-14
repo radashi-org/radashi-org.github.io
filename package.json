@@ -7,6 +7,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
+    "test": "tsx --test scripts/*.test.ts",
     "preview": "astro preview",
     "astro": "astro",
     "generate:radashi-prompt": "node scripts/generate-radashi-replacement-prompt.mjs --output public/prompts/radashi-replacement.md",

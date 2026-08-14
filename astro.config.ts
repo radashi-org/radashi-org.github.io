@@ -15,12 +15,16 @@ import virtual from 'vite-plugin-virtual'
 import { renderHeftJson } from './scripts/render-heft-json'
 import { renderLlmsTxt } from './scripts/render-llms-txt'
 import { renderReferenceIndex } from './scripts/render-reference-index'
+import { rewriteRadashiReferenceLinks } from './scripts/remark-reference-links'
 
 type SidebarItem = (StarlightUserConfig['sidebar'] & object)[number]
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://radashi.js.org',
+  markdown: {
+    remarkPlugins: [rewriteRadashiReferenceLinks],
+  },
   integrations: [
     mdAstro(),
     starlight({
