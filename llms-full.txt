@@ -167,13 +167,12 @@ const undefinedToArray = _.castArrayIfExists(undefined) // => undefined
 
 ### cluster
 
-Split a list into many lists of the given size
+Divides an array into many arrays of the given size
 
 ### Usage
 
-Given an array of items and a desired cluster size (`n`), returns an array
-of arrays. Each child array containing `n` (cluster size) items
-split as evenly as possible.
+Takes an array and divides it into many arrays of the given size. The last
+array may be smaller than the given size, if not enough items are left.
 
 ```ts twoslash
 import * as _ from 'radashi'
@@ -996,12 +995,12 @@ const fish = [
 ]
 
 _.sort(fish, f => f.weight) // => [bass, trout, marlin]
-_.sort(fish, f => f.weight, true) // => [marlin, trout, bass]
+_.sort(fish, f => f.weight, 'desc') // => [marlin, trout, bass]
 
 const numbers = [2, 0, 1]
 
 _.sort(numbers) // => [0, 1, 2]
-_.sort(numbers, _.identity, true) // => [2, 1, 0]
+_.sort(numbers, _.identity, 'desc') // => [2, 1, 0]
 ```
 
 ### toggle
@@ -1440,6 +1439,79 @@ const [err, users] = await _.tryit(_.parallel)(3, userIds, async userId => {
 console.log(err) // => AggregateError
 console.log(err.errors) // => [Error, Error, Error]
 console.log(err.errors[1].message) // => "No, I don't want to find user 2"
+```
+
+### promiseMemo
+
+Memoize an asynchronous function.
+
+### Usage
+
+Memoize an asynchronous function, so that it only runs when a promise does not exist for the given arguments. If a promise is rejected, it will be removed from the cache.
+
+```ts
+import * as _ from 'radashi'
+
+const calls = []
+
+const getData = _.promiseMemo(async param => {
+  calls.push(param)
+
+  return new Promise(resolve => resolve(param))
+})
+
+const val1 = await getData(1)
+const val2 = await getData(2)
+const val3 = await getData(1)
+
+console.log(calls) // [1, 2]
+```
+
+### Expiration
+
+The `ttl` option can be used to specify a time-to-live for the memoized value. If you call the memoized function after the TTL has expired, it will run the function again.
+
+Even after the TTL has expired, the cached promise will remain in memory until you call the function again. This is a side effect of using a timestamp, rather than a timeout, to track the expiration.
+
+```ts
+import * as _ from 'radashi'
+
+const calls = []
+
+const getData = _.promiseMemo(
+  async param => {
+    calls.push(param)
+
+    return new Promise(resolve => resolve(param))
+  },
+  {
+    ttl: 1000,
+  },
+)
+
+const val1 = await getData(1)
+const val2 = await getData(2)
+
+await _.sleep(2000)
+
+const val3 = await getData(1)
+
+console.log(calls) // [1, 2, 1]
+```
+
+### Key Function
+
+Use the `key` option to customize how the cache key is generated from the arguments. By default, `JSON.stringify` is used on the whole arguments array.
+
+```ts
+const memoized = _.promiseMemo(func, {
+  key: arg => arg.user.id,
+})
+
+const resultA = await memoized({ user: { id: 'Alpha' } })
+const resultA2 = await memoized({ user: { id: 'Alpha' } })
+
+resultA === resultA2 // true
 ```
 
 ### queueByKey
@@ -1918,25 +1990,33 @@ Delay a function until after a specified time has elapsed since the last call
 
 ### Usage
 
-The `debounce` function helps manage frequent function calls efficiently. It requires two inputs: a `delay` time (in milliseconds) and a callback. When you use the function returned by `debounce` (a.k.a. the “debounced function”), it doesn't immediately run your callback. Instead, it waits for the specified `delay`.
+Create a new function that delays invoking a callback until after a specified time has elapsed since the last call.
 
-If called again during this waiting period, it resets the timer. Your source function only runs after the full `delay` passes without interruption. This is useful for handling rapid events like keystrokes, ensuring your code responds only after a pause in activity.
-
-```ts twoslash
+```ts
 import * as _ from 'radashi'
 
-const processData = (data: string) => {
-  console.log(`Processing data: "${data}"...`)
+// Debounce a search function to avoid making API calls on every keystroke
+const searchAPI = _.debounce({ delay: 300 }, async query => {
+  try {
+    const response = await fetch(`https://api.example.com/search?q=${query}`)
+    const results = await response.json()
+    displayResults(results)
+  } catch (error) {
+    console.error('Search failed:', error)
+  }
+})
+
+// Simulate user typing in a search box
+document.querySelector('#search-input').addEventListener('input', event => {
+  const query = event.target.value
+  searchAPI(query)
+})
+
+function displayResults(results) {
+  // Update UI with search results
+  console.log('Search results:', results)
 }
 const debouncedProcessData = _.debounce({ delay: 100 }, processData)
-
-debouncedProcessData('data1') // Never logs
-debouncedProcessData('data2') // Never logs
-debouncedProcessData('data3') // Processing data: "data3"...
-
-setTimeout(() => {
-  debouncedProcessData('data4') // Processing data: "data4"... (200ms later)
-}, 200)
 ```
 
 ## Options
@@ -1945,69 +2025,49 @@ setTimeout(() => {
 
 When the `leading` option is `true`, your callback is invoked immediately the very first time the debounced function is called. After that, the debounced function works as if `leading` was `false`.
 
-```ts twoslash
-import * as _ from 'radashi'
-// @errors: 2353
-// ---cut-before---
-
-const myDebouncedFunc = _.debounce({ delay: 100, leading: true }, x => {
+```ts
+const debouncedFunc = _.debounce({ delay: 100, leading: true }, x => {
   console.log(x)
 })
 
-myDebouncedFunc(0) // Logs "0" immediately
-myDebouncedFunc(1) // Never logs
-myDebouncedFunc(2) // Logs "2" about 100ms later
+debouncedFunc(0) // Logs "0" immediately
+debouncedFunc(1) // Never logs
+debouncedFunc(2) // Logs "2" about 100ms later
 ```
 
-## Methods
+## Return type
 
-### cancel
+The `DebounceFunction` type is used to represent a debounced function in TypeScript. It has the following properties:
 
-The `cancel` method of the debounced function does two things:
+- `callee`: The underlying function that is debounced.
+- `flush`: A method that forces a debounced call to execute immediately.
+- `cancel`: A method that cancels a debounced function.
 
-1. It cancels any pending invocations of the debounced function.
-2. It permanently disables the debouncing behavior. All future invocations of the debounced function will immediately invoke your callback.
+### Flushing
 
-```ts twoslash
-import * as _ from 'radashi'
-// ---cut-before---
-const myDebouncedFunc = _.debounce({ delay: 100 }, x => {
-  console.log(x)
-})
-
-myDebouncedFunc(0) // Never logs
-myDebouncedFunc(1) // Never logs
-myDebouncedFunc.cancel()
-myDebouncedFunc(2) // Logs "2" immediately
-```
-
-### flush
-
-The `flush` method will immediately invoke your callback, regardless of whether the debounced function is currently pending.
+The `flush` method forces a debounced call to execute immediately. If no call was currently scheduled, this method does nothing. So you're effectively saying “execute the function now, but only if it's scheduled to execute.”
 
 ```ts
-const myDebouncedFunc = _.debounce({ delay: 100 }, x => {
-  console.log(x)
+const debouncedFunc = _.debounce({ delay: 1000 }, () => {
+  console.log('Flushed')
 })
 
-myDebouncedFunc(0) // Logs "0" about 100ms later
-myDebouncedFunc.flush(1) // Logs "1" immediately
+debouncedFunc.flush()
 ```
 
-### isPending
+The `flush` method is set to [`noop`](/reference/function/noop) when no pending call is scheduled.
 
-The `isPending` method returns `true` if there is any pending invocation of the debounced function.
+### Cancelling
+
+The `cancel` method can be used to cancel a debounced function. Future calls still get debounced, but the currently pending call is immediately cancelled.
 
 ```ts
-const myDebouncedFunc = _.debounce({ delay: 100 }, x => {
-  console.log(x)
+const debouncedFunc = _.debounce({ delay: 1000 }, () => {
+  console.log('Flushed')
 })
 
-myDebouncedFunc(0) // Logs "0" about 100ms later
-myDebouncedFunc.isPending() // => true
-setTimeout(() => {
-  myDebouncedFunc.isPending() // => false
-}, 100)
+debouncedFunc()
+debouncedFunc.cancel()
 ```
 
 ### flip
@@ -2213,6 +2273,71 @@ const func3 = async (n: number) => `Your Value is ${n}`
 const chained = _.promiseChain(func1, func2, func3)
 
 await chained(5, 2) // => "Your Value is 14"
+```
+
+### promiseDebounce
+
+Debounce a function while returning a promise that resolves with the last invocation
+
+### Usage
+
+`promiseDebounce` works like [`debounce`](./debounce) but each invocation returns a promise that settles with the result of the final call in the debounce window. Every time you call the debounced function, you get a promise that resolves only if that call is the one that eventually runs.
+
+```ts
+import * as _ from 'radashi'
+
+const saveDraft = _.promiseDebounce({ delay: 1000 }, async payload => {
+  const response = await fetch('/api/drafts', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+  return response.json()
+})
+
+// These rapid calls collapse into a single request.
+const first = saveDraft({ content: 'Radashi' })
+const second = saveDraft({ content: 'Radashi, but better' })
+
+// `first` stays pending forever because that invocation never runs.
+await second // resolves with the API response
+```
+
+The returned function exposes the same helpers as `debounce`:
+
+- `cancel()` prevents the scheduled call from running.
+- `flush()` runs the pending call immediately and returns its promise (or `undefined` when idle).
+- `isDebounced()` tells you if a call is waiting to run.
+- `callee` holds a reference to the original function.
+
+### Leading calls
+
+Pass `leading: true` to run the first call immediately while continuing to debounce the rest. Only the first call resolves right away; later promises resolve once their invocation survives the debounce delay.
+
+```ts
+const fetchSuggestions = _.promiseDebounce(
+  { delay: 250, leading: true },
+  async term => {
+    const response = await fetch(`/api/suggest?q=${term}`)
+    return response.json()
+  },
+)
+
+const result = await fetchSuggestions('radashi') // executes immediately
+const next = fetchSuggestions('radashi toolkit') // waits 250ms
+```
+
+### Flushing immediately
+
+Use `flush()` to force the pending invocation to run and get the promise for that call.
+
+```ts
+const debounced = _.promiseDebounce({ delay: 500 }, async value => value.toUpperCase())
+
+debounced('one')
+const latest = debounced('two')
+
+const promise = debounced.flush() // same promise as `latest`
+await promise // => 'TWO'
 ```
 
 ### proxied
@@ -2562,6 +2687,110 @@ _.noop() // => undefined
 
 - **Shouldn't I just use `?.` operator?**  
   Where possible, yes you should. The `noop` is best for cases where you're not in control of the code that calls it and a function is required.
+
+## Migration
+
+### v13
+
+Migrate from Radashi v12 to v13
+
+This guide covers every breaking change in Radashi v13 and how to update your code. If you find a call site that isn't covered here, the [changelog](/changelog) has the full list of changes.
+
+## Requirements
+
+- **Node 18 or higher** — the `engines` field requires it, and the published code is now transpiled to ES2022 syntax (was ES2017).
+- For browsers, the `browserslist` targets moved accordingly (e.g. Chrome ≥ 92, Safari ≥ 16, Firefox ≥ 90).
+
+## Signature changes
+
+### `sort` takes a direction string
+
+The third parameter changed from `desc: boolean` to `direction: 'asc' | 'desc'`.
+
+```diff
+- sort(list, x => x.price, true)
++ sort(list, x => x.price, 'desc')
+```
+
+### `cluster` requires `size`
+
+```diff
+- cluster(list)      // used a default size
++ cluster(list, 2)
+```
+
+### `trim` requires both arguments
+
+```diff
+- trim(str)
++ trim(str, ' ')
+```
+
+### `debounce` was reworked
+
+The debounced function's API changed:
+
+- `isPending()` is now `isDebounced()`.
+- `flush()` takes no arguments and does nothing when no call is pending (previously it invoked the callback immediately, even with no pending call).
+- `cancel()` now only cancels the pending call — it no longer disables debouncing, so future calls are debounced as usual (the old behavior made them run immediately).
+- The new `callee` property references the underlying function.
+
+```diff
+- debounced.isPending()
++ debounced.isDebounced()
+
+- debounced.flush(...args)
++ debounced.flush() // no-op when nothing is pending
+```
+
+## Null and undefined inputs
+
+Functions whose signatures don't accept `null`/`undefined` no longer defensively handle them at runtime — they now throw (e.g. `undefined is not an object`) instead of silently returning a default value. Affected functions:
+
+- **array**: `alphabetical`, `boil`, `counting`, `diff`, `first`, `fork`, `intersects`, `last`, `merge`, `replace`, `replaceOrAppend`, `select`, `selectFirst`, `sort`, `toggle`, `unzip`, `zipToObject`
+- **async**: `map`, `reduce`
+- **number**: `inRange`, `max`, `min`
+- **object**: `assign`, `construct`, `crush`, `invert`, `keys`, `listify`, `mapEntries`, `omit`, `pick`, `set`, `shake`
+- **string**: `camel`, `capitalize`, `dash`, `pascal`, `snake`, `title`, `trim`
+
+```diff
+- diff(maybeNull, [1, 2]) // silently returned a copy
++ maybeNull ? diff(maybeNull, [1, 2]) : []
+```
+
+## Behavior changes
+
+### `clone` is stricter
+
+`clone` now only accepts plain objects and arrays. Primitives, functions, and built-ins like `Map`, `Set`, and `Date` are no longer valid inputs (return them directly or clone manually).
+
+### `isNumber` returns `true` for `NaN`
+
+This makes `isNumber` safe to use for TypeScript narrowing — previously, a `NaN` value would slip through `!isNumber(x)` checks and then fail at runtime.
+
+### `crush` ⇄ `construct` is now lossless
+
+`crush` preserves empty objects and arrays as leaf values instead of dropping them, so `construct` restores them exactly. As a consequence, `set` no longer ignores `undefined` values — `set(obj, 'a', undefined)` now assigns `a: undefined` instead of being a no-op.
+
+```ts
+const flat = crush({ a: {}, b: [] })
+// v12: {}
+// v13: { a: {}, b: [] }
+```
+
+### `AggregateError` polyfill matches the native constructor
+
+For environments without a global `AggregateError`, the polyfill now accepts `(errors, message, options)` including `options.cause`, and copies the `errors` iterable like the native constructor.
+
+## Type-level changes
+
+- `counting` and `objectify` return `Partial<Record<K, V>>` — assigning their result to a plain `Record` type will now error. Accessed values may need a `| undefined` check (e.g. with `noUncheckedIndexedAccess`).
+- `MemoOptions` is now generic over the function type (`MemoOptions<typeof fn>`) instead of its args tuple (`MemoOptions<[string, number]>`). `memo` also gained a `cache` option and exports the `Memoized`/`MemoCache` types.
+- `sort` preserves tuple types in its return type via `SortArray<T>`.
+
+## New in v13
+
+Not breaking, but worth knowing: `promiseDebounce`, `promiseMemo`, and `memo`'s `cache` option were added.
 
 ## Number
 
@@ -3121,7 +3350,9 @@ Creates a shallow copy of the given object/value.
 
 ### Usage
 
-Creates a shallow copy of the given object/value.
+Creates a shallow copy of the given object or array.
+
+Notably, built-in objects like `Map`, `Set`, `Date`, and others are not supported.
 
 ```ts twoslash
 import * as _ from 'radashi'
@@ -3136,6 +3367,12 @@ const gods = [ra]
 _.clone(ra) // => copy of ra
 _.clone(gods) // => copy of gods
 ```
+
+### Differences from spread syntax
+
+The `clone` function is similar to spread syntax (e.g. `{...obj}`), but it also preserves the prototype of the original object. If a `constructor` property exists on the original prototype, it will be called with the `new` keyword to create a new instance, and all properties will then be copied over to it.
+
+Unlike spread syntax, `clone` also supports cloning arrays.
 
 ### cloneDeep
 
@@ -3279,6 +3516,17 @@ const crushed = _.crush(ra)
 //   'enemies.0.name': 'hathor',
 //   'enemies.0.power': 12
 // }
+```
+
+### Empty objects and arrays
+
+Empty objects and arrays are preserved as leaf values, so `construct` can restore them losslessly.
+
+```ts twoslash
+import * as _ from 'radashi'
+
+const crushed = _.crush({ a: {}, b: [], c: { d: {} } })
+// { a: {}, b: [], 'c.d': {} }
 ```
 
 ### filterKey
@@ -4846,21 +5094,21 @@ _.title('queryItems') // => 'Query Items'
 
 ### trim
 
-Trim values from a string
+Remove characters from the ends of a string
 
 ### Usage
 
-Trims all prefix and suffix characters from the given string. Like the builtin trim function but accepts alternate (other than space) characters you would like to trim.
+Trim specific characters from the start and end of a given string. Like the built-in `String.prototype.trim` method, but it accepts alternate (other than space) characters you would like to trim.
 
 ```ts twoslash
 import * as _ from 'radashi'
 
-_.trim('  hello ') // => hello
+_.trim('  hello ', ' ') // => hello
 _.trim('__hello__', '_') // => hello
 _.trim('/repos/:owner/', '/') // => repos/:owner
 ```
 
-Trim also handles more than one character to trim.
+It also handles more than one character to trim.
 
 ```ts twoslash
 import * as _ from 'radashi'
@@ -5360,6 +5608,7 @@ import * as _ from 'radashi'
 _.isNumber('hello') // => false
 _.isNumber(['hello']) // => false
 _.isNumber(12) // => true
+_.isNumber(NaN) // => true
 ```
 
 ### isObject

@@ -16,7 +16,7 @@ Final report:
 - noteworthy skipped candidates with reasons
 - verification commands and results
 
-Radashi export data (154 entries):
+Radashi export data (157 entries):
 
 ```json
 [
@@ -580,6 +580,16 @@ Radashi export data (154 entries):
     "aliases": []
   },
   {
+    "name": "promiseDebounce",
+    "category": "curry",
+    "aliases": []
+  },
+  {
+    "name": "promiseMemo",
+    "category": "async",
+    "aliases": []
+  },
+  {
     "name": "proportionalJitter",
     "category": "random",
     "aliases": []
@@ -777,6 +787,11 @@ Radashi export data (154 entries):
   {
     "name": "upperize",
     "category": "object",
+    "aliases": []
+  },
+  {
+    "name": "v13",
+    "category": "migration",
     "aliases": []
   },
   {

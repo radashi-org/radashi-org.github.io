@@ -17,7 +17,7 @@ Array manipulation and transformation
 - [cartesianProduct](https://radashi.js.org/reference/array/cartesianProduct): Perform a Cartesian product of arrays
 - [castArray](https://radashi.js.org/reference/array/castArray): Cast a value into an array
 - [castArrayIfExists](https://radashi.js.org/reference/array/castArrayIfExists): Cast a non-nullish value into an array
-- [cluster](https://radashi.js.org/reference/array/cluster): Split a list into many lists of the given size
+- [cluster](https://radashi.js.org/reference/array/cluster): Divides an array into many arrays of the given size
 - [concat](https://radashi.js.org/reference/array/concat): Flattens and filters nullish values from arguments
 - [counting](https://radashi.js.org/reference/array/counting): Creates an object with counts of occurrences of items
 - [diff](https://radashi.js.org/reference/array/diff): Create an array of differences between two arrays
@@ -57,6 +57,7 @@ Async/await utilities and control flow
 - [guard](https://radashi.js.org/reference/async/guard): Make an async function return undefined if it rejects
 - [map](https://radashi.js.org/reference/async/map): Map an array with an async function
 - [parallel](https://radashi.js.org/reference/async/parallel): Parallelize async operations while managing load
+- [promiseMemo](https://radashi.js.org/reference/async/promiseMemo): Memoize an asynchronous function.
 - [queueByKey](https://radashi.js.org/reference/async/queueByKey): Queues async function calls by key to ensure sequential execution per key
 - [reduce](https://radashi.js.org/reference/async/reduce): Reduce an array with an async function
 - [retry](https://radashi.js.org/reference/async/retry): Retry an async function when it fails
@@ -80,6 +81,7 @@ Function composition and partial application
 - [partial](https://radashi.js.org/reference/curry/partial): Create a partial a function
 - [partob](https://radashi.js.org/reference/curry/partob): Create a partob a function
 - [promiseChain](https://radashi.js.org/reference/curry/promiseChain): Chain async functions together
+- [promiseDebounce](https://radashi.js.org/reference/curry/promiseDebounce): Debounce a function while returning a promise that resolves with the last invocation
 - [proxied](https://radashi.js.org/reference/curry/proxied): Create a dynamic proxied a object
 - [throttle](https://radashi.js.org/reference/curry/throttle): Creates a throttled function that limits invocations to a specified interval
 
@@ -92,6 +94,10 @@ Function utilities and helpers
 - [castMapping](https://radashi.js.org/reference/function/castMapping): Cast a value into a mapping function
 - [identity](https://radashi.js.org/reference/function/identity): Returns the value passed to it
 - [noop](https://radashi.js.org/reference/function/noop): Does nothing and returns undefined
+
+## Migration
+
+- [v13](https://radashi.js.org/reference/migration/v13): Migrate from Radashi v12 to v13
 
 ## Number
 
@@ -176,7 +182,7 @@ String transformation and formatting
 - [snake](https://radashi.js.org/reference/string/snake): Convert a string to snake case
 - [template](https://radashi.js.org/reference/string/template): Template a string with values from a data object using a search expression
 - [title](https://radashi.js.org/reference/string/title): Convert a string to title case
-- [trim](https://radashi.js.org/reference/string/trim): Trim values from a string
+- [trim](https://radashi.js.org/reference/string/trim): Remove characters from the ends of a string
 
 ## Typed
 
